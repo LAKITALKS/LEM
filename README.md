@@ -37,4 +37,5 @@ It is intended as a conceptual and structural foundation.
 Subsequent versions may refine the mathematical definitions and expand the theoretical model step by step.
 
 ## Citation
-*(Add DOI here once Zenodo is synced)*
+## Citation
+DOI: [10.5281/zenodo.16729790](https://doi.org/10.5281/zenodo.16729790)
