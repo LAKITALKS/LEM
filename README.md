@@ -32,8 +32,9 @@ The **Lazaros–Eudora Method (LEM)** hypothesizes that:
 - **Author:** Lazaros Varvatis  
 
 ## Disclaimer
-This release introduces the first *formalization* of the LEM hypothesis.  
-Empirical validation, benchmark datasets, and security evaluation will follow in v0.3+.  
+This release documents the first formalization of the LEM hypothesis and introduces the initial theoretical framework.  
+It is intended as a conceptual and structural foundation.  
+Subsequent versions may refine the mathematical definitions and expand the theoretical model step by step.
 
 ## Citation
 *(Add DOI here once Zenodo is synced)*
