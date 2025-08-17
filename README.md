@@ -24,11 +24,34 @@ Version 0.3 expands the framework with the **Four Pillars of LEM**, integrates i
 
 ## Mathematical Foundations
 
-<div align="center">
-  <img src="assets/TrajectoryDiagram.png" width="300"/>
-  <img src="assets/GeodesicDiagram.png" width="300"/>
-  <img src="assets/GeometryDiagram.png" width="300"/>
-</div>
+### Visualizations
+<p align="center">
+  <img src="assets/TrajectoryDiagram.png" width="300" alt="Trajectory Diagram"/>
+  <img src="assets/GeodesicDiagram.png" width="300" alt="Geodesic Diagram"/>
+  <img src="assets/GeometryDiagram.png" width="300" alt="Geometry Diagram"/>
+</p>
+
+### Formalisierung
+
+- **Trajectory Diagram**: zeigt Attraktor-Landschaft mit Energieminima.  
+  Mathematisch modelliert als Potentiallandschaft \( U(y) \) mit Gradientenfluss  
+  \[
+  \frac{dy}{dt} = -\nabla U(y).
+  \]
+
+- **Geodesic Diagram**: zeigt geodätische Bewegung auf einem Mannigfaltigkeitssattel.  
+  Geodäten \( \gamma(t) \) erfüllen die Gleichung  
+  \[
+  \nabla_{\dot{\gamma}(t)} \dot{\gamma}(t) = 0.
+  \]
+
+- **Geometry Diagram**: zeigt lokale Basenvektoren \( v_1, v_2 \) und die Patch-Struktur  
+  des Tangentialraums \( T_x\mathcal{M} \).  
+  \[
+  g_{ij}(x) = \langle v_i, v_j \rangle.
+  \]
+
+---
 
 **Formalisierung:**
 
