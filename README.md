@@ -33,17 +33,10 @@ Version 0.3 expands the framework with the **Four Pillars of LEM**, integrates i
 ## Mathematical Foundations
 
 <p align="center">
-  <img src="assets/card-trajectory.png" width="360" alt="Trajectory Diagram – Gradient Flow"/>
+  <img src="assets/card-trajectory-en.png" width="320"/>
+  <img src="assets/card-geodesic-en.png" width="320"/>
+  <img src="assets/card-geometry-en.png" width="320"/>
 </p>
-
-<p align="center">
-  <img src="assets/card-geodesic.png" width="360" alt="Geodesic Diagram – Geodesic Equation"/>
-</p>
-
-<p align="center">
-  <img src="assets/card-geometry.png" width="360" alt="Geometry Diagram – Metric from Basis"/>
-</p>
-
 ## Distinction
 - Models **thinking patterns**, not just content.  
 - Focus on **dynamic trajectories** instead of static embeddings.  
