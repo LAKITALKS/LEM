@@ -52,13 +52,37 @@ Version 0.3 expands the framework with the **Four Pillars of LEM**, integrates i
   \]
 
 ---
+## Formalisierung
 
-**Formalisierung:**
+Die mathematische Struktur lässt sich durch drei zentrale Diagrammtypen darstellen:
 
-- TrajectoryDiagram: zeigt Attraktor-Landschaft mit Energieminima.  
-- GeodesicDiagram: zeigt geodätische Bewegung auf einem Mannigfaltigkeitssattel.  
-- GeometryDiagram: zeigt lokale Basenvektoren \(v_1, v_2\) und die Patch-Struktur.  
+### 1. Trajectory Diagram
+Zeigt die Attraktor-Landschaft mit Energieminima.  
+Mathematisch modelliert als Potentiallandschaft \( U(y) \) mit Gradientenfluss:  
 
+\[
+\frac{dy}{dt} = -\nabla U(y)
+\]
+
+---
+
+### 2. Geodesic Diagram
+Veranschaulicht die geodätische Bewegung auf einem Mannigfaltigkeitssattel.  
+Geodäten \( \gamma(t) \) erfüllen die Gleichung:  
+
+\[
+\nabla_{\dot{\gamma}(t)} \dot{\gamma}(t) = 0
+\]
+
+---
+
+### 3. Geometry Diagram
+Zeigt lokale Basenvektoren \( (v_1, v_2) \) und die Patch-Struktur des Tangentialraums \( T_x \mathcal{M} \).  
+Die Metrik wird durch das Skalarprodukt definiert:  
+
+\[
+g_{ij}(x) = \langle v_i, v_j \rangle
+\]
 ---
 
 ## Distinction
