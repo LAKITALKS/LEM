@@ -73,7 +73,7 @@ The system dynamics can be interpreted as movement through a rugged landscape:
 
 <!-- Statistical Physics block: single clean card -->
 <p align="center">
-  <img src="assets/statistical_formulas_card.png" width="780" alt="LEM – Statistical Physics Formulas" />
+  <img src="assets/statistical_formulas_card.png" width="200" alt="LEM – Statistical Physics Formulas" />
 </p> 
 
 
