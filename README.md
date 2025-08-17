@@ -30,60 +30,19 @@ Version 0.3 expands the framework with the **Four Pillars of LEM**, integrates i
   <img src="assets/GeodesicDiagram.png" width="300" alt="Geodesic Diagram"/>
   <img src="assets/GeometryDiagram.png" width="300" alt="Geometry Diagram"/>
 </p>
+## Mathematical Foundations
 
-### Formalisierung
+<p align="center">
+  <img src="assets/card-trajectory.png" width="360" alt="Trajectory Diagram – Gradient Flow"/>
+</p>
 
-- **Trajectory Diagram**: zeigt Attraktor-Landschaft mit Energieminima.  
-  Mathematisch modelliert als Potentiallandschaft \( U(y) \) mit Gradientenfluss  
-  \[
-  \frac{dy}{dt} = -\nabla U(y).
-  \]
+<p align="center">
+  <img src="assets/card-geodesic.png" width="360" alt="Geodesic Diagram – Geodesic Equation"/>
+</p>
 
-- **Geodesic Diagram**: zeigt geodätische Bewegung auf einem Mannigfaltigkeitssattel.  
-  Geodäten \( \gamma(t) \) erfüllen die Gleichung  
-  \[
-  \nabla_{\dot{\gamma}(t)} \dot{\gamma}(t) = 0.
-  \]
-
-- **Geometry Diagram**: zeigt lokale Basenvektoren \( v_1, v_2 \) und die Patch-Struktur  
-  des Tangentialraums \( T_x\mathcal{M} \).  
-  \[
-  g_{ij}(x) = \langle v_i, v_j \rangle.
-  \]
-
----
-## Formalisierung
-
-Die mathematische Struktur lässt sich durch drei zentrale Diagrammtypen darstellen:
-
-### 1. Trajectory Diagram
-Zeigt die Attraktor-Landschaft mit Energieminima.  
-Mathematisch modelliert als Potentiallandschaft \( U(y) \) mit Gradientenfluss:  
-
-\[
-\frac{dy}{dt} = -\nabla U(y)
-\]
-
----
-
-### 2. Geodesic Diagram
-Veranschaulicht die geodätische Bewegung auf einem Mannigfaltigkeitssattel.  
-Geodäten \( \gamma(t) \) erfüllen die Gleichung:  
-
-\[
-\nabla_{\dot{\gamma}(t)} \dot{\gamma}(t) = 0
-\]
-
----
-
-### 3. Geometry Diagram
-Zeigt lokale Basenvektoren \( (v_1, v_2) \) und die Patch-Struktur des Tangentialraums \( T_x \mathcal{M} \).  
-Die Metrik wird durch das Skalarprodukt definiert:  
-
-\[
-g_{ij}(x) = \langle v_i, v_j \rangle
-\]
----
+<p align="center">
+  <img src="assets/card-geometry.png" width="360" alt="Geometry Diagram – Metric from Basis"/>
+</p>
 
 ## Distinction
 - Models **thinking patterns**, not just content.  
