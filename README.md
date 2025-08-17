@@ -111,4 +111,4 @@ We welcome expertise in:
 
 ## ✍️ Citation
 
-10.5281/zenodo.16891286
+[10.5281/zenodo.16891286](https://doi.org/10.5281/zenodo.16891286)
