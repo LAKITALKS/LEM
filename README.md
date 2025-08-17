@@ -45,6 +45,39 @@ Version 0.3 expands the framework with the **Four Pillars of LEM**, integrates i
 
 ---
 
+##  Statistical Physics & Attractor Landscapes
+
+This section extends the mathematical foundations of LEM into the domain of **statistical physics**.  
+By doing so, we can view the latent space not only geometrically, but also as an **energy landscape**.  
+This landscape is structured by attractor states, stable points where the system naturally tends to settle.
+
+### Spin Glass Analogy
+We adopt the analogy of spin glasses from statistical mechanics:
+- Spins represent the binary activation states of neurons.
+- Couplings represent the synaptic connections between them.
+
+### Hamiltonian Formulation
+The energy of a configuration of neurons can be described by a Hamiltonian,  
+which encodes the stability of the system. Low energy corresponds to stable attractors,  
+while high energy corresponds to unstable or transient states.
+
+### Attractor Landscapes
+The system dynamics can be interpreted as movement through a rugged landscape:
+- Valleys = attractor states (stable thoughts or modes).  
+- Mountains = unstable states.  
+- Trajectories roll downhill into valleys, corresponding to geodesic flows guided by energy minimization.
+
+### Geometry–Physics Duality
+- Geometry describes the **trajectories** of state transitions.  
+- Physics describes the **stability** of the endpoints.
+
+<!-- Statistical Physics block: single clean card -->
+<p align="center">
+  <img src="assets/statistical_formulas_card.png" width="780" alt="LEM – Statistical Physics Formulas" />
+</p> 
+
+
+
 ## Research Questions
 1. **RQ1 – Existence:** Do user interactions produce distinctive embedding trajectories?  
 2. **RQ2 – Persistence:** Do these signatures persist across different LLM versions?  
