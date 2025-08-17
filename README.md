@@ -24,19 +24,40 @@ Version 0.3 expands the framework with the **Four Pillars of LEM**, integrates i
 
 ## Mathematical Foundations
 
-### Geodesic Trajectory
-A geodesic trajectory γ(t) across the curved manifold M:
+The theoretical basis of this project lies in the intersection of **dynamical systems**,  
+**geometric analysis**, and **information theory**.  
+Below we illustrate the core mathematical structures.
 
-![Trajectory Diagram](assets/TrajectoryDiagram.png)
+---
+
+<p align="center">
+  <img src="assets/TrajectoryDiagram.png" alt="Attractor Landscape" width="320"/>
+  <img src="assets/GeodesicDiagram.png" alt="Geodesic Path" width="320"/>
+</p>
+
+<p align="center">
+  <em>
+  **Figure 1 (left):** Energy landscape of attractor states.  
+  **Equation (1):** H(σ) = - Σ Jᵢⱼ σᵢ σⱼ  
+  <br><br>
+  **Figure 2 (right):** Geodesic path in curved state space.  
+  **Equation (2):** L(γ) = ∫ √(g₍γ(t)₎(γ̇(t), γ̇(t))) dt
+  </em>
+</p>
 
 ---
 
-### Attractor Landscape
-Energy landscape with local minima representing attractor states:
+<p align="center">
+  <img src="assets/GeometryDiagram.png" alt="Geometric Representation" width="280"/>
+</p>
 
-![Attractor Landscape](assets/AttractorLandscape.png)
-
----
+<p align="center">
+  <em>
+  **Figure 3:** Abstract geometric representation of system dynamics.  
+  **Equation (3):** ρ(t) = e<sup>-βH(σ)</sup> / Z  
+  **Equation (4):** d(σ₁,σ₂) = min ∫ √(g(σ̇,σ̇)) dt
+  </em>
+</p>
 
 ---
 
