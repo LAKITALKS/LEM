@@ -23,21 +23,18 @@ Version 0.3 expands the framework with the **Four Pillars of LEM**, integrates i
 | **4. External Triggering** | Specific prompts can reliably reactivate the attractor signature (γ̇(t)). | Echo making ripples on a lake. |
 
 ## Mathematical Foundations
-The LEM framework builds on two scientific pillars:
 
-- **Information Geometry** — trajectories on a curved statistical manifold (𝓜).  
-- **Statistical Physics** — energy landscapes inspired by spin glasses; stable minima correspond to attractor states (𝒜ᵤ).
+### Geodesic Trajectory
+A geodesic trajectory γ(t) across the curved manifold M:
 
-### Key Diagrams
-<p align="center">
-  <img src="assets/geodesic-length.png" alt="Geodesic Length – trajectory γᵤ(t) on manifold" width="520">
-</p>
-<p align="center"><em>Trajectory γᵤ(t) across the manifold (start a → end b). The geodesic length measures induced cognitive effort.</em></p>
+![Trajectory Diagram](assets/TrajectoryDiagram.png)
 
-<p align="center">
-  <img src="assets/spin-glass.png" alt="Spin Glass Energy Landscape – Hamiltonian H(σ)" width="620">
-</p>
-<p align="center"><em>Hamiltonian energy surface with local minima (attractors 𝒜ᵤ) representing persistent cognitive signatures.</em></p>
+---
+
+### Attractor Landscape
+Energy landscape with local minima representing attractor states:
+
+![Attractor Landscape](assets/AttractorLandscape.png)
 
 ---
 
