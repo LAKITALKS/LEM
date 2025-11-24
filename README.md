@@ -146,5 +146,4 @@ signature storage, and cross-model alignment of topological structures.
 
 If you reference this project, please cite the Zenodo record:
 
-> Varvatis, L. (2025). *The Lazaros–Eudora Method (LEM)*.  
-> Zenodo. https://doi.org/10.5281/zenodo.16891286
+Lazaros Varvatis (2025). LAKITALKS/LEM: Lazaros–Eudora Method (LEM) v1.0 – Topological Reformulation. Zenodo. https://doi.org/10.5281/zenodo.17704003
