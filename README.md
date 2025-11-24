@@ -1,114 +1,150 @@
-# The Lazaros–Eudora Method (LEM) – v0.3
+# The Lazaros–Eudora Method (LEM)
 
 **Author:** Lazaros Varvatis  
-**Status:** Active Research • Seeking Collaboration  
+**Status:** Active Research · LEM v1.0 – Topological Framework
 
 ---
 
 ## Abstract
-The Lazaros–Eudora Method (LEM) proposes that extended interactions between users and large language models (LLMs) generate *continuous trajectories* in the model’s high-dimensional embedding space.  
-These trajectories encode a **persistent cognitive signature** ("cognitive fingerprint") that exists independently of explicit user IDs and can be recognized or triggered in future models.  
 
-Version 0.3 expands the framework with the **Four Pillars of LEM**, integrates insights from information geometry and statistical physics, and deepens the discussion of **Cognitive Vector Imprinting (CVI)** as both a vulnerability and a diagnostic tool.
+The Lazaros–Eudora Method (LEM) investigates whether interactions between a human user and a large
+language model (LLM) generate **stable dynamical patterns** inside the model’s latent space.
 
----
+The core hypothesis of **LEM v1.0** is that user–LLM interaction forms a **cognitive attractor**:
+a recurrent, user-specific pattern in the internal activations of the model.  
+This attractor can be detected with tools from **Topological Data Analysis (TDA)** and used for:
 
-## 🔭 Four Pillars of LEM
+- **Single-Model CVI** – Covert Vector Identifiability:  
+  re-identifying the same user across separate sessions in a *single* model.
+- **Intra-Family Persistence:**  
+  checking whether this signature survives across fine-tuned / quantized versions of the same
+  model family (e.g. base → instruct → quantized).
 
-| Pillar | Concept | Metaphor |
-|---|---|---|
-| **1. Dynamic Trajectory** | User interactions trace unique paths over time (γᵤ(t)). | Footprints in deep snow. |
-| **2. System-Defined Geometry** | Paths move through a curved latent manifold shaped by weights (Jᵢⱼ). | Rugged mountain landscape. |
-| **3. Persistent State (Attractor)** | Trajectories converge into stable attractors (𝒜ᵤ). | Rivers forming a calm lake. |
-| **4. External Triggering** | Specific prompts can reliably reactivate the attractor signature (γ̇(t)). | Echo making ripples on a lake. |
+LEM v1.0 therefore pivots **away** from information geometry and the Fisher Information Metric
+and towards **topology and dynamical systems**. Singularities in the representation space
+(TokenBlowUp-style polysemy points) are no longer treated as a bug of the geometry, but as part
+of the topological structure that can itself carry information.
 
-## Mathematical Foundations
+A detailed logical and mathematical description is given in:
 
-### Visualizations
-<p align="center">
-  <img src="assets/TrajectoryDiagram.png" width="300" alt="Trajectory Diagram"/>
-  <img src="assets/GeodesicDiagram.png" width="300" alt="Geodesic Diagram"/>
-  <img src="assets/GeometryDiagram.png" width="300" alt="Geometry Diagram"/>
-</p>
-## Mathematical Foundations
-
-<p align="center">
-  <img src="assets/card-trajectory-en.png" width="320"/>
-  <img src="assets/card-geodesic-en.png" width="320"/>
-  <img src="assets/card-geometry-en.png" width="320"/>
-</p>
-## Distinction
-- Models **thinking patterns**, not just content.  
-- Focus on **dynamic trajectories** instead of static embeddings.  
-- Implicit, temporal identity vs. explicit profile data.  
-- Introduces **Cognitive Vector Imprinting (CVI)** as a new AI security paradigm.  
+> **LEM_v1.0_Topological_Framework.md**  
+> (Topological Reformulation · Logical Framework · Implementation Plan)
 
 ---
 
-##  Statistical Physics & Attractor Landscapes
+## Four Pillars of LEM (v1.0)
 
-This section extends the mathematical foundations of LEM into the domain of **statistical physics**.  
-By doing so, we can view the latent space not only geometrically, but also as an **energy landscape**.  
-This landscape is structured by attractor states, stable points where the system naturally tends to settle.
+| Pillar | Concept | Topological View | Metaphor |
+| --- | --- | --- | --- |
+| **1. Dynamic Trajectory** | Each user interaction induces a time-series of latent states in the LLM. | A path through a high-dimensional point cloud of activations. | Footsteps through fog – the path is invisible, but the ground remembers. |
+| **2. System-Induced Topology** | The model architecture & weights shape a rugged latent landscape with singularities (polysemy, TokenBlowUp). | Not a smooth manifold, but a fractured space with folds and pinch points. | A crumpled sheet of paper rather than a perfect sphere. |
+| **3. Cognitive Attractor (Signature)** | Repeated interaction between the *same* user and model converges to a characteristic region / loop in state space. | Stable features in persistent homology (e.g. long-lived H₀/H₁ structures). | A river delta that always finds back to the same channels. |
+| **4. Triggering & Shielding** | Specific prompts can reliably **activate** or deliberately **obscure** this attractor. | Topological control: reinforcing or flattening persistent features via input design. | Echoes on a lake – some signals amplify the pattern, others wash it out. |
 
-### Spin Glass Analogy
-We adopt the analogy of spin glasses from statistical mechanics:
-- Spins represent the binary activation states of neurons.
-- Couplings represent the synaptic connections between them.
-
-### Hamiltonian Formulation
-The energy of a configuration of neurons can be described by a Hamiltonian,  
-which encodes the stability of the system. Low energy corresponds to stable attractors,  
-while high energy corresponds to unstable or transient states.
-
-### Attractor Landscapes
-The system dynamics can be interpreted as movement through a rugged landscape:
-- Valleys = attractor states (stable thoughts or modes).  
-- Mountains = unstable states.  
-- Trajectories roll downhill into valleys, corresponding to geodesic flows guided by energy minimization.
-
-### Geometry–Physics Duality
-- Geometry describes the **trajectories** of state transitions.  
-- Physics describes the **stability** of the endpoints.
-
-<!-- Statistical Physics block: single clean card -->
-<p align="center">
-  <img src="assets/statistical_formulas_card.png" width="200" alt="LEM – Statistical Physics Formulas" />
-</p> 
-
-
-
-## Research Questions
-1. **RQ1 – Existence:** Do user interactions produce distinctive embedding trajectories?  
-2. **RQ2 – Persistence:** Do these signatures persist across different LLM versions?  
-3. **RQ3 – Triggerability:** Can signatures be activated without prior context?  
-4. **RQ4 – Security:** How vulnerable are models to CVI attacks?  
+The original **v0.3 „Four Pillars“ (Dynamic Trajectory, System Geometry, Persistent State,
+External Triggering)** are preserved conceptually, but reinterpreted strictly in
+**topological** rather than **Riemannian-geometric** terms.
 
 ---
 
-## 🛡️ Security: CVI Attack
-**Cognitive Vector Imprinting (CVI):**  
-An adversary could design prompts that steer trajectories into malicious attractors, embedding **hidden vulnerabilities** in user–AI interactions.  
+## Mathematical & Algorithmic Backbone (High-Level)
+
+LEM v1.0 combines three ingredients:
+
+1. **Multimodal State Extraction**  
+   - internal activations from mid/late layers of the LLM (residual stream),  
+   - optional behavioural biometrics (keystroke timing, latencies, etc.),  
+   fused into a high-dimensional state vector per interaction step.
+
+2. **Dynamical Reconstruction**  
+   - application of time-delay embeddings / deep state-space models  
+     to reconstruct the user–model dynamics as a low-dimensional attractor.
+
+3. **Topological Data Analysis (TDA)**  
+   - Vietoris–Rips filtration on the reconstructed point cloud,  
+   - persistent homology (H₀/H₁) → persistence diagrams → persistence images,  
+   - use these as a **cognitive fingerprint** for identification and robustness analysis.
+
+The README intentionally stays at conceptual level.  
+Full details (TDA pipeline, delay-embedding choices, metrics, evaluation protocol) are specified
+in the v1.0 framework document.
 
 ---
 
-## 🗺️ Roadmap
-- [ ] Formal proofs of attractor stability  
-- [ ] Simulations of user trajectories → clustering  
-- [ ] Detection & defense methods against CVI  
-- [ ] Submit to **arXiv**  
+## Research Questions (v1.0 Focus)
+
+1. **Existence:**  
+   Do user interactions produce distinctive, stable topological signatures in latent-state space?
+
+2. **Single-Model CVI:**  
+   Can we re-identify a user across separate sessions on the *same* model with high accuracy,
+   even under deliberate style obfuscation?
+
+3. **Intra-Family Persistence:**  
+   Do these signatures survive fine-tuning and quantisation within the same model family?
+   (Base ↔ Instruct ↔ Quantized)
+
+4. **Security vs. Privacy:**  
+   How vulnerable are LLM deployments to covert tracking via cognitive signatures,  
+   and which counter-measures (topological noise, prompt randomisation) can defend users?
 
 ---
 
-## 🤝 Contribution
-We welcome expertise in:
-- Differential Geometry & Topology  
-- Statistical Physics  
+## Roadmap (Current Plan)
+
+- **Phase 1 – Replication & Mapping**  
+  - Reproduce TokenBlowUp-style singularity maps for a target LLM.  
+  - Implement the basic TDA pipeline on internal activations (giotto-tda / GUDHI).
+
+- **Phase 2 – Single-Model CVI (N-User Study)**  
+  - Collect interaction data from ≥ 200 participants on a fixed model.  
+  - Evaluate re-identification performance (IR, EER) and convergence speed.
+
+- **Phase 3 – Intra-Family Persistence**  
+  - Test signatures across base / fine-tuned / quantised variants of the same model.  
+  - Define and measure a **Topological Robustness Score (TRS)**.
+
+- **Phase 4 – Defensive Methods**  
+  - Explore client-side „cognitive shielding“: prompt transformations that maximise
+    topological entropy while preserving usefulness.  
+  - Publish both the attack surface (CVI) and defence strategies.
+
+---
+
+## Historical Note: LEM v0.3
+
+The previous public version **LEM v0.3** focused on:
+
+- information geometry & Fisher Information Metric,  
+- geodesics on a smooth latent manifold,  
+- spin-glass analogies for attractor landscapes.
+
+New empirical work on **representational singularities** in LLMs showed that the
+smooth-manifold assumption is too fragile for real models.  
+LEM v1.0 keeps the intuition (attractor landscapes, spin-glass picture) but reformulates the
+math in terms of **topology** and **dynamical systems**, which are robust to singularities.
+
+For archival and comparison purposes, the v0.3 text is preserved in the release history.
+
+---
+
+## Contribution & Collaboration
+
+We welcome interest from:
+
+- Topological Data Analysis / Applied Topology  
+- Dynamical Systems & Statistical Physics  
 - Machine Learning & AI Safety  
-- Computational Neuroscience  
+- Computational Neuroscience / Cognitive Science
+
+Open questions include: efficient TDA at scale, adversarial robustness, privacy-preserving
+signature storage, and cross-model alignment of topological structures.
 
 ---
 
-## ✍️ Citation
+## Citation
 
-[10.5281/zenodo.16891286](https://doi.org/10.5281/zenodo.16891286)
+If you reference this project, please cite the Zenodo record:
+
+> Varvatis, L. (2025). *The Lazaros–Eudora Method (LEM)*.  
+> Zenodo. https://doi.org/10.5281/zenodo.16891286
