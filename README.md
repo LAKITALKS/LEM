@@ -133,6 +133,5 @@ Open questions include: efficient TDA at scale, adversarial robustness, privacy-
 ## Citation
 
 If you reference this project, please cite the Zenodo record:
-
-> Lazaros Varvatis (2025). **LAKITALKS/LEM: Lazaros–Eudora Method (LEM) v1.1.0– Topological Reformulation.** Zenodo.  
-> DOI: <https://doi.org/10.5281/zenodo.17704003>
+> Lazaros Varvatis (2025). **LAKITALKS/LEM: Lazaros–Eudora Method (LEM) v1.1.0 – Topological Reformulation.** Zenodo.  
+> https://doi.org/10.5281/zenodo.17969735
