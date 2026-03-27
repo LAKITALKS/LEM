@@ -78,9 +78,8 @@ This runs all three paper experiments (Toy V1 Scaled, V1b Robustness, V2 Topolog
 
 If you reference this project, please cite the Zenodo record:
 
-Lazaros Varvatis (2026). LAKITALKS/LEM: Lazaros–Eudora Method (LEM) v2.0.0 — Preprint with Toy Validation.
-Zenodo. https://doi.org/10.5281/zenodo.19266201
-
+> Lazaros Varvatis (2026). **LAKITALKS/LEM: Lazaros–Eudora Method (LEM) v2.0.0 — Preprint with Toy Validation.**
+> Zenodo   https://doi.org/10.5281/zenodo.19266201
 ---
 
 ## Related Work
