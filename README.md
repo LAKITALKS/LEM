@@ -1,137 +1,104 @@
 # The Lazaros–Eudora Method (LEM)
 
-**Author:** Lazaros Varvatis  
-**Status:** Active Research · LEM v1.0 – Topological Framework
+**Author:** Lazaros Varvatis
+**Status:** Preprint · v2.0 — Topological Framework with Toy Validation
 
 ---
 
 ## Abstract
 
-The Lazaros–Eudora Method (LEM) investigates whether interactions between a human user and a large language model (LLM) generate **stable dynamical patterns** inside the model’s latent space.
+The Lazaros–Eudora Method (LEM) is a conceptual and computational framework for analyzing user–LLM interactions as **dynamic trajectories in latent representation space** rather than as isolated prompt–response pairs.
 
-The core hypothesis of **LEM v1.0** is that user–LLM interaction forms a **cognitive attractor**: a recurrent, user-specific pattern in the internal activations of the model.  
-This attractor can be detected with tools from **Topological Data Analysis (TDA)** and used for:
+The core hypothesis is that repeated interaction between a user and a language model induces structured trajectory regimes — convergence, recurrence, or instability — that can be described through user-specific attractors and compact interaction signatures. LEM argues that purely geometric similarity is insufficient for characterizing such regimes and motivates a **topological reformulation based on persistent homology**.
 
-- **Single-Model CVI – Covert Vector Identifiability:**  
-  re-identifying the same user across separate sessions in a *single* model.
+The current preprint presents two toy-model validations:
 
-- **Intra-Family Persistence:**  
-  checking whether this signature survives across fine-tuned / quantized versions of the same model family (e.g. base → instruct → quantized).
+1. **Geometric Identifiability** — Perfect nearest-neighbor re-identification across N=500 users in d=512 dimensions, with a sharp phase transition at σ ≈ 0.25.
+2. **Topological Class Separation** — Convergent and cyclic regimes distinguished through persistent H₁ structure with SNR = 161.6.
 
-LEM v1.0 therefore pivots **away** from information geometry and the Fisher Information Metric and towards **topology and dynamical systems**.  
-Irregularities in the representation space – such as **anisotropic regions and local breakdowns of the manifold hypothesis around polysemous tokens** – are no longer treated as a defect of the geometry, but as part of the structure that TDA can measure and exploit.
+---
 
-A detailed logical and mathematical description is given in:
+## Repository Structure
 
-**`LEM_v1.0_Topological_Framework.md`**  
-*(Topological Reformulation · Logical Framework · Implementation Plan)*
+```
+LEM/
+├── README.md                         ← this file
+├── LEM_v1.0_Topological_Framework.md ← conceptual framework document
+├── paper/
+│   ├── lem_paper_final_v3.tex        ← LaTeX source (preprint)
+│   ├── lem_paper_final_v3.pdf        ← compiled PDF
+│   ├── references.bib                ← bibliography (11 sources)
+│   └── assets/
+│       ├── toy_v1_scaled_results.png ← Figure 1
+│       ├── toy_v1b_robustness.png    ← Figure 2
+│       └── toy_v2_moneyplot.png      ← Figure 3
+└── experiments/
+    ├── lem_simulations.py            ← all simulation code
+    ├── run_all.py                    ← standalone runner (no Colab needed)
+    ├── requirements.txt              ← Python dependencies
+    └── README.md                     ← experiment documentation
+```
+
+---
+
+## Reproducing the Results
+
+```bash
+cd experiments
+pip install -r requirements.txt
+python run_all.py --skip-pilot
+```
+
+This runs all three paper experiments (Toy V1 Scaled, V1b Robustness, V2 Topological) and saves figures to `assets/` and numerical results to the current directory. Seeds are fixed for full reproducibility.
+
+---
+
+## Key Results
+
+| Experiment | Key Finding | Paper Section |
+|---|---|---|
+| Toy V1 (Scaled) | NN Accuracy 1.000 ± 0.000 across 10 seeds | Section 4.1, Table 1 |
+| Toy V1b (Robustness) | Phase transition at σ ≈ 0.25 | Section 4.1, Table 2 |
+| Toy V2 (Topological) | SNR = 161.6 (H₁ cyclic vs. convergent) | Section 4.2, Table 3 |
 
 ---
 
 ## Four Pillars of LEM (v1.0)
 
-| Pillar                        | Concept                                                                 | Topological View                                                                 | Metaphor                                                         |
-|------------------------------|-------------------------------------------------------------------------|-----------------------------------------------------------------------------------|------------------------------------------------------------------|
-| **1. Dynamic Trajectory**    | Each user interaction induces a time-series of latent states in the LLM.| A path through a high-dimensional point cloud of activations.                    | Footsteps through fog – the path is invisible, but the ground remembers. |
-| **2. System-Induced Topology** | The model architecture & weights shape a rugged latent landscape with anisotropic regions and representation singularities (e.g. around polysemous tokens). | Not a smooth manifold, but a fractured space with folds, pinch points, and local violations of the manifold hypothesis. | A crumpled sheet of paper rather than a perfect sphere.         |
-| **3. Cognitive Attractor (Signature)** | Repeated interaction between the *same* user and model converges to a characteristic region / loop in state space. | Stable features in persistent homology (e.g. long-lived H₀/H₁ structures).      | A river delta that always finds back to the same channels.       |
-| **4. Triggering & Shielding** | Specific prompts can reliably **activate** or deliberately **obscure** this attractor. | Topological control: reinforcing or flattening persistent features via input design. | Echoes on a lake – some signals amplify the pattern, others wash it out. |
-
-The original **v0.3 “Four Pillars” (Dynamic Trajectory, System Geometry, Persistent State, External Triggering)** are preserved conceptually, but reinterpreted strictly in **topological** rather than **Riemannian-geometric** terms.
-
----
-
-## Mathematical & Algorithmic Backbone (High-Level)
-
-LEM v1.0 combines three ingredients:
-
-1. **Multimodal State Extraction**  
-   - internal activations from mid/late layers of the LLM (residual stream),  
-   - optional behavioural biometrics (keystroke timing, latencies, etc.),  
-   - fused into a high-dimensional state vector per interaction step.
-
-2. **Dynamical Reconstruction**  
-   - application of time-delay embeddings / deep state-space models  
-   - to reconstruct the user–model dynamics as a low-dimensional attractor.
-
-3. **Topological Data Analysis (TDA)**  
-   - Vietoris–Rips filtration on the reconstructed point cloud,  
-   - persistent homology (H₀/H₁) → persistence diagrams → persistence images,  
-   - used as a **cognitive fingerprint** for identification and robustness analysis.
-
-The README intentionally stays at a conceptual level.  
-Full details (TDA pipeline, delay-embedding choices, metrics, evaluation protocol) are specified in the v1.0 framework document.
-
----
-
-## Research Questions (v1.0 Focus)
-
-1. **Existence**  
-   Do user interactions produce distinctive, stable topological signatures in latent-state space?
-
-2. **Single-Model CVI**  
-   Can we re-identify a user across separate sessions on the *same* model with high accuracy, even under deliberate style obfuscation?
-
-3. **Intra-Family Persistence**  
-   Do these signatures survive fine-tuning and quantisation within the same model family? (Base ↔ Instruct ↔ Quantized)
-
-4. **Security vs. Privacy**  
-   How vulnerable are LLM deployments to covert tracking via cognitive signatures,  
-   and which counter-measures (topological noise, prompt randomisation) can defend users?
-
----
-
-## Roadmap (Current Plan)
-
-- **Phase 1 – Mapping Representational Structure**  
-  - Identify and visualise regions of **anisotropy and representational singularities** in a target LLM  
-    (e.g. via intrinsic-dimension and anisotropy diagnostics).  
-  - Implement the basic TDA pipeline on internal activations (giotto-tda / GUDHI).
-
-- **Phase 2 – Single-Model CVI (N-User Study)**  
-  - Collect interaction data from ≥ 200 participants on a fixed model.  
-  - Evaluate re-identification performance (IR, EER) and convergence speed.
-
-- **Phase 3 – Intra-Family Persistence**  
-  - Test signatures across base / fine-tuned / quantised variants of the same model.  
-  - Define and measure a **Topological Robustness Score (TRS)**.
-
-- **Phase 4 – Defensive Methods**  
-  - Explore client-side “cognitive shielding”: prompt transformations that maximise topological entropy while preserving usefulness.  
-  - Publish both the attack surface (CVI) and defence strategies.
-
----
-
-## Historical Note: LEM v0.3
-
-The previous public version **LEM v0.3** focused on:
-
-- information geometry & Fisher Information Metric,  
-- geodesics on a smooth latent manifold,  
-- spin-glass analogies for attractor landscapes.
-
-New empirical work on **representational singularities, anisotropy, and violations of the manifold hypothesis** in LLMs showed that the smooth-manifold assumption is too fragile for real models.  
-LEM v1.0 keeps the intuition (attractor landscapes, spin-glass picture) but reformulates the math in terms of **topology** and **dynamical systems**, which are robust to such irregularities.
-
-For archival and comparison purposes, the v0.3 text is preserved in the release history.
-
----
-
-## Contribution & Collaboration
-
-We welcome interest from:
-
-- Topological Data Analysis / Applied Topology  
-- Dynamical Systems & Statistical Physics  
-- Machine Learning & AI Safety  
-- Computational Neuroscience / Cognitive Science  
-
-Open questions include: efficient TDA at scale, adversarial robustness, privacy-preserving signature storage, and cross-model alignment of topological structures.
+| Pillar | Concept | Topological View |
+|---|---|---|
+| **1. Dynamic Trajectory** | User interaction induces a time-series of latent states | Path through a high-dimensional point cloud |
+| **2. System-Induced Topology** | The model's latent landscape has anisotropic regions | Not a smooth manifold — folds, pinch points, singularities |
+| **3. Cognitive Attractor** | Repeated interaction converges to a characteristic region | Stable features in persistent homology (H₀/H₁) |
+| **4. Triggering & Shielding** | Prompts can activate or obscure the attractor | Reinforcing or flattening persistent features |
 
 ---
 
 ## Citation
 
 If you reference this project, please cite the Zenodo record:
-> Lazaros Varvatis (2025). **LAKITALKS/LEM: Lazaros–Eudora Method (LEM) v1.1.0 – Topological Reformulation.** Zenodo.  
+
+> Lazaros Varvatis (2025). **LAKITALKS/LEM: Lazaros–Eudora Method (LEM) v1.1.0 – Topological Reformulation.** Zenodo.
 > https://doi.org/10.5281/zenodo.17969735
+
+---
+
+## Related Work
+
+LEM builds on and distinguishes itself from several research traditions:
+
+- **Dynamical systems in LLMs:** Wang et al. (ACL 2025), Ramsauer et al. (ICLR 2021), Bai et al. (NeurIPS 2019)
+- **Persona and behavioral directions:** Chen et al. / Anthropic (2025), Zou et al. (2023)
+- **Mechanistic interpretability:** Bricken et al. (2023), Templeton et al. (2024)
+- **TDA on LLM representations:** Gardinazzi et al. (ICLR 2025), Carlsson (2009)
+- **Latent state persistence:** Huang et al. (2025)
+
+LEM's novelty lies in combining user-specific trajectory modeling, latent-space analysis, and topological regime differentiation — a synthesis not present in any single existing work.
+
+---
+
+## License & Collaboration
+
+This is an active research project. Researchers in TDA, dynamical systems, ML interpretability, and AI safety are welcome to reach out via the Issues page.
+
+> *LEM explores whether user–LLM interactions form stable dynamical patterns — and what that means for identity, privacy, and alignment.*
