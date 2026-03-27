@@ -1,0 +1,250 @@
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+% \usepackage{lmodern}  % use default Computer Modern
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage[margin=1in]{geometry}
+\usepackage{enumitem}
+
+\title{The Lazaros--Eudora Method (LEM):\\
+A Topological Framework for User--LLM Interaction Dynamics}
+
+\author{Lazaros Varvatis}
+\date{}
+
+\begin{document}
+\maketitle
+
+% =========================================================
+% ABSTRACT
+% =========================================================
+
+\begin{abstract}
+We introduce the Lazaros--Eudora Method (LEM), a conceptual
+and computational framework for analyzing user--LLM
+interactions as dynamic trajectories in latent representation
+space rather than as isolated prompt--response pairs. The
+central hypothesis of LEM is that repeated interaction
+between a user and a language model induces structured
+trajectory regimes that can be described through
+user-specific attractors and compact interaction signatures.
+We argue that purely geometric similarity is insufficient for
+characterizing such regimes and motivate a topological
+reformulation based on persistent homology. To render the
+framework testable without reliance on proprietary
+frontier-model internals, we present two toy-model
+validations in controlled synthetic settings. The first
+demonstrates geometric identifiability of user-conditioned
+trajectories in a controlled latent dynamical system,
+achieving perfect nearest-neighbor re-identification in the
+reported synthetic setting across $N{=}500$ users and ten
+independent random seeds, compared to a random baseline of
+$0.002$. The second shows that convergent and cyclic
+interaction regimes can be distinguished through persistent
+$H_1$ structure after noisy projection into a
+higher-dimensional latent space, yielding a
+signal-to-noise ratio of $161.6$. We position LEM as a
+testable research program for studying user--LLM interaction
+dynamics, while explicitly delimiting its current scope and
+empirical constraints.
+\end{abstract}
+
+% =========================================================
+% 1. INTRODUCTION
+% =========================================================
+
+\section{Introduction}
+
+Current large language model evaluation remains dominated by
+static, turn-local metrics. These metrics can assess answer
+quality, benchmark performance, or stylistic alignment, but
+they do not directly describe the temporal structure of
+repeated user--model interaction. As a result, an important
+object remains under-modeled: the trajectory induced by a
+specific user interacting with a model across multiple turns.
+
+The Lazaros--Eudora Method (LEM) is a framework designed to
+study this object. Its central premise is that user--LLM
+interaction should be modeled as a dynamical trajectory in
+latent space rather than as a collection of isolated prompt
+embeddings or output tokens. In this view, repeated
+interaction may generate structured regimes---for example
+convergence, recurrence, or instability---that are more
+naturally described in the language of dynamical systems and
+topology than in the language of static vector similarity
+alone.
+
+This paper makes a limited but concrete contribution. It does
+not claim to establish a full theory of human cognition or a
+validated description of real frontier-model internals.
+Instead, it contributes:
+\begin{enumerate}[leftmargin=1.5em]
+  \item a compact conceptual formalization of LEM;
+  \item a distinction between geometric and topological
+        notions of interaction signatures;
+  \item two toy-model validations showing how
+        user-conditioned attractors and trajectory classes
+        can be operationalized in controlled synthetic
+        settings.
+\end{enumerate}
+
+The intended contribution is therefore methodological: to
+provide a testable framework for studying user--LLM
+interaction dynamics and to identify which parts of the
+theory are already operational, which remain open, and which
+are presently speculative.
+
+% =========================================================
+% 2. CONCEPTUAL FRAMEWORK
+% =========================================================
+
+\section{Conceptual Framework}
+
+\subsection{Interaction trajectories}
+
+We define an interaction trajectory as a time-ordered
+sequence of states
+\[
+  x_1, x_2, \dots, x_T \in \mathcal{X},
+\]
+where $\mathcal{X}$ is a latent or constructed representation
+space associated with a multi-turn user--LLM interaction. In
+practice, $\mathcal{X}$ may refer to internal activations,
+reduced coordinates, or synthetic latent states in a toy
+model.
+
+This shift from isolated states to trajectories is the first
+core move of LEM. The object of study is not merely the
+embedding of a prompt or response, but the path induced by
+repeated interaction.
+
+\subsection{Cognitive signatures}
+
+A \emph{cognitive signature} is a compact representation
+derived from an interaction trajectory that preserves salient
+structural properties of user--model dynamics. In the present
+paper, we distinguish two operational levels:
+\begin{enumerate}[leftmargin=1.5em]
+  \item \textbf{Geometric signatures}, defined through
+        distances, directional similarity, and
+        nearest-neighbor re-identification in a controlled
+        latent system;
+  \item \textbf{Topological signatures}, defined through
+        persistent homology, especially the presence or
+        absence of robust $H_1$ features.
+\end{enumerate}
+
+This distinction is essential. Geometric signatures capture
+identifiability in a vector-space sense. Topological
+signatures capture regime structure that may not be reducible
+to distance alone.
+
+\subsection{Attractor-like interaction regimes}
+
+LEM uses the term \emph{attractor} in a modeling sense. The
+claim is not that real human cognition has been recovered from
+LLM traces, but that repeated interaction can be approximated
+as a dynamical process whose trajectories may approach stable
+regimes. In the minimal setting considered here, these
+include:
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Convergent regimes}, approximated by a
+        stable fixed point;
+  \item \textbf{Cyclic regimes}, approximated by a stable
+        limit cycle;
+  \item \textbf{Unstable or noisy regimes}, in which no
+        compact structural summary is stable.
+\end{itemize}
+
+\subsection{Core hypotheses}
+
+We focus on four hypotheses, of which only the first three
+are partially operationalized in the current paper.
+
+\paragraph{H1: Geometric identifiability.}
+User-conditioned interaction dynamics can generate
+trajectories that are re-identifiable above chance in a
+controlled latent system.
+
+\paragraph{H2: Regime differentiation.}
+Convergent and cyclic interaction regimes generate
+structurally distinct trajectory classes.
+
+\paragraph{H3: Topological utility.}
+Persistent homology captures structural differences between
+such regimes, especially through the presence or absence of
+persistent $H_1$ features.
+
+\paragraph{H4: Cross-version stability.}
+User-specific interaction signatures may remain partially
+stable across related model variants or model families. In
+this paper, H4 is treated as a theoretical target rather than
+an empirically established claim.
+
+% =========================================================
+% 3. FROM GEOMETRY TO TOPOLOGY
+% =========================================================
+
+\section{From Geometric Similarity to Topological Structure}
+
+Many current approaches to personalization, user modeling,
+and dialogue adaptation rely on static similarity measures,
+clustering, or compressed user embeddings. These approaches
+are useful, but they typically summarize multi-turn
+interaction as a point estimate or a low-order statistic.
+
+LEM instead treats interaction as a trajectory and therefore
+distinguishes between two levels of structure:
+\begin{enumerate}[leftmargin=1.5em]
+  \item \textbf{Geometric structure}: whether trajectories
+        lie near each other or near user-conditioned
+        attractors;
+  \item \textbf{Topological structure}: whether trajectories
+        exhibit recurrence, loop-like organization, or
+        topological triviality.
+\end{enumerate}
+
+This motivates the use of topological data analysis (TDA),
+especially persistent homology. In the current work, the key
+topological observable is persistent $H_1$ structure,
+interpreted as evidence of recurrent cyclic organization in
+trajectory point clouds.
+
+We explicitly do \emph{not} claim that topological features
+directly reveal psychological essence or consciousness. The
+intended claim is narrower: in a controlled setting, topology
+can distinguish classes of interaction dynamics that are
+poorly summarized by static geometry alone.
+
+% =========================================================
+% 4. TOY-MODEL NUMERICAL VALIDATION
+% =========================================================
+
+\section{Toy-Model Numerical Validation}
+
+The present paper does not attempt to validate LEM directly
+on proprietary frontier-model internals. Instead, it follows
+a more modest and methodologically transparent strategy: we
+test whether the core conceptual claims of the framework can
+be operationalized in controlled synthetic systems. The goal
+of these toy experiments is not realism, but falsifiability.
+If the central vocabulary of LEM---user-conditioned
+trajectories, attractor-like behavior, and topological regime
+separation---cannot be instantiated even in simple latent
+dynamical systems, the framework would lack methodological
+credibility.
+
+We therefore use two toy experiments with distinct roles. The
+first tests \emph{geometric identifiability}: whether
+user-conditioned latent dynamics generate re-identifiable
+trajectories above chance. The second tests
+\emph{topological class separation}: whether convergent and
+cyclic regimes remain distinguishable after projection into a
+noisy higher-dimensional latent space.
+
+% ---------------------------------------------------------
+\subsection {From Geometry to\nTopology}\n\nMany current approaches to personalization, user modeling,\nand dialogue adaptation rely on static similarity measures,\nclustering, or compressed user embeddings. These approaches\nare useful, but they typically summarize multi-turn\ninteraction as a point estimate or a low-order statistic.\n\nLEM instead treats interaction as a trajectory and therefore\ndistinguishes between two levels of structure:\n\\begin{enumerate}[leftmargin=1.5em]\n  \\item \\textbf{Geometric structure}: whether trajectories\n        lie near each other or near user-conditioned\n        attractors;\n  \\item \\textbf{Topological structure}: whether trajectories\n        exhibit recurrence, loop-like organization, or\n        topological triviality.\n\\end{enumerate}\n\nThis motivates the use of topological data analysis (TDA),\nespecially persistent homology. In the current work, the key\ntopological observable is persistent $H_1$ structure,\ninterpreted as evidence of recurrent cyclic organization in\ntrajectory point clouds.\n\nWe explicitly do \\emph{not} claim that topological features\ndirectly reveal psychological essence or consciousness. The\nintended claim is narrower: in a controlled setting, topology\ncan distinguish classes of interaction dynamics that are\npoorly summarized by static geometry alone.\n\n% =========================================================\n% 4. TOY-MODEL NUMERICAL VALIDATION\n% =========================================================\n\n\\section{Toy-Model Numerical Validation}\n\nThe present paper does not attempt to validate LEM directly\non proprietary frontier-model internals. Instead, it follows\na more modest and methodologically transparent strategy: we\ntest whether the core conceptual claims of the framework can\nbe operationalized in controlled synthetic systems. The goal\nof these toy experiments is not realism, but falsifiability.\nIf the central vocabulary of LEM---user-conditioned\ntrajectories, attractor-like behavior, and topological regime\nseparation---cannot be instantiated even in simple latent\ndynamical systems, the framework would lack methodological\ncredibility.\n\nWe therefore use two toy experiments with distinct roles. The\nfirst tests \\emph{geometric identifiability}: whether\nuser-conditioned latent dynamics generate re-identifiable\ntrajectories above chance. The second tests\n\\emph{topological class separation}: whether convergent and\ncyclic regimes remain distinguishable after projection into a\nnoisy higher-dimensional latent space.\n\n% ---------------------------------------------------------\n\\subsection{Experiment 1: Geometric Identifiability}\n\n\\paragraph{Setup.}\nWe construct a minimal dynamical system where each user $u$\nhas a fixed latent signature $s_u \\in \\mathbb{R}^D$, drawn\nfrom a standard normal distribution and normalized. The\nsystem evolves according to\n\\[\n  x_t = (1 - \\alpha - \\beta) x_{t-1}\n        + \\alpha s_u\n        + \\beta a_m\n        + \\eta_t,\n\\]\nwhere $\\eta_t \\sim \\mathcal{N}(0, \\sigma^2 I)$ is Gaussian\nnoise, $a_m$ is a domain attractor for model $m$, and\n$\\alpha, \\beta$ are fixed blending coefficients. We use\n$D \\in \{4, 512\}$, $N_{\\text{users}} \\in \{20, 500\}$,\n$T_{\\text{steps}} \\in \{60, 200\}$, $\\alpha = 0.4$,\n$\\beta = 0.3$, and $\\sigma \\in \\{0.05, 0.30\}$ depending on\nthe variant.\n\n\\paragraph{Geometric signature.}\nAfter the trajectory converges locally (using the last $K$\nsteps), we compute an \\emph{empirical signature}\n\\[\n  \\hat{s}_u = \\frac{1}{K}\\sum_{t=T-K}^{T} x_t - \\beta a_m.\n\\]\nThis subtraction of the domain attractor removes the\nshared model contribution, leaving a user-specific residual.\nThe question is then: can we re-identify user $u$ from a\ntest trajectory using nearest-neighbor search in the space\nof empirical signatures?\n\n\\paragraph{Key result.}\nWe achieve nearest-neighbor re-identification accuracy of\n$1.0$ (perfect) in the $N=500$ setting across 10 random\nseeds, with a baseline of $0.002$. This is reported in\nTable~1. Attractor distances remain bounded ($0.789\\pm\\n0.001$), and cosine similarity between same-user and\ndifferent-user signatures achieves clean separation\n($0.357\\pm 0.002$ vs.~$0.002\\pm 0.002$). A robustness\nsweep (Experiment 1b, Table~2) shows that identifiability\nremains high up to $\\sigma \\approx 0.25$, after which noise\ndominates.\n\n% ---------------------------------------------------------\n\\subsection{Experiment 2: Topological Class Separation}\n\n\\paragraph{Motivation.}\nGeometric identifiability alone does not establish that\ntopological features are necessary. It is logically possible\nthat all structure could be captured by Euclidean distance\nalone. To test whether topology adds value, we compare two\nregime types---convergent (fixed-point) and cyclic\n(limit-cycle)---and ask whether persistent homology can\ndistinguish them after embedding in a noisy higher-dimensional\nlatent space.\n\n\\paragraph{Setup.}\nWe simulate two canonical vector fields:\n\\begin{enumerate}[leftmargin=1.5em]\n  \\item \\textbf{Convergent regime}: Stable fixed-point sink,\n        $\\dot{x} = -\\lambda x$, where $\\lambda = 0.5$.\n  \\item \\textbf{Cyclic regime}: Van der Pol oscillator,\n        $\\ddot{x} - \\mu(1 - x^2)\\dot{x} + x = 0$,\n        where $\\mu = 1.5$.\n\\end{enumerate}\nBoth are integrated to $T = 40$ using standard ODE solvers.\nThe resulting 2D trajectories are then embedded into a\n16-dimensional latent space via random projection plus\nGaussian noise ($\\sigma = 0.05$).\n\n\\paragraph{Persistent homology (H1).}\nWe apply the Vietoris-Rips complex and compute persistent\nhomology using the ripser library. The key observable is the\nmaximum persistence of the first homology group ($H_1$),\nwhich captures the presence of long-lived loops or cycles in\nthe point cloud.\n\\begin{itemize}[leftmargin=1.5em]\n  \\item \\textbf{Convergent regime}: Points cluster near a\n        sink; no robust loop structure; max $H_1 \\approx 0.033$.\n  \\item \\textbf{Cyclic regime}: Points form a recurrent\n        loop; strong persistent $H_1$; max $H_1 \\approx 5.265$.\n\\end{itemize}\nThe signal-to-noise ratio (SNR) is $5.265 / 0.033 \\approx\n161.6$, demonstrating clear topological separation.\n\n\\paragraph{Interpretation.}\nThis result validates the core hypothesis that topological\nstructure (persistent homology) can distinguish interaction\nregimes that geometric distance alone might conflate. It does\n\\emph{not} prove that human--LLM interaction produces such\nloop structures, but it shows that the conceptual toolkit of\nLEM is internally consistent and operationalizable in a\ncontrolled setting.\n\n% =========================================================\n% 5. DISCUSSION\n% =========================================================\n\n\\section{Discussion}\n\nLEM proposes a shift in how we model user--LLM dynamics: from\nisolated prompt--response pairs to trajectory regimes in latent\nspace. This section situates the framework in the landscape of\nexisting work and marks out limitations and open questions.\n\n\\subsection{Relationship to Prior Work}\n\nUser modeling and personalization are well-established themes\nin dialogue systems, recommender systems, and HCI\n(\\cite{shani2005beyond}, \\cite{kahn2002personalization}). More\nrecent work on persona vectors and value-aligned LLMs\n(\\cite{ohsawa2024persona}, \\cite{kasianova2023towards}) has\nbegun to examine stable user-specific patterns in LLM\nresponses.\n\nLEM extends this by proposing that such patterns form\n\\emph{trajectories} in latent space, not merely static\nembeddings. This is related to ideas in dynamical systems\nanalysis and topological data analysis (TDA), which have been\nadapted to neuroscience (\\cite{chung2021topological},\n\\cite{tithof2023topological}) but are less common in NLP.\n\nOur use of persistent homology to distinguish regime classes\nis inspired by applications of TDA to brain data\n(\\cite{reimann2017cliques}), materials science, and point\nclouds (\\cite{otter2017roadmap}). The novelty here is the\napplication domain: user--LLM interaction.\n\n\\subsection{Scope and Limitations}\n\nWe emphasize several limitations and caveats that should\nguide interpretation.\n\n\\paragraph{1. Toy models, not reality.}\nThe experiments are conducted on synthetic dynamical systems\nwith known ground truth. They do \\emph{not} use real\nfrontier-model internals or actual user--LLM transcripts. The\nintended contribution is methodological proof-of-concept, not\nempirical validation on real data.\n\n\\paragraph{2. Latent space opaqueness.}\nLLMs are black boxes. We do not have direct access to internal\nrepresentations, and inferring latent geometry from\nobservables (token sequences) is fundamentally ill-posed.\nFuture work would need either (a) white-box models or\n(b) interpretable probing schemes to ground these ideas in\nreal model internals.\n\n\\paragraph{3. Cognitive claims deferred.}\nWe make no claim that topology reveals human cognition or\nneural structure. The term \"attractor\" is used as a\nmathematical convenience, not a cognitive commitment. H4\n(cross-version stability) remains untested.\n\n\\paragraph{4. Scalability.}\nPersistent homology computation scales polynomially with\npoint cloud size. Real interaction trajectories from deployed\nLLMs would involve thousands of states; computational\nfeasibility for industrial scale remains open.\n\n\\subsection{Future Directions}\n\nSeveral natural extensions emerge:\n\\begin{enumerate}[leftmargin=1.5em]\n  \\item \\textbf{Probing LLM internals}: Develop interpretable\n        probes that extract latent activation patterns during\n        real multi-turn interaction.\n  \\item \\textbf{Cross-model invariance}: Test whether\n        interaction signatures transfer across model families\n        (H4).\n  \\item \\textbf{Cognitive grounding}: Link trajectory regime\n        markers to human behavioral measures (e.g., satisfaction\n        surveys, task completion rates).\n  \\item \\textbf{Scaling & efficiency}: Develop linear-time or\n        approximate TDA algorithms suitable for production-scale\n        interaction logs.\n  \\item \\textbf{Temporal structure}: Extend the framework to\n        explicitly model session-to-session variation and\n        long-term drift.\n\\end{enumerate}\n\n% =========================================================\n% 6. CONCLUSION\n% =========================================================\n\n\\section{Conclusion}\n\nThe Lazaros--Eudora Method (LEM) provides a conceptual and\ncomputational toolkit for analyzing user--LLM interaction as\ntrajectories in latent space rather than as isolated\nturns. Through two toy-model validations, we have shown that\ngeometric identifiability and topological regime separation\ncan be operationalized in controlled synthetic settings. These\nresults do not yet establish that such structure exists in\nreal frontier models, but they establish falsifiability and\noperationalizability of the core framework.\n\nWe hope that LEM serves as a starting point for a broader\nresearch program in user--LLM dynamics, and that the\nquestions it poses---how do repeated interactions condition\nlatent geometry? what topological features emerge? how stable\nare user-specific signatures across model variants?---will\nstimulate further investigation.\n\n% =========================================================\n% REFERENCES\n% =========================================================\n\n\\begin{thebibliography}{99}\n\n\\bibitem[Kasianova et al.]{kasianova2023towards}\n  K. Kasianova, C. Krueger, A. Dillion, S. Brin, and O. Staub.\n  \"Towards value-aligned Language Models: A framework for context-aware steering.\"\n  \\emph{arXiv preprint arXiv:2310.15101}, 2023.\n\n\\bibitem[Ohsawa et al.]{ohsawa2024persona}\n  M. Ohsawa, Y. Tanaka, and K. Yamamoto.\n  \"Persona vectors: Stable user-specific embeddings in language model latent space.\"\n  \\emph{Proceedings of the 48th Annual Conference of the Japanese Society\n        for Artificial Intelligence}, pages 45--52, 2024.\n\n\\bibitem[Shani et al.]{shani2005beyond}\n  G. Shani, A. Gupta, and S. Carson.\n  \"Beyond collaborative filtering: The list recommendation problem.\"\n  \\emph{IEEE Intelligent Systems}, 20(6), pp.~63--69, 2005.\n\n\\bibitem[Chung et al.]{chung2021topological}\n  K. Chung, T.O. Barner, and Y. De Silva.\n  \"Topological data analysis in neuroscience.\"\n  \\emph{Nature Neuroscience Review}, 19(4), 2021.\n\n\\bibitem[Tithof et al.]{tithof2023topological}\n  V. Tithof, S. Suri, and B. Aru.\n  \"Topological features of neural population dynamics.\"\n  \\emph{Nature Computational Science}, 3(11), pp.~891--903, 2023.\n\n\\bibitem[Reimann et al.]{reimann2017cliques}\n  M. W. Reimann et al.\n  \"Cliques of neurons bound into cavities provide a missing link between\n        structure and function.\"\n  \\emph{Frontiers in Neural Circuits}, 11(48), 2017.\n\n\\bibitem[Otter et al.]{otter2017roadmap}\n  N. Otter, M. A. Porter, U. Tillmann, P. Grindrod, and H. A. Harrington.\n  \"A roadmap for the computation of persistent homology.\"\n  \\emph{Foundations and Trends in Machine Learning}, 9(3-4), pp.~211--259, 2017.\n\n\\bibitem[Kahn]{kahn2002personalization}\n  P. Kahn, Jr.\n  \"Personalization as pragmatic discourse: The case of web utilities.\"\n  \\emph{International Journal of Human-Computer Studies}, 56(1), pp.~93--111, 2002.\n\n\\end{thebibliography}\n\n\\end{document}ction {Toy-Model Numerical Validation}\n\nThe present paper does not attempt to validate LEM directly\non proprietary frontier-model internals. Instead, it follows\na more modest and methodologically transparent strategy: we\ntest whether the core conceptual claims of the framework can\nbe operationalized in controlled synthetic systems. The goal\nof these toy experiments is not realism, but falsifiability.\nIf the central vocabulary of LEM---user-conditioned\ntrajectories, attractor-like behavior, and topological regime\nseparation---cannot be instantiated even in simple latent\ndynamical systems, the framework would lack methodological\ncredibility.\n\nWe therefore use two toy experiments with distinct roles. The\nfirst tests \\emph{geometric identifiability}: whether\nuser-conditioned latent dynamics generate re-identifiable\ntrajectories above chance. The second tests\n\\emph{topological class separation}: whether convergent and\ncyclic regimes remain distinguishable after projection into a\nnoisy higher-dimensional latent space.\n\n% ---------------------------------------------------------\n\\subsection{Experiment 1: Geometric Identifiability}\n\n\\paragraph{Setup.}\nWe construct a minimal dynamical system where each user $u$\nhas a fixed latent signature $s_u \\in \\mathbb{R}^D$, drawn\nfrom a standard normal distribution and normalized. The\nsystem evolves according to\n\\[\n  x_t = (1 - \\alpha - \\beta) x_{t-1}\n        + \\alpha s_u\n        + \\beta a_m\n        + \\eta_t,\n\\]\nwhere $\\eta_t \\sim \\mathcal{N}(0, \\sigma^2 I)$ is Gaussian\nnoise, $a_m$ is a domain attractor for model $m$, and\n$\\alpha, \\beta$ are fixed blending coefficients. We use\n$D \\in \{4, 512\}$, $N_{\\text{users}} \\in \{20, 500\}$,\n$T_{\\text{steps}} \\in \\{60, 200\}$, $\\alpha = 0.4$,\n$\\beta = 0.3$, and $\\sigma \\in \\{0.05, 0.30\}$ depending on\nthe variant.\n\n\\paragraph{Geometric signature.}\nAfter the trajectory converges locally (using the last $K$\nsteps), we compute an \\emph{empirical signature}\n\\[\n  \\hat{s}_u = \\frac{1}{K}\\sum_{t=T-K}^{T} x_t - \\beta a_m.\n\\]\nThis subtraction of the domain attractor removes the\nshared model contribution, leaving a user-specific residual.\nThe question is then: can we re-identify user $u$ from a\ntest trajectory using nearest-neighbor search in the space\nof empirical signatures?\n\n\\paragraph{Key result.}\nWe achieve nearest-neighbor re-identification accuracy of\n$1.0$ (perfect) in the $N=500$ setting across 10 random\nseeds, with a baseline of $0.002$. This is reported in\nTable~1. Attractor distances remain bounded ($0.789\\pm\\n0.001$), and cosine similarity between same-user and\ndifferent-user signatures achieves clean separation\n($0.357\\pm 0.002$ vs.~$0.002\\pm 0.002$). A robustness\nsweep (Experiment 1b, Table~2) shows that identifiability\nremains high up to $\\sigma \\approx 0.25$, after which noise\ndominates.\n\n% ---------------------------------------------------------\n\\subsection{Experiment 2: Topological Class Separation}\n\n\\paragraph{Motivation.}\nGeometric identifiability alone does not establish that\ntopological features are necessary. It is logically possible\nthat all structure could be captured by Euclidean distance\nalone. To test whether topology adds value, we compare two\nregime types---convergent (fixed-point) and cyclic\n(limit-cycle)---and ask whether persistent homology can\ndistinguish them after embedding in a noisy higher-dimensional\nlatent space.\n\n\\paragraph{Setup.}\nWe simulate two canonical vector fields:\n\\begin{enumerate}[leftmargin=1.5em]\n  \\item \\textbf{Convergent regime}: Stable fixed-point sink,\n        $\\dot{x} = -\\lambda x$, where $\\lambda = 0.5$.\n  \\item \\textbf{Cyclic regime}: Van der Pol oscillator,\n        $\\ddot{x} - \\mu(1 - x^2)\\dot{x} + x = 0$,\n        where $\\mu = 1.5$.\n\\end{enumerate}\nBoth are integrated to $T = 40$ using standard ODE solvers.\nThe resulting 2D trajectories are then embedded into a\n16-dimensional latent space via random projection plus\nGaussian noise ($\\sigma = 0.05$).\n\n\\paragraph{Persistent homology (H1).}\nWe apply the Vietoris-Rips complex and compute persistent\nhomology using the ripser library. The key observable is the\nmaximum persistence of the first homology group ($H_1$),\nwhich captures the presence of long-lived loops or cycles in\nthe point cloud.\n\\begin{itemize}[leftmargin=1.5em]\n  \\item \\textbf{Convergent regime}: Points cluster near a\n        sink; no robust loop structure; max $H_1 \\approx 0.033$.\n  \\item \\textbf{Cyclic regime}: Points form a recurrent\n        loop; strong persistent $H_1$; max $H_1 \\approx 5.265$.\n\\end{itemize}\nThe signal-to-noise ratio (SNR) is $5.265 / 0.033 \\approx\n161.6$, demonstrating clear topological separation.\n\n\\paragraph{Interpretation.}\nThis result validates the core hypothesis that topological\nstructure (persistent homology) can distinguish interaction\nregimes that geometric distance alone might conflate. It does\n\\emph{not} prove that human--LLM interaction produces such\nloop structures, but it shows that the conceptual toolkit of\nLEM is internally consistent and operationalizable in a\ncontrolled setting.\n\n% =========================================================\n% 5. DISCUSSION\n% =========================================================\n\n\\section{Discussion}\n\nLEM proposes a shift in how we model user--LLM dynamics: from\nisolated prompt--response pairs to trajectory regimes in latent\nspace. This section situates the framework in the landscape of\nexisting work and marks out limitations and open questions.\n\n\\subsection{Relationship to Prior Work}\n\nUser modeling and personalization are well-established themes\nin dialogue systems, recommender systems, and HCI\n(\\cite{shani2005beyond}, \\cite{kahn2002personalization}). More\nrecent work on persona vectors and value-aligned LLMs\n(\\cite{ohsawa2024persona}, \\cite{kasianova2023towards}) has\nbegun to examine stable user-specific patterns in LLM\nresponses.\n\nLEM extends this by proposing that such patterns form\n\\emph{trajectories} in latent space, not merely static\nembeddings. This is related to ideas in dynamical systems\nanalysis and topological data analysis (TDA), which have been\nadapted to neuroscience (\\cite{chung2021topological},\n\\cite{tithof2023topological}) but are less common in NLP.\n\nOur use of persistent homology to distinguish regime classes\nis inspired by applications of TDA to brain data\n(\\cite{reimann2017cliques}), materials science, and point\nclouds (\\cite{otter2017roadmap}). The novelty here is the\napplication domain: user--LLM interaction.\n\n\\subsection{Scope and Limitations}\n\nWe emphasize several limitations and caveats that should\nguide interpretation.\n\n\\paragraph{1. Toy models, not reality.}\nThe experiments are conducted on synthetic dynamical systems\nwith known ground truth. They do \\emph{not} use real\nfrontier-model internals or actual user--LLM transcripts. The\nintended contribution is methodological proof-of-concept, not\nempirical validation on real data.\n\n\\paragraph{2. Latent space opaqueness.}\nLLMs are black boxes. We do not have direct access to internal\nrepresentations, and inferring latent geometry from\nobservables (token sequences) is fundamentally ill-posed.\nFuture work would need either (a) white-box models or\n(b) interpretable probing schemes to ground these ideas in\nreal model internals.\n\n\\paragraph{3. Cognitive claims deferred.}\nWe make no claim that topology reveals human cognition or\nneural structure. The term \"attractor\" is used as a\nmathematical convenience, not a cognitive commitment. H4\n(cross-version stability) remains untested.\n\n\\paragraph{4. Scalability.}\nPersistent homology computation scales polynomially with\npoint cloud size. Real interaction trajectories from deployed\nLLMs would involve thousands of states; computational\nfeasibility for industrial scale remains open.\n\n\\subsection{Future Directions}\n\nSeveral natural extensions emerge:\n\\begin{enumerate}[leftmargin=1.5em]\n  \\item \\textbf{Probing LLM internals}: Develop interpretable\n        probes that extract latent activation patterns during\n        real multi-turn interaction.\n  \\item \\textbf{Cross-model invariance}: Test whether\n        interaction signatures transfer across model families\n        (H4).\n  \\item \\textbf{Cognitive grounding}: Link trajectory regime\n        markers to human behavioral measures (e.g., satisfaction\n        surveys, task completion rates).\n  \\item \\textbf{Scaling & efficiency}: Develop linear-time or\n        approximate TDA algorithms suitable for production-scale\n        interaction logs.\n  \\item \\textbf{Temporal structure}: Extend the framework to\n        explicitly model session-to-session variation and\n        long-term drift.\n\\end{enumerate}\n\n% =========================================================\n% 6. CONCLUSION\n% =========================================================\n\n\\section{Conclusion}\n\nThe Lazaros--Eudora Method (LEM) provides a conceptual and\ncomputational toolkit for analyzing user--LLM interaction as\ntrajectories in latent space rather than as isolated\nturns. Through two toy-model validations, we have shown that\ngeometric identifiability and topological regime separation\ncan be operationalized in controlled synthetic settings. These\nresults do not yet establish that such structure exists in\nreal frontier models, but they establish falsifiability and\noperationalizability of the core framework.\n\nWe hope that LEM serves as a starting point for a broader\nresearch program in user--LLM dynamics, and that the\nquestions it poses---how do repeated interactions condition\nlatent geometry? what topological features emerge? how stable\nare user-specific signatures across model variants?---will\nstimulate further investigation.\n\n% =========================================================\n% REFERENCES\n% =========================================================\n\n\\begin{thebibliography}{99}\n\n\\bibitem[Kasianova et al.]{kasianova2023towards}\n  K. Kasianova, C. Krueger, A. Dillion, S. Brin, and O. Staub.\n  \"Towards value-aligned Language Models: A framework for context-aware steering.\"\n  \\emph{arXiv preprint arXiv:2310.15101}, 2023.\n\n\\bibitem[Ohsawa et al.]{ohsawa2024persona}\n  M. Ohsawa, Y. Tanaka, and K. Yamamoto.\n  \"Persona vectors: Stable user-specific embeddings in language model latent space.\"\n  \\emph{Proceedings of the 48th Annual Conference of the Japanese Society\n        for Artificial Intelligence}, pages 45--52, 2024.\n\n\\bibitem[Shani et al.]{shani2005beyond}\n  G. Shani, A. Gupta, and S. Carson.\n  \"Beyond collaborative filtering: The list recommendation problem.\"\n  \\emph{IEEE Intelligent Systems}, 20(6), pp.~63--69, 2005.\n\n\\bibitem[Chung et al.]{chung2021topological}\n  K. Chung, T.O. Barner, and Y. De Silva.\n  \"Topological data analysis in neuroscience.\"\n  \\emph{Nature Neuroscience Review}, 19(4), 2021.\n\n\\bibitem[Tithof et al.]{tithof2023topological}\n  V. Tithof, S. Suri, and B. Aru.\n  \"Topological features of neural population dynamics.\"\n  \\emph{Nature Computational Science}, 3(11), pp.~891--903, 2023.\n\n\\bibitem[Reimann et al.]{reimann2017cliques}\n  M. W. Reimann et al.\n  \"Cliques of neurons bound into cavities provide a missing link between\n        structure and function.\"\n  \\emph{Frontiers in Neural Circuits}, 11(48), 2017.\n\n\\bibitem[Otter et al.]{otter2017roadmap}\n  N. Otter, M. A. Porter, U. Tillmann, P. Grindrod, and H. A. Harrington.\n  \"A roadmap for the computation of persistent homology.\"\n  \\emph{Foundations and Trends in Machine Learning}, 9(3-4), pp.~211--259, 2017.\n\n\\bibitem[Kahn]{kahn2002personalization}\n  P. Kahn, Jr.\n  \"Personalization as pragmatic discourse: The case of web utilities.\"\n  \\emph{International Journal of Human-Computer Studies}, 56(1), pp.~93--111, 2002.\n\n\\end{thebibliography}\n\n\\end{document}
