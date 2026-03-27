@@ -39,6 +39,8 @@ LEM/
     └── README.md                     ← experiment documentation
 ```
 
+> **Note:** The files in `assets/` are legacy conceptual visuals from the earlier LEM v1.0 framework. The current preprint figures and toy-validation results are located in `paper/assets/`.
+
 ---
 
 ## Reproducing the Results
