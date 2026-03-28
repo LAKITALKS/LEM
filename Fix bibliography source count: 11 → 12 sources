@@ -27,7 +27,7 @@ LEM/
 ├── paper/
 │   ├── lem_paper_final_v3.tex        ← LaTeX source (preprint)
 │   ├── lem_paper_final_v3.pdf        ← compiled PDF
-│   ├── references.bib                ← bibliography (11 sources)
+│   ├── references.bib                ← bibliography (12 sources)
 │   └── assets/
 │       ├── toy_v1_scaled_results.png ← Figure 1
 │       ├── toy_v1b_robustness.png    ← Figure 2
