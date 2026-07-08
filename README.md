@@ -1,7 +1,10 @@
 # The Lazaros–Eudora Method (LEM)
 
 **Author:** Lazaros Varvatis
-**Status:** Preprint · v2.0 — Topological Framework with Toy Validation
+**Status:** Preprint · v2.1 — Topological Framework with Toy Validation
+
+**Release / Zenodo version:** `v2.1.0` — archival, bibliography-corrected edition · DOI [10.5281/zenodo.21268033](https://doi.org/10.5281/zenodo.21268033)
+**Paper source of record:** `paper/lem_paper_final_v4.tex`
 
 ---
 
@@ -24,14 +27,19 @@ The current preprint presents two toy-model validations:
 LEM/
 ├── README.md                         ← this file
 ├── LEM_v1.0_Topological_Framework.md ← conceptual framework document
+├── assets/                           ← legacy conceptual visuals (LEM v1.0)
 ├── paper/
-│   ├── lem_paper_final_v3.tex        ← LaTeX source (preprint)
-│   ├── lem_paper_final_v3.pdf        ← compiled PDF
-│   ├── references.bib                ← bibliography (12 sources)
-│   └── assets/
-│       ├── toy_v1_scaled_results.png ← Figure 1
-│       ├── toy_v1b_robustness.png    ← Figure 2
-│       └── toy_v2_moneyplot.png      ← Figure 3
+│   ├── lem_paper_final_v4.tex        ← LaTeX source of record (reconstructed)
+│   ├── lem_paper_final_v4.pdf        ← compiled PDF (v4)
+│   ├── lem_paper_final_v3.pdf        ← published preprint PDF (Zenodo record)
+│   ├── references.bib                ← bibliography (14 sources)
+│   ├── CHANGELOG_v4.md               ← v3→v4 reconstruction & bibliography notes
+│   ├── toy_v1_scaled_results.png     ← Figure 1
+│   ├── toy_v1b_robustness.png        ← Figure 2
+│   ├── toy_v2_moneyplot.png          ← Figure 3
+│   └── archive/
+│       ├── lem_paper_final_v3_legacy_source.tex ← superseded, non-compiling
+│       └── README.md                 ← archive note
 └── experiments/
     ├── lem_simulations.py            ← all simulation code
     ├── run_all.py                    ← standalone runner (no Colab needed)
@@ -39,7 +47,7 @@ LEM/
     └── README.md                     ← experiment documentation
 ```
 
-> **Note:** The files in `assets/` are legacy conceptual visuals from the earlier LEM v1.0 framework. The current preprint figures and toy-validation results are located in `paper/assets/`.
+> **Note:** The top-level `assets/` directory holds legacy conceptual visuals from the earlier LEM v1.0 framework. The current preprint figures and toy-validation results (`toy_v1_scaled_results.png`, `toy_v1b_robustness.png`, `toy_v2_moneyplot.png`) live directly in `paper/`.
 
 ---
 
@@ -80,8 +88,8 @@ This runs all three paper experiments (Toy V1 Scaled, V1b Robustness, V2 Topolog
 
 If you reference this project, please cite the Zenodo record:
 
-> Lazaros Varvatis (2026). **LAKITALKS/LEM: Lazaros–Eudora Method (LEM) v2.0.0 — Preprint with Toy Validation.** Zenodo.
-> https://doi.org/10.5281/zenodo.19266201
+> Lazaros Varvatis (2026). **LAKITALKS/LEM: Lazaros–Eudora Method (LEM) v2.1.0 — Archival Edition (Bibliography-Corrected).** Zenodo.
+> https://doi.org/10.5281/zenodo.21268033
 
 ---
 
@@ -90,9 +98,9 @@ If you reference this project, please cite the Zenodo record:
 LEM builds on and distinguishes itself from several research traditions:
 
 - **Dynamical systems in LLMs:** Wang et al. (ACL 2025), Ramsauer et al. (ICLR 2021), Bai et al. (NeurIPS 2019)
-- **Persona and behavioral directions:** Chen et al. / Anthropic (2025), Zou et al. (2023)
+- **Persona and behavioral directions:** Chen et al. / Anthropic (2025)
 - **Mechanistic interpretability:** Bricken et al. (2023), Templeton et al. (2024)
-- **TDA on LLM representations:** Gardinazzi et al. (ICLR 2025), Carlsson (2009)
+- **TDA on LLM representations:** Gardinazzi et al. (arXiv 2024; ICML 2025 poster), Carlsson (2009)
 - **Latent state persistence:** Huang et al. (2025)
 
 LEM's novelty lies in combining user-specific trajectory modeling, latent-space analysis, and topological regime differentiation — a synthesis not present in any single existing work.

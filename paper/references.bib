@@ -13,31 +13,53 @@
 
 @article{bricken2023monosemanticity,
   title   = {Towards Monosemanticity: Decomposing Language Models
-             with Dictionary Learning},
+             With Dictionary Learning},
   author  = {Bricken, Trenton and Templeton, Adly and Batson, Joshua
-             and Chen, Brian and Jermyn, Adam and Leask, Matthew
-             and Lieberum, Tom and Tseng, Cathy and Turner, Nicholas
-             and McDougall, Callum and others},
+             and Chen, Brian and Jermyn, Adam and Conerly, Tom
+             and Turner, Nick and Anil, Cem and Denison, Carson
+             and Askell, Amanda and Lasenby, Robert and Wu, Yifan
+             and Kravec, Shauna and Schiefer, Nicholas
+             and Maxwell, Tim and Joseph, Nicholas
+             and Hatfield-Dodds, Zac and Tamkin, Alex
+             and Nguyen, Karina and McLean, Brayden
+             and Burke, Josiah E. and Hume, Tristan
+             and Carter, Shan and Henighan, Tom and Olah, Christopher},
   journal = {Transformer Circuits Thread},
   year    = {2023},
-  url     = {https://transformer-circuits.pub/2023/monosemantic-features}
+  url     = {https://transformer-circuits.pub/2023/monosemantic-features/index.html}
 }
 
 @article{templeton2024scaling,
   title   = {Scaling Monosemanticity: Extracting Interpretable
              Features from {Claude 3 Sonnet}},
-  author  = {Templeton, Adly and others},
+  author  = {Templeton, Adly and Conerly, Tom and Marcus, Jonathan
+             and Lindsey, Jack and Bricken, Trenton and Chen, Brian
+             and Pearce, Adam and Citro, Craig and Ameisen, Emmanuel
+             and Jones, Andy and Cunningham, Hoagy
+             and Turner, Nicholas L. and McDougall, Callum
+             and MacDiarmid, Monte and Freeman, C. Daniel
+             and Sumers, Theodore R. and Rees, Edward
+             and Batson, Joshua and Jermyn, Adam and Carter, Shan
+             and Olah, Chris and Henighan, Tom},
   journal = {Transformer Circuits Thread},
   year    = {2024},
-  url     = {https://transformer-circuits.pub/2024/scaling-monosemanticity/}
+  url     = {https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html}
 }
 
-@article{erdogan2025attributiongraphs,
+@article{ameisen2025circuittracing,
   title   = {Circuit Tracing: Revealing Computational Graphs
              in Language Models},
   author  = {Ameisen, Emmanuel and Lindsey, Jack and Pearce, Adam
              and Gurnee, Wes and Turner, Nicholas L. and Chen, Brian
-             and Citro, Craig and others},
+             and Citro, Craig and Abrahams, David and Carter, Shan
+             and Hosmer, Basil and Marcus, Jonathan and Sklar, Michael
+             and Templeton, Adly and Bricken, Trenton
+             and McDougall, Callum and Cunningham, Hoagy
+             and Henighan, Thomas and Jermyn, Adam and Jones, Andy
+             and Persic, Andrew and Qi, Zhenyi
+             and Thompson, T. Ben and Zimmerman, Sam
+             and Rivoire, Kelley and Conerly, Thomas
+             and Olah, Chris and Batson, Joshua},
   journal = {Transformer Circuits Thread},
   year    = {2025},
   url     = {https://transformer-circuits.pub/2025/attribution-graphs/methods.html}
@@ -46,14 +68,15 @@
 @article{gardinazzi2024persistent,
   title         = {Persistent Topological Features in Large
                    Language Models},
-  author        = {Gardinazzi, Yuri and Panerai, Giada and
-                   Viswanathan, Karthik and Ansuini, Alessio and
+  author        = {Gardinazzi, Yuri and Viswanathan, Karthik and
+                   Panerai, Giada and Ansuini, Alessio and
                    Cazzaniga, Alberto and Biagetti, Matteo},
   journal       = {arXiv preprint arXiv:2410.11042},
   year          = {2024},
   eprint        = {2410.11042},
   archivePrefix = {arXiv},
   primaryClass  = {cs.CL},
+  note          = {Accepted as poster at ICML 2025},
   url           = {https://arxiv.org/abs/2410.11042}
 }
 
@@ -84,13 +107,17 @@
 }
 
 @inproceedings{wang2025attractorcycles,
-  title     = {Unveiling Attractor Cycles in Large Language Models},
-  author    = {Wang, Xigui and Zhao, Tian and Sun, Zhangang
-               and Gao, Yang},
+  title     = {Unveiling Attractor Cycles in Large Language Models:
+               A Dynamical Systems View of Successive Paraphrasing},
+  author    = {Wang, Zhilin and Li, Yafu and Yan, Jianhao
+               and Cheng, Yu and Zhang, Yue},
   booktitle = {Proceedings of the 63rd Annual Meeting of the
-               Association for Computational Linguistics},
+               Association for Computational Linguistics
+               (Volume 1: Long Papers)},
   pages     = {12740--12755},
   year      = {2025},
+  address   = {Vienna, Austria},
+  publisher = {Association for Computational Linguistics},
   eprint    = {2502.15208},
   archivePrefix = {arXiv},
   primaryClass  = {cs.CL},
@@ -134,4 +161,45 @@
   pages   = {255--308},
   year    = {2009},
   doi     = {10.1090/S0273-0979-09-01249-X}
+}
+
+@article{bauer2021ripser,
+  title   = {Ripser: Efficient Computation of {V}ietoris--{R}ips
+             Persistence Barcodes},
+  author  = {Bauer, Ulrich},
+  journal = {Journal of Applied and Computational Topology},
+  volume  = {5},
+  number  = {3},
+  pages   = {391--423},
+  year    = {2021},
+  issn    = {2367-1726},
+  doi     = {10.1007/s41468-021-00071-5},
+  url     = {https://doi.org/10.1007/s41468-021-00071-5}
+}
+
+@article{tralie2018ripserpy,
+  title     = {{Ripser.py}: A Lean Persistent Homology Library
+               for {P}ython},
+  author    = {Tralie, Christopher and Saul, Nathaniel and
+               Bar-On, Rann},
+  journal   = {Journal of Open Source Software},
+  volume    = {3},
+  number    = {29},
+  pages     = {925},
+  year      = {2018},
+  publisher = {The Open Journal},
+  doi       = {10.21105/joss.00925},
+  url       = {https://doi.org/10.21105/joss.00925}
+}
+
+@article{chia2025probing,
+  title         = {Probing Latent Subspaces in {LLM} for {AI} Security:
+                   Identifying and Manipulating Adversarial States},
+  author        = {Chia, Xin Wei and Wong, Swee Liang and Pan, Jonathan},
+  journal       = {arXiv preprint arXiv:2503.09066},
+  year          = {2025},
+  eprint        = {2503.09066},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG},
+  url           = {https://arxiv.org/abs/2503.09066}
 }

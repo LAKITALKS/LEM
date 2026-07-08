@@ -98,8 +98,8 @@ For moderate updates within the same model family (base vs. instruct vs. quantiz
 The same machinery that extracts a signature can also help **destroy** it:
 
 - A client-side agent can introduce controlled perturbations (paraphrasing, timing noise, intermediate “detours” in prompt space).
-- Ziel: Das Persistenzdiagramm “verflachen” – nur kurzlebige, rauschähnliche Features bleiben.  
-- Ergebnis: **Cognitive Firewall** – hohe Nützlichkeit der Antworten, aber kein stabiler Attraktor für Tracking.
+- Goal: “Flatten” the persistence diagram – only short-lived, noise-like features remain.  
+- Result: **Cognitive Firewall** – high usefulness of the responses, but no stable attractor for tracking.
 
 ---
 
