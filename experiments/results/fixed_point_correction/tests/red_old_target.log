@@ -1,0 +1,70 @@
+test_noiseless_converged_scalar (test_fixed_point_distance.FixedPointDistanceTests.test_noiseless_converged_scalar) ... FAIL
+test_pilot_production_path (test_fixed_point_distance.FixedPointDistanceTests.test_pilot_production_path) ... FAIL
+test_scaled_production_path (test_fixed_point_distance.FixedPointDistanceTests.test_scaled_production_path) ... FAIL
+test_v1b_production_path (test_fixed_point_distance.FixedPointDistanceTests.test_v1b_production_path) ... FAIL
+test_vectorized_distances_match_independent_values_and_scalar (test_fixed_point_distance.FixedPointDistanceTests.test_vectorized_distances_match_independent_values_and_scalar) ... FAIL
+
+======================================================================
+FAIL: test_noiseless_converged_scalar (test_fixed_point_distance.FixedPointDistanceTests.test_noiseless_converged_scalar)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/lazarosvarvatis/Documents/Projects/LEM/experiments/tests/test_fixed_point_distance.py", line 74, in test_noiseless_converged_scalar
+    self.assertLess(sim.fixed_point_distance(mean, s, d, 0.4, 0.3), 1e-12)
+AssertionError: np.float64(0.21428571428571425) not less than 1e-12
+
+======================================================================
+FAIL: test_pilot_production_path (test_fixed_point_distance.FixedPointDistanceTests.test_pilot_production_path)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/lazarosvarvatis/Documents/Projects/LEM/experiments/tests/test_fixed_point_distance.py", line 111, in test_pilot_production_path
+    self.assert_production_distance_zero("run_experiment_1")
+  File "/Users/lazarosvarvatis/Documents/Projects/LEM/experiments/tests/test_fixed_point_distance.py", line 108, in assert_production_distance_zero
+    self.assertEqual(distance, 0.0, f"{name} must measure the actual fixed point")
+AssertionError: 0.2143 != 0.0 : run_experiment_1 must measure the actual fixed point
+
+======================================================================
+FAIL: test_scaled_production_path (test_fixed_point_distance.FixedPointDistanceTests.test_scaled_production_path)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/lazarosvarvatis/Documents/Projects/LEM/experiments/tests/test_fixed_point_distance.py", line 114, in test_scaled_production_path
+    self.assert_production_distance_zero("run_experiment_1_scaled")
+  File "/Users/lazarosvarvatis/Documents/Projects/LEM/experiments/tests/test_fixed_point_distance.py", line 108, in assert_production_distance_zero
+    self.assertEqual(distance, 0.0, f"{name} must measure the actual fixed point")
+AssertionError: np.float64(0.214286) != 0.0 : run_experiment_1_scaled must measure the actual fixed point
+
+======================================================================
+FAIL: test_v1b_production_path (test_fixed_point_distance.FixedPointDistanceTests.test_v1b_production_path)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/lazarosvarvatis/Documents/Projects/LEM/experiments/tests/test_fixed_point_distance.py", line 117, in test_v1b_production_path
+    self.assert_production_distance_zero("run_experiment_1b")
+  File "/Users/lazarosvarvatis/Documents/Projects/LEM/experiments/tests/test_fixed_point_distance.py", line 108, in assert_production_distance_zero
+    self.assertEqual(distance, 0.0, f"{name} must measure the actual fixed point")
+AssertionError: np.float64(0.2143) != 0.0 : run_experiment_1b must measure the actual fixed point
+
+======================================================================
+FAIL: test_vectorized_distances_match_independent_values_and_scalar (test_fixed_point_distance.FixedPointDistanceTests.test_vectorized_distances_match_independent_values_and_scalar)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/lazarosvarvatis/Documents/Projects/LEM/experiments/tests/test_fixed_point_distance.py", line 83, in test_vectorized_distances_match_independent_values_and_scalar
+    np.testing.assert_allclose(actual, [0.0, 5.0], rtol=0, atol=1e-12)
+  File "/Users/lazarosvarvatis/Documents/Projects/LEM/.venv-correction/lib/python3.11/site-packages/numpy/testing/_private/utils.py", line 1768, in assert_allclose
+    assert_array_compare(compare, actual, desired, err_msg=str(err_msg),
+  File "/Users/lazarosvarvatis/Documents/Projects/LEM/.venv-correction/lib/python3.11/site-packages/numpy/testing/_private/utils.py", line 983, in assert_array_compare
+    raise AssertionError(msg)
+AssertionError: 
+Not equal to tolerance rtol=0, atol=1e-12
+
+Mismatched elements: 2 / 2 (100%)
+Mismatch at indices:
+ [0]: 0.21428571428571425 (ACTUAL), 0.0 (DESIRED)
+ [1]: 5.243090691567332 (ACTUAL), 5.0 (DESIRED)
+Max absolute difference among violations: 0.24309069
+Max relative difference among violations: 0.04861814
+ ACTUAL: array([0.214286, 5.243091])
+ DESIRED: array([0., 5.])
+
+----------------------------------------------------------------------
+Ran 5 tests in 1.700s
+
+FAILED (failures=5)

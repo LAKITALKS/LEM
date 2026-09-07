@@ -1,0 +1,7 @@
+{
+  "random_baseline_accuracy": 0.05,
+  "nn_reidentification_accuracy": 0.97,
+  "mean_attractor_distance": 0.0917,
+  "same_user_cosine_similarity": 0.9774,
+  "different_user_cosine_similarity": 0.0336
+}

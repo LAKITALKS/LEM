@@ -1,0 +1,105 @@
+{
+  "config": {
+    "DIM": 512,
+    "N_USERS": 500,
+    "T_STEPS": 200,
+    "ALPHA": 0.4,
+    "BETA": 0.3,
+    "SIGMA": 0.15,
+    "N_TESTS": 500,
+    "SEEDS": [
+      42,
+      123,
+      999,
+      2024,
+      7,
+      314,
+      1337,
+      77,
+      256,
+      88
+    ]
+  },
+  "results": [
+    {
+      "seed": 42,
+      "random_baseline_accuracy": 0.002,
+      "nn_reidentification_accuracy": 1.0,
+      "mean_attractor_distance": 0.760128,
+      "same_user_cosine_similarity": 0.355714,
+      "different_user_cosine_similarity": 0.001999
+    },
+    {
+      "seed": 123,
+      "random_baseline_accuracy": 0.002,
+      "nn_reidentification_accuracy": 1.0,
+      "mean_attractor_distance": 0.759865,
+      "same_user_cosine_similarity": 0.355491,
+      "different_user_cosine_similarity": 0.005588
+    },
+    {
+      "seed": 999,
+      "random_baseline_accuracy": 0.002,
+      "nn_reidentification_accuracy": 1.0,
+      "mean_attractor_distance": 0.760271,
+      "same_user_cosine_similarity": 0.356856,
+      "different_user_cosine_similarity": 0.001499
+    },
+    {
+      "seed": 2024,
+      "random_baseline_accuracy": 0.002,
+      "nn_reidentification_accuracy": 1.0,
+      "mean_attractor_distance": 0.759759,
+      "same_user_cosine_similarity": 0.357742,
+      "different_user_cosine_similarity": -0.001123
+    },
+    {
+      "seed": 7,
+      "random_baseline_accuracy": 0.002,
+      "nn_reidentification_accuracy": 1.0,
+      "mean_attractor_distance": 0.758774,
+      "same_user_cosine_similarity": 0.357822,
+      "different_user_cosine_similarity": 0.002683
+    },
+    {
+      "seed": 314,
+      "random_baseline_accuracy": 0.002,
+      "nn_reidentification_accuracy": 1.0,
+      "mean_attractor_distance": 0.75915,
+      "same_user_cosine_similarity": 0.356166,
+      "different_user_cosine_similarity": 0.003471
+    },
+    {
+      "seed": 1337,
+      "random_baseline_accuracy": 0.002,
+      "nn_reidentification_accuracy": 1.0,
+      "mean_attractor_distance": 0.760707,
+      "same_user_cosine_similarity": 0.358866,
+      "different_user_cosine_similarity": 0.002677
+    },
+    {
+      "seed": 77,
+      "random_baseline_accuracy": 0.002,
+      "nn_reidentification_accuracy": 1.0,
+      "mean_attractor_distance": 0.760671,
+      "same_user_cosine_similarity": 0.353835,
+      "different_user_cosine_similarity": 0.002364
+    },
+    {
+      "seed": 256,
+      "random_baseline_accuracy": 0.002,
+      "nn_reidentification_accuracy": 1.0,
+      "mean_attractor_distance": 0.758344,
+      "same_user_cosine_similarity": 0.36088,
+      "different_user_cosine_similarity": 0.002211
+    },
+    {
+      "seed": 88,
+      "random_baseline_accuracy": 0.002,
+      "nn_reidentification_accuracy": 1.0,
+      "mean_attractor_distance": 0.758849,
+      "same_user_cosine_similarity": 0.356578,
+      "different_user_cosine_similarity": 0.000261
+    }
+  ]
+}

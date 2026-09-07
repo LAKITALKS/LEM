@@ -1,0 +1,39 @@
+{
+  "archived_paper_sha256_unchanged": {
+    "paper/CHANGELOG_v4.md": "8a52718214330066e83cc28c808857e0b7b55979219fdcd6145ec7bfe1052e8f",
+    "paper/archive/README.md": "a0977f30618d29b1012d10f89c7ee08ebfb16dd4d3b8f30be0ac8c69776e6043",
+    "paper/archive/lem_paper_final_v3_legacy_source.tex": "953cbb358b7bf1af76e02625413ab9aa77115473f6d341f1045e13670b12302b",
+    "paper/lem_paper_final_v3.pdf": "3909aa11f230bb82358b813c5d7459c3725d46bc4b3db5004f81ad05c19b4547",
+    "paper/lem_paper_final_v4.pdf": "2c864e516bf53d5cd45657e15b2db3669ec64e9df8a5a177ebbdae53a9f91848",
+    "paper/lem_paper_final_v4.tex": "3211ce182f558c008b4445c839a6bc14d6cd418992b892385dce12304ec82e51",
+    "paper/references.bib": "d6026b17ff97571b2de8958c883aa0679ee22916a42bc3bcd87ce08a4a2dbbb1",
+    "paper/toy_v1_scaled_results.png": "facb79bcd99c10b6de7f4d6c117b5872904637c9fe24a1b0d7a6ba1b1c267f9a",
+    "paper/toy_v1b_robustness.png": "5a3220379e1c95321342024b686c8db045b387f27e8b165bd51a971757df6814",
+    "paper/toy_v2_moneyplot.png": "85d1d2b347df6f81b08a3b417ab5313d8b4bc312dc466e40d1b2dc496d3b2764"
+  },
+  "baseline_commit": "f15073f2cab3fb68857ffb16035d6675957c2e06",
+  "comparison": "All reported NN/baseline/cosine values exactly equal; RNG states exactly equal; only distances change.",
+  "corrected_source_base_commit": "f15073f2cab3fb68857ffb16035d6675957c2e06",
+  "corrected_source_reference": "Apply production.patch to baseline_commit; source hashes in corrected/execution.json",
+  "method_details": {
+    "classification": "Euclidean nearest neighbour within each domain; mean accuracy across two domains; fresh queries (pilot 200, Scaled 500, V1b 300 per domain).",
+    "cosine_pairs": "Same user across domains; different user: random nonself offset in pilot, fixed np.roll(...,1) in Scaled/V1b.",
+    "distance": "Euclidean norm of each tail mean minus fixed point, averaged over users and domains; alpha=0.4, beta=0.3.",
+    "domain_construction": "Normalized Gaussian user/domain vectors; second domain replaced with normalize(first domain + 0.4 * Gaussian noise). Original draws/order preserved.",
+    "rounding": "Pilot/V1b outputs 4 decimals; Scaled per-seed outputs 6 decimals before summary, as in baseline.",
+    "signature": "mean of last K stored states - beta * domain_vector (unchanged)",
+    "time_indexing": "Pilot/train and all scalar test queries store x_0,...,x_(T-1). Vectorized Scaled/V1b training updates T times and retains x_(T-K+1),...,x_T. All estimators average exactly K stored states.",
+    "v1b_reseeding": "Seed 42 for fixed setup, then reset to 42 before EVERY sigma."
+  },
+  "method_integrity": {
+    "run_experiment_1": "Nested simulation, estimator, normalization and classifier functions AST-identical",
+    "run_experiment_1_scaled": "Nested simulation, estimator, normalization and classifier functions AST-identical",
+    "run_experiment_1b": "Nested simulation, estimator, normalization and classifier functions AST-identical",
+    "run_experiment_2": "Entire function AST-identical; not rerun"
+  },
+  "production_patch_sha256": "1becb3304d0da106bd68fcbcbaa18f686a3fc834c0a99a2c6840a3e37207c0d2",
+  "reproduce_command": "python experiments/reproduce_fixed_point_correction.py --baseline-ref f15073f2cab3fb68857ffb16035d6675957c2e06 --output-dir /tmp/lem-correction-reproduction",
+  "reproduction_script_sha256": "4d942922dfc7333457709082a69d67f8b727b985527e8ab83059034a819173ff",
+  "standard_deviation": "Sample SD across the 10 exported (6-decimal) seed values; pandas ddof=1. No seed SD for pilot or single-seed V1b.",
+  "v2": "Not rerun: run_experiment_2 and run_all.py unchanged; archived V2 figure/table retained."
+}
