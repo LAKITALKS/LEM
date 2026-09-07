@@ -39,6 +39,20 @@ import os
 os.makedirs("assets", exist_ok=True)
 
 
+def fixed_point_distance(mean_states, user_signatures, domain_vector, alpha, beta):
+    """L2 distance of tail means to the noiseless fixed point, per final axis.
+
+    Supports one vector or a batch of vectors using NumPy broadcasting.
+    This only corrects the reported distance; it does not change the dynamics
+    or the published signature estimator (tail mean - beta * domain vector).
+    The experiments use alpha=0.4, beta=0.3, a stable nonzero sum.
+    """
+    import numpy as np
+
+    target = (alpha * user_signatures + beta * domain_vector) / (alpha + beta)
+    return np.linalg.norm(mean_states - target, axis=-1)
+
+
 # ==============================================================================
 # EXPERIMENT 1 — GEOMETRIC IDENTIFIABILITY (Small Pilot, DIM=4, N=20)
 # ==============================================================================
@@ -49,9 +63,9 @@ os.makedirs("assets", exist_ok=True)
 #
 # Key results (seed=42):
 #   - NN Accuracy:          0.9700  (baseline: 0.0500)
-#   - Attractor Distance:   0.2161
-#   - Same-user cosine:     0.9782
-#   - Diff-user cosine:     0.0307
+#   - Attractor distance: see results/fixed_point_correction/corrected/
+#   - Same-user cosine:     0.9774
+#   - Diff-user cosine:     0.0336
 # ==============================================================================
 
 def run_experiment_1():
@@ -128,8 +142,8 @@ def run_experiment_1():
     distances = []
     for (i, m), traj in trajectories.items():
         mean_vec = mean_last_k(traj, LAST_K)
-        target   = ALPHA * user_signatures[i] + BETA * domain_attractors[m]
-        distances.append(np.linalg.norm(mean_vec - target))
+        distances.append(fixed_point_distance(
+            mean_vec, user_signatures[i], domain_attractors[m], ALPHA, BETA))
 
     # Empirical signatures
     empirical_signatures = {m: [] for m in range(N_MODELS)}
@@ -194,9 +208,9 @@ def run_experiment_1():
 #
 # Key results (mean over 10 seeds):
 #   - NN Accuracy:         1.0000 +/- 0.0000  (baseline: 0.0020)
-#   - Attractor Distance:  0.7893 +/- 0.0009
-#   - Same-user cosine:    0.3570 +/- 0.0020
-#   - Diff-user cosine:    0.0022 +/- 0.0019
+#   - Corrected distance and sample SD (ddof=1): see corrected results CSVs.
+#   - Same-user cosine:    0.3570
+#   - Diff-user cosine:    0.0022
 #
 # Runtime: ~2 minutes on Colab CPU
 # ==============================================================================
@@ -288,8 +302,9 @@ def run_experiment_1_scaled():
             buf       = simulate_all_vectorized(user_signatures, domain_attractors[m], LAST_K)
             mean_vecs = buf.mean(axis=1)
             emp_sigs[m] = mean_vecs - BETA * domain_attractors[m][None, :]
-            targets   = ALPHA * user_signatures + BETA * domain_attractors[m][None, :]
-            attr_dists.append(float(np.linalg.norm(mean_vecs - targets, axis=1).mean()))
+            attr_dists.append(float(fixed_point_distance(
+                mean_vecs, user_signatures, domain_attractors[m][None, :],
+                ALPHA, BETA).mean()))
 
         accs = [nn_accuracy(user_signatures, domain_attractors[m], emp_sigs[m])
                 for m in range(N_MODELS)]
@@ -314,6 +329,7 @@ def run_experiment_1_scaled():
     df = pd.DataFrame(all_results)
     cols = ["nn_reidentification_accuracy", "mean_attractor_distance",
             "same_user_cosine_similarity",  "different_user_cosine_similarity"]
+    # Pandas "std" is the sample SD (ddof=1) across the ten exported seed values.
     summary = df[cols].agg(["mean", "std", "min", "max"]).T
     print("\n=== Summary ===")
     print(summary.to_string(float_format="{:.4f}".format))
@@ -366,13 +382,13 @@ def run_experiment_1_scaled():
 # ==============================================================================
 # Purpose:
 #   Tests sensitivity of geometric identifiability to noise level sigma.
-#   Reveals three regimes: stable, critical transition, noise-dominated.
+#   Samples loss of accuracy as noise increases, without locating a threshold.
 #   This is the robustness analysis reported in the paper (Table 2).
 #
 # Key results (seed=42):
 #   sigma=0.05: NN=1.000  |  sigma=0.30: NN=0.230  |  sigma=0.50: NN=0.020
-#   Phase transition at sigma ~0.25
-#   Attractor distance grows linearly: slope ~5.07
+#   No measurement at sigma=0.25; at sigma=0.50 accuracy is above baseline 0.002.
+#   Tail-mean distance depends on sigma, dimension, window length and correlation.
 #
 # Runtime: ~10-15 minutes on Colab CPU
 # ==============================================================================
@@ -464,8 +480,9 @@ def run_experiment_1b():
             buf       = simulate_all_vectorized(user_signatures, domain_attractors[m], sigma)
             mean_vecs = buf.mean(axis=1)
             emp_sigs[m] = mean_vecs - BETA * domain_attractors[m][None, :]
-            targets   = ALPHA * user_signatures + BETA * domain_attractors[m][None, :]
-            attr_dists.append(float(np.linalg.norm(mean_vecs - targets, axis=1).mean()))
+            attr_dists.append(float(fixed_point_distance(
+                mean_vecs, user_signatures, domain_attractors[m][None, :],
+                ALPHA, BETA).mean()))
 
         accs = [nn_accuracy(user_signatures, domain_attractors[m], emp_sigs[m], sigma)
                 for m in range(N_MODELS)]
@@ -494,8 +511,8 @@ def run_experiment_1b():
 
     axes[1].plot(df["sigma"], df["attractor_distance"], "o-", color="darkorange", linewidth=2)
     axes[1].axvline(0.15, color="gray", linestyle=":", alpha=0.7)
-    axes[1].set_xlabel("Noise Level sigma"); axes[1].set_ylabel("Attractor Distance")
-    axes[1].set_title("Convergence vs Noise"); axes[1].grid(alpha=0.3)
+    axes[1].set_xlabel("Noise Level sigma"); axes[1].set_ylabel("Tail-mean distance to fixed point")
+    axes[1].set_title("Corrected distance vs Noise"); axes[1].grid(alpha=0.3)
 
     axes[2].plot(df["sigma"], df["cosine_same"], "o-", color="tab:green",
                  linewidth=2, label="Same User")

@@ -1,0 +1,37 @@
+{
+  "status": "passed",
+  "checked_date": "2026-09-07",
+  "pdf_pages": 14,
+  "build_command": "cd paper && tectonic --keep-logs lem_paper_correction_draft.tex",
+  "tectonic_version": "0.16.9",
+  "render_command": "pdftoppm -r 105 -png paper/lem_paper_correction_draft.pdf tmp/pdf-review/corrected",
+  "visually_inspected_pages": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14
+  ],
+  "visual_checks": "All 14 rendered pages inspected. Version notice, equations, both corrected tables and V1 figures, retained V2 figure/table, cross-references, DOI/archive wording, bibliography, margins and page numbers legible; no clipping or overlap observed.",
+  "latex_checks": "No errors, undefined references/citations or overfull boxes; 14 cited bibliography keys exist; equations remain numbered 1 through 5.",
+  "pdf_backend_note": "xdvipdfmx omitted an unsupported ICC 4.3 color profile when building PDF 1.5. Figures render legibly; source images unchanged. This is a color-profile metadata warning, not a numerical/result error.",
+  "independent_diff_review": "Completed read-only review: no actionable findings; independently verified invariants/hashes/results and five green regression tests.",
+  "sha256": {
+    "paper/lem_paper_correction_draft.tex": "1bc21393c69f9cbb49560571b456d60fdab6fc8ef216913ed952ba9e808d4d7e",
+    "paper/lem_paper_correction_draft.pdf": "aab032767a8d3fdfff676026ebcda888e4fe33723be7e0cee16fdea98ace600a",
+    "paper/tables_correction/toy_v1_scaled.tex": "9fce9b1749ebf9f9ec08e671b22abf84a259f36cd5cf1fbdd8c63b6162cff71c",
+    "paper/tables_correction/toy_v1b.tex": "4da4f700153af6c5a38cc2c744b252390bca55cb0054fe70d566a95194c44fde",
+    "paper/figures_correction/toy_v1_scaled_results.png": "c03a880838da22da1970ea3b499c4bf4a8d3a268c56c4c1f3edb2e56c0a7d331",
+    "paper/figures_correction/toy_v1b_robustness.png": "675b842fcc890d58261258c93f565a78d4f2794979bb88c2aa4776656a71c202",
+    "experiments/update_correction_artifacts.py": "7595669ddda52546db5d109a5783bbb9e9855e60c53a143d1c3dcb97fbbaacfd"
+  }
+}

@@ -1,0 +1,57 @@
+
+--- run_experiment_1 ---
+=== Toy Experiment 1 Results ===
+  random_baseline_accuracy: 0.05
+  nn_reidentification_accuracy: 0.97
+  mean_attractor_distance: 0.2166
+  same_user_cosine_similarity: 0.9774
+  different_user_cosine_similarity: 0.0336
+
+--- run_experiment_1_scaled ---
+LEM Toy Experiment 1 — Scaled
+DIM=512 | N_USERS=500 | T_STEPS=200 | Seeds=10
+
+Seed 42 (1/10)
+  NN=1.0000 | AttrDist=0.7901 | Same=0.3557 | Diff=0.0020 | 4.7s
+Seed 123 (2/10)
+  NN=1.0000 | AttrDist=0.7894 | Same=0.3555 | Diff=0.0056 | 4.6s
+Seed 999 (3/10)
+  NN=1.0000 | AttrDist=0.7899 | Same=0.3569 | Diff=0.0015 | 4.7s
+Seed 2024 (4/10)
+  NN=1.0000 | AttrDist=0.7895 | Same=0.3577 | Diff=-0.0011 | 4.9s
+Seed 7 (5/10)
+  NN=1.0000 | AttrDist=0.7884 | Same=0.3578 | Diff=0.0027 | 4.9s
+Seed 314 (6/10)
+  NN=1.0000 | AttrDist=0.7883 | Same=0.3562 | Diff=0.0035 | 4.6s
+Seed 1337 (7/10)
+  NN=1.0000 | AttrDist=0.7907 | Same=0.3589 | Diff=0.0027 | 4.5s
+Seed 77 (8/10)
+  NN=1.0000 | AttrDist=0.7902 | Same=0.3538 | Diff=0.0024 | 4.8s
+Seed 256 (9/10)
+  NN=1.0000 | AttrDist=0.7878 | Same=0.3609 | Diff=0.0022 | 4.6s
+Seed 88 (10/10)
+  NN=1.0000 | AttrDist=0.7885 | Same=0.3566 | Diff=0.0003 | 4.7s
+
+=== Summary ===
+                                   mean    std     min    max
+nn_reidentification_accuracy     1.0000 0.0000  1.0000 1.0000
+mean_attractor_distance          0.7893 0.0010  0.7878 0.7907
+same_user_cosine_similarity      0.3570 0.0020  0.3538 0.3609
+different_user_cosine_similarity 0.0022 0.0018 -0.0011 0.0056
+
+--- run_experiment_1b ---
+/Users/lazarosvarvatis/Documents/Projects/LEM/.venv-correction/lib/python3.11/site-packages/numpy/__config__.py:155: UserWarning: Install `pyyaml` for better output
+  warnings.warn("Install `pyyaml` for better output", stacklevel=1)
+LEM Toy Experiment 1b — Robustness
+DIM=512 | N=500 | Seed=42
+
+SIGMA    NN-Acc     AttrDist     CosSame    CosDiff   
+-------------------------------------------------------
+0.05     1.0000     0.3319       0.8037     0.0045    
+0.15     1.0000     0.7895       0.3545     0.0019    
+0.30     0.2300     1.5348       0.1219     0.0006    
+0.50     0.0200     2.5419       0.0469     0.0002    
+0.75     0.0050     3.8054       0.0207     0.0001    
+1.00     0.0033     5.0703       0.0112     0.0000    
+1.50     0.0033     7.6017       0.0043     0.0000    
+2.00     0.0017     10.1339      0.0018     0.0000    

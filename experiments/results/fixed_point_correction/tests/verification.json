@@ -1,0 +1,46 @@
+{
+  "red_old_target": {
+    "exit_code": 1,
+    "expected_assertion_failures": 5,
+    "command": [
+      "/Users/lazarosvarvatis/Documents/Projects/LEM/.venv-correction/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "experiments/tests",
+      "-v"
+    ],
+    "source_selection": "red_old_target"
+  },
+  "red_archived_production": {
+    "exit_code": 1,
+    "expected_assertion_failures": 3,
+    "command": [
+      "/Users/lazarosvarvatis/Documents/Projects/LEM/.venv-correction/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "experiments/tests",
+      "-v",
+      "-k",
+      "production_path"
+    ],
+    "source_selection": "red_archived_production"
+  },
+  "green_corrected": {
+    "exit_code": 0,
+    "expected_assertion_failures": 0,
+    "command": [
+      "/Users/lazarosvarvatis/Documents/Projects/LEM/.venv-correction/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "experiments/tests",
+      "-v"
+    ],
+    "source_selection": "green_corrected"
+  }
+}

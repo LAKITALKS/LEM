@@ -1,0 +1,58 @@
+[
+  {
+    "sigma": 0.05,
+    "nn_accuracy": 1.0,
+    "attractor_distance": 0.3319,
+    "cosine_same": 0.8037,
+    "cosine_diff": 0.0045
+  },
+  {
+    "sigma": 0.15,
+    "nn_accuracy": 1.0,
+    "attractor_distance": 0.7895,
+    "cosine_same": 0.3545,
+    "cosine_diff": 0.0019
+  },
+  {
+    "sigma": 0.3,
+    "nn_accuracy": 0.23,
+    "attractor_distance": 1.5348,
+    "cosine_same": 0.1219,
+    "cosine_diff": 0.0006
+  },
+  {
+    "sigma": 0.5,
+    "nn_accuracy": 0.02,
+    "attractor_distance": 2.5419,
+    "cosine_same": 0.0469,
+    "cosine_diff": 0.0002
+  },
+  {
+    "sigma": 0.75,
+    "nn_accuracy": 0.005,
+    "attractor_distance": 3.8054,
+    "cosine_same": 0.0207,
+    "cosine_diff": 0.0001
+  },
+  {
+    "sigma": 1.0,
+    "nn_accuracy": 0.0033,
+    "attractor_distance": 5.0703,
+    "cosine_same": 0.0112,
+    "cosine_diff": 0.0
+  },
+  {
+    "sigma": 1.5,
+    "nn_accuracy": 0.0033,
+    "attractor_distance": 7.6017,
+    "cosine_same": 0.0043,
+    "cosine_diff": 0.0
+  },
+  {
+    "sigma": 2.0,
+    "nn_accuracy": 0.0017,
+    "attractor_distance": 10.1339,
+    "cosine_same": 0.0018,
+    "cosine_diff": 0.0
+  }
+]

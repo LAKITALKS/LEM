@@ -1,10 +1,13 @@
 # The Lazaros–Eudora Method (LEM)
 
 **Author:** Lazaros Varvatis
-**Status:** Preprint · v2.1 — Topological Framework with Toy Validation
+**Status:** LEM I toy validation — unpublished fixed-point correction draft; archived edition v2.1.0 preserved
 
 **Release / Zenodo version:** `v2.1.0` — archival, bibliography-corrected edition · DOI [10.5281/zenodo.21268033](https://doi.org/10.5281/zenodo.21268033)
-**Paper source of record:** `paper/lem_paper_final_v4.tex`
+**Archival source of record:** [`paper/lem_paper_final_v4.tex`](paper/lem_paper_final_v4.tex)
+
+**Corrected working draft:** [PDF](paper/lem_paper_correction_draft.pdf) · [source](paper/lem_paper_correction_draft.tex) · [correction note](paper/CORRECTION_NOTE.md).
+The draft corrects the V1 distance metric and adjacent method descriptions. It is **not a new Zenodo version** and has no new DOI. Archived v3/v4 sources, PDFs, bibliography and original figures remain unchanged.
 
 ---
 
@@ -16,7 +19,7 @@ The core hypothesis is that repeated interaction between a user and a language m
 
 The current preprint presents two toy-model validations:
 
-1. **Geometric Identifiability** — Perfect nearest-neighbor re-identification across N=500 users in d=512 dimensions, with a sharp phase transition at σ ≈ 0.25.
+1. **Geometric Identifiability** — Perfect nearest-neighbor re-identification across N=500 users in d=512 dimensions, at σ = 0.15. On the original noise grid, accuracy drops between σ = 0.15 and 0.30; no precise threshold at 0.25 was measured.
 2. **Topological Class Separation** — Convergent and cyclic regimes distinguished through persistent H₁ structure with SNR = 161.6.
 
 ---
@@ -29,6 +32,11 @@ LEM/
 ├── LEM_v1.0_Topological_Framework.md ← conceptual framework document
 ├── assets/                           ← legacy conceptual visuals (LEM v1.0)
 ├── paper/
+│   ├── lem_paper_correction_draft.tex ← corrected, unpublished working source
+│   ├── lem_paper_correction_draft.pdf ← compiled correction draft
+│   ├── figures_correction/           ← regenerated V1 figures only
+│   ├── tables_correction/            ← V1 table rows generated from result CSVs
+│   ├── CORRECTION_NOTE.md            ← before/after results and provenance
 │   ├── lem_paper_final_v4.tex        ← LaTeX source of record (reconstructed)
 │   ├── lem_paper_final_v4.pdf        ← compiled PDF (v4)
 │   ├── lem_paper_final_v3.pdf        ← published preprint PDF (Zenodo record)
@@ -53,13 +61,18 @@ LEM/
 
 ## Reproducing the Results
 
+For the complete matched V1 comparison, run from the repository root:
+
 ```bash
-cd experiments
-pip install -r requirements.txt
-python run_all.py --skip-pilot
+python3 -m venv .venv-correction
+.venv-correction/bin/python -m pip install -r experiments/requirements-v1-correction.lock
+.venv-correction/bin/python experiments/reproduce_fixed_point_correction.py --output-dir /tmp/lem-correction-reproduction
+.venv-correction/bin/python experiments/verify_fixed_point_regression.py --output-dir /tmp/lem-correction-tests
 ```
 
-This runs all three paper experiments (Toy V1 Scaled, V1b Robustness, V2 Topological) and saves figures to `assets/` and numerical results to the current directory. Seeds are fixed for full reproducibility.
+The runner extracts the original V1 sources from `f15073f2cab3fb68857ffb16035d6675957c2e06` into a temporary source copy, runs all three original and corrected V1 experiments in separate output folders, and checks exact equality of every unaffected reported metric and of the final random-generator states. Use a fresh output directory. The checked-in [results and manifest](experiments/results/fixed_point_correction/) record parameters, environment, commands, sample SD (`ddof=1`), and archive hashes. No V2 rerun is required for this correction.
+
+See [experiment instructions](experiments/README.md) for manuscript regeneration and the separate full-suite runner.
 
 ---
 
@@ -68,7 +81,7 @@ This runs all three paper experiments (Toy V1 Scaled, V1b Robustness, V2 Topolog
 | Experiment | Key Finding | Paper Section |
 |---|---|---|
 | Toy V1 (Scaled) | NN Accuracy 1.000 ± 0.000 across 10 seeds | Section 4.1, Table 1 |
-| Toy V1b (Robustness) | Phase transition at σ ≈ 0.25 | Section 4.1, Table 2 |
+| Toy V1b (Robustness) | Accuracy 1.0000 at σ=0.15, 0.2300 at 0.30, 0.0200 at 0.50 (baseline 0.0020) | Section 4.1, Table 2 |
 | Toy V2 (Topological) | SNR = 161.6 (H₁ cyclic vs. convergent) | Section 4.2, Table 3 |
 
 ---
@@ -86,7 +99,7 @@ This runs all three paper experiments (Toy V1 Scaled, V1b Robustness, V2 Topolog
 
 ## Citation
 
-If you reference this project, please cite the Zenodo record:
+For the published archival edition, cite the existing Zenodo record below. For the correction draft, additionally identify its branch/commit; this DOI does not identify the correction:
 
 > Lazaros Varvatis (2026). **LAKITALKS/LEM: Lazaros–Eudora Method (LEM) v2.1.0 — Archival Edition (Bibliography-Corrected).** Zenodo.
 > https://doi.org/10.5281/zenodo.21268033

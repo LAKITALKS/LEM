@@ -1,0 +1,105 @@
+{
+  "numpy_build_configuration": "{\n  \"Compilers\": {\n    \"c\": {\n      \"name\": \"clang\",\n      \"linker\": \"ld64\",\n      \"version\": \"15.0.0\",\n      \"commands\": \"cc\"\n    },\n    \"cython\": {\n      \"name\": \"cython\",\n      \"linker\": \"cython\",\n      \"version\": \"3.2.4\",\n      \"commands\": \"cython\"\n    },\n    \"c++\": {\n      \"name\": \"clang\",\n      \"linker\": \"ld64\",\n      \"version\": \"15.0.0\",\n      \"commands\": \"c++\"\n    }\n  },\n  \"Machine Information\": {\n    \"host\": {\n      \"cpu\": \"aarch64\",\n      \"family\": \"aarch64\",\n      \"endian\": \"little\",\n      \"system\": \"darwin\"\n    },\n    \"build\": {\n      \"cpu\": \"aarch64\",\n      \"family\": \"aarch64\",\n      \"endian\": \"little\",\n      \"system\": \"darwin\"\n    }\n  },\n  \"Build Dependencies\": {\n    \"blas\": {\n      \"name\": \"accelerate\",\n      \"found\": true,\n      \"version\": \"unknown\",\n      \"detection method\": \"system\",\n      \"include directory\": \"unknown\",\n      \"lib directory\": \"unknown\",\n      \"openblas configuration\": \"unknown\",\n      \"pc file directory\": \"unknown\"\n    },\n    \"lapack\": {\n      \"name\": \"accelerate\",\n      \"found\": true,\n      \"version\": \"unknown\",\n      \"detection method\": \"system\",\n      \"include directory\": \"unknown\",\n      \"lib directory\": \"unknown\",\n      \"openblas configuration\": \"unknown\",\n      \"pc file directory\": \"unknown\"\n    }\n  },\n  \"Python Information\": {\n    \"path\": \"/private/var/folders/k4/_09nqs851t35bpkk8lr_p43c0000gn/T/build-env-rubp05cr/bin/python\",\n    \"version\": \"3.11\"\n  },\n  \"SIMD Extensions\": {\n    \"baseline\": [\n      \"NEON\",\n      \"NEON_FP16\",\n      \"NEON_VFPV4\",\n      \"ASIMD\"\n    ],\n    \"found\": [\n      \"ASIMDHP\",\n      \"ASIMDDP\"\n    ],\n    \"not found\": [\n      \"ASIMDFHM\"\n    ]\n  }\n}\n",
+  "outputs_sha256": {
+    "assets/toy_v1_geometric_cvi.png": "79c3691f4fa0cdc4abf88e76df2428c755a7c02fd202f65409f406a35d136249",
+    "assets/toy_v1_scaled_results.png": "c03a880838da22da1970ea3b499c4bf4a8d3a268c56c4c1f3edb2e56c0a7d331",
+    "assets/toy_v1b_robustness.png": "675b842fcc890d58261258c93f565a78d4f2794979bb88c2aa4776656a71c202",
+    "rng_states.json": "c07efd204b2f6855baa0553a7e0ff64bfd81e923e1ffcf6fe41ed2e24e079c40",
+    "toy_v1_metrics.json": "fb122c76e8c6de0c2bbd3c9c82514848e0a35c16b49f9bfd09fdb8c5729533c8",
+    "toy_v1_scaled_results.csv": "ead3c99f516ed7bf10c81ae8ab9c82e366919a20964e1545643f51d646e27ee0",
+    "toy_v1_scaled_results.json": "f8d669aa7c8ce4a43083a39126988133bec0be224c001a3c48283a0c5cbc9c90",
+    "toy_v1_scaled_summary.csv": "34a2e81886ed2c2dee66511f5b3a902b7d9017b6a5a8dd93d543fe7987725ef2",
+    "toy_v1b_robustness.csv": "76047cd33f662eb5e1284db05e358fad6084860bd422806c77461b9f8a701dd3",
+    "toy_v1b_robustness.json": "c78c11d9c37ef4baf0bc994daa80a18fba0c26b3f2f2536154e4234c5f2728de"
+  },
+  "packages": {
+    "matplotlib": "3.11.1",
+    "numpy": "2.4.6",
+    "pandas": "3.0.5",
+    "scikit-learn": "1.9.0",
+    "scipy": "1.17.1"
+  },
+  "parameters": {
+    "run_experiment_1": {
+      "ALPHA": 0.4,
+      "BETA": 0.3,
+      "DIM": 4,
+      "LAST_K": 20,
+      "N_MODELS": 2,
+      "N_TESTS": 200,
+      "N_USERS": 20,
+      "RNG_SEED": 42,
+      "SIGMA": 0.15,
+      "T_STEPS": 60
+    },
+    "run_experiment_1_scaled": {
+      "ALPHA": 0.4,
+      "BETA": 0.3,
+      "DIM": 512,
+      "LAST_K": 40,
+      "N_MODELS": 2,
+      "N_TESTS": 500,
+      "N_USERS": 500,
+      "SEEDS": [
+        42,
+        123,
+        999,
+        2024,
+        7,
+        314,
+        1337,
+        77,
+        256,
+        88
+      ],
+      "SIGMA": 0.15,
+      "T_STEPS": 200
+    },
+    "run_experiment_1b": {
+      "ALPHA": 0.4,
+      "BETA": 0.3,
+      "DIM": 512,
+      "LAST_K": 40,
+      "N_MODELS": 2,
+      "N_TESTS": 300,
+      "N_USERS": 500,
+      "SEED": 42,
+      "SIGMA_VALUES": [
+        0.05,
+        0.15,
+        0.3,
+        0.5,
+        0.75,
+        1.0,
+        1.5,
+        2.0
+      ],
+      "T_STEPS": 200
+    }
+  },
+  "platform": "macOS-14.6.1-arm64-arm-64bit",
+  "python": "3.11.7 (v3.11.7:fa7a6f2303, Dec  4 2023, 15:22:56) [Clang 13.0.0 (clang-1300.0.29.30)]",
+  "python_executable": "/Users/lazarosvarvatis/Documents/Projects/LEM/.venv-correction/bin/python",
+  "rng_state_sha256_after_each_experiment": {
+    "run_experiment_1": "4bd71805370cedd54d449ac93a4417dddea0fddfedb13d0a89ff5ab93bdebda0",
+    "run_experiment_1_scaled": "74079ffe2f85e1fd0ebccc4b9cb138195b4da96cd7f2fe2b400b772cca7688ff",
+    "run_experiment_1b": "6d85e651aff6553dcbdc585d1a7874815f5fea03cb4f393f0db774feac131643"
+  },
+  "source_sha256": {
+    "experiments/lem_simulations.py": "0416c2e71356b5cf6b5fe161044add006b2ab433e16e3fecf24bb0bfe796fa72",
+    "experiments/run_all.py": "103a382fc749a5218b1ce6d4806f3b2b9ebd281d22c4ad3f8c4b416d766b86a4"
+  },
+  "thread_environment": {
+    "MKL_NUM_THREADS": null,
+    "OMP_NUM_THREADS": null,
+    "OPENBLAS_NUM_THREADS": null
+  },
+  "worker_command": [
+    "/Users/lazarosvarvatis/Documents/Projects/LEM/experiments/reproduce_fixed_point_correction.py",
+    "--worker",
+    "--source-root",
+    "/Users/lazarosvarvatis/Documents/Projects/LEM",
+    "--output-dir",
+    "/Users/lazarosvarvatis/Documents/Projects/LEM/experiments/results/fixed_point_correction/corrected"
+  ]
+}
