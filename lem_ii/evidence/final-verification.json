@@ -1,0 +1,32 @@
+{
+  "checked_at_utc": "2026-09-07T21:15:48.887343+00:00",
+  "pipeline_tests_passed": 66,
+  "pipeline_tests_skipped": 0,
+  "pipeline_log_sha256": "ad84b0ccdadc302f9721f89b0af8cc81d4f5d8bf2dc5812f926492b9ce6abd28",
+  "existing_lem_i_regressions_passed": 5,
+  "lem_i_log_sha256": "d4cfb2120a8febc4d737352381710f1781e190c3c198e6d6aef855eb0157171d",
+  "real_model_smoke": "PASS_TECHNICAL_SMOKE",
+  "remote_attempts": 1,
+  "remote_failed_attempts": 0,
+  "local_recomputation": "PASS",
+  "local_tests_not_github_ci": true,
+  "post_smoke_changes": "Post-smoke controller, accounting tests and documentation updates; core model, simulator, feature and scientific-configuration files unchanged. Public export removes private operational evidence.",
+  "no_additional_cloud_run_for_accounting_changes": true,
+  "scientific_study_executed": false,
+  "confirmation_generated_or_evaluated": false,
+  "remaining_operational_steps": [
+    "separate scientific study authorization",
+    "private review of currently applicable provider account limits",
+    "independently verified external GPU resource timeout for future study CLI"
+  ],
+  "private_execution_reference": "cf9e6e00eb3f9589e301de248b852df61a2ca8a1",
+  "private_execution_reference_note": "Private local execution snapshot; absent from the public publication ancestry.",
+  "public_export_validation": {
+    "checked_at_utc": "2026-09-07T21:26:41.672448+00:00",
+    "pipeline_tests_passed": 66,
+    "pipeline_tests_skipped": 0,
+    "pipeline_log_sha256": "f9829bdb5fd404dbf721340bd42564b7ccff14bea75b85c4286cd1595deecc84",
+    "scientific_core_file_hashes_match_execution": 8,
+    "scope": "Sanitized public tree; local tests, not GitHub CI. No additional cloud invocation."
+  }
+}
