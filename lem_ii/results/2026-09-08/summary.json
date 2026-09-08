@@ -1,0 +1,258 @@
+{
+  "all_source_and_data_integrity_checks_passed": true,
+  "balanced_accuracy_by_endpoint": {
+    "12": {
+      "text": 0.5,
+      "text_static": 0.5555555555555555,
+      "text_static_geometry_time": 0.5555555555555555,
+      "text_static_geometry_time_topology": 0.5555555555555555
+    },
+    "16": {
+      "text": 0.3888888888888889,
+      "text_static": 0.5,
+      "text_static_geometry_time": 0.6111111111111112,
+      "text_static_geometry_time_topology": 0.5277777777777778
+    },
+    "20": {
+      "text": 0.3888888888888889,
+      "text_static": 0.47222222222222215,
+      "text_static_geometry_time": 0.47222222222222215,
+      "text_static_geometry_time_topology": 0.47222222222222215
+    },
+    "24": {
+      "text": 0.4166666666666667,
+      "text_static": 0.47222222222222215,
+      "text_static_geometry_time": 0.47222222222222215,
+      "text_static_geometry_time_topology": 0.5277777777777778
+    }
+  },
+  "confirmation_after_freeze": true,
+  "confirmation_sha256": "a26c4a7c6f18c5b059ac2812e0beb1b6b270abbf3aafb78c03ea0500c54a9d0b",
+  "counterchecks": {
+    "bootstrap_replicates": 2000,
+    "label_replicates": 199,
+    "time_order_confirmation": {
+      "current_state_fixed": true,
+      "delay_embedding_rebuilt": true,
+      "entire_static_basis_invariant": true,
+      "kind": "inference_time_predecessor_order_shuffle_endpoint_fixed_no_refit",
+      "methods": {
+        "text": {
+          "changed_predictions": 0,
+          "normal_balanced_accuracy": 0.4166666666666667,
+          "shuffled_balanced_accuracy": 0.4166666666666667
+        },
+        "text_static": {
+          "changed_predictions": 0,
+          "normal_balanced_accuracy": 0.47222222222222215,
+          "shuffled_balanced_accuracy": 0.47222222222222215
+        },
+        "text_static_geometry_time": {
+          "changed_predictions": 0,
+          "normal_balanced_accuracy": 0.47222222222222215,
+          "shuffled_balanced_accuracy": 0.47222222222222215
+        },
+        "text_static_geometry_time_topology": {
+          "changed_predictions": 2,
+          "normal_balanced_accuracy": 0.5277777777777778,
+          "shuffled_balanced_accuracy": 0.49999999999999994
+        }
+      },
+      "scope": "sensitivity_of_frozen_classifier;distribution_shift_is_possible",
+      "static_max_absolute_difference": 8.881784197001252e-16
+    },
+    "time_order_validation": {
+      "current_state_fixed": true,
+      "delay_embedding_rebuilt": true,
+      "entire_static_basis_invariant": true,
+      "kind": "inference_time_predecessor_order_shuffle_endpoint_fixed_no_refit",
+      "methods": {
+        "text": {
+          "changed_predictions": 0,
+          "normal_balanced_accuracy": 0.5833333333333334,
+          "shuffled_balanced_accuracy": 0.5833333333333334
+        },
+        "text_static": {
+          "changed_predictions": 0,
+          "normal_balanced_accuracy": 0.5,
+          "shuffled_balanced_accuracy": 0.5
+        },
+        "text_static_geometry_time": {
+          "changed_predictions": 1,
+          "normal_balanced_accuracy": 0.47222222222222227,
+          "shuffled_balanced_accuracy": 0.5
+        },
+        "text_static_geometry_time_topology": {
+          "changed_predictions": 3,
+          "normal_balanced_accuracy": 0.5277777777777778,
+          "shuffled_balanced_accuracy": 0.5
+        }
+      },
+      "scope": "sensitivity_of_frozen_classifier;distribution_shift_is_possible",
+      "static_max_absolute_difference": 8.881784197001252e-16
+    }
+  },
+  "fit_on_confirmation": false,
+  "freeze_sha256": "92db2d1949048b4b9ba67e29c8c9d4eab4a7f29819659eae19ff8f9dcdac2f84",
+  "model_revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+  "phase_counts": {
+    "confirmation": {
+      "sessions": 36,
+      "turns": 864
+    },
+    "development": {
+      "sessions": 36,
+      "turns": 864
+    },
+    "validation": {
+      "sessions": 36,
+      "turns": 864
+    }
+  },
+  "primary_paired_differences": {
+    "activation_added": {
+      "added": "text_static",
+      "balanced_accuracy_difference": 0.05555555555555547,
+      "base": "text",
+      "bootstrap_replicates": 2000,
+      "confidence_level": 0.9833333333333333,
+      "interval": [
+        -0.16666666666666666,
+        0.25000000000000006
+      ],
+      "resampling_unit": "profile_bundle_with_both_sessions_stratified_by_regime",
+      "scope": "confirmation_conditional_on_fixed_topic_families"
+    },
+    "time_geometry_added": {
+      "added": "text_static_geometry_time",
+      "balanced_accuracy_difference": 0.0,
+      "base": "text_static",
+      "bootstrap_replicates": 2000,
+      "confidence_level": 0.9833333333333333,
+      "interval": [
+        0.0,
+        0.0
+      ],
+      "resampling_unit": "profile_bundle_with_both_sessions_stratified_by_regime",
+      "scope": "confirmation_conditional_on_fixed_topic_families"
+    },
+    "topology_added": {
+      "added": "text_static_geometry_time_topology",
+      "balanced_accuracy_difference": 0.055555555555555636,
+      "base": "text_static_geometry_time",
+      "bootstrap_replicates": 2000,
+      "confidence_level": 0.9833333333333333,
+      "interval": [
+        0.0,
+        0.1388888888888889
+      ],
+      "resampling_unit": "profile_bundle_with_both_sessions_stratified_by_regime",
+      "scope": "confirmation_conditional_on_fixed_topic_families"
+    }
+  },
+  "recognition": {
+    "text": {
+      "consecutive": 2,
+      "earliest_endpoint": null,
+      "stability_confirmed_at": null,
+      "status": "not_reached_in_observed_grid",
+      "threshold": 0.7
+    },
+    "text_static": {
+      "consecutive": 2,
+      "earliest_endpoint": null,
+      "stability_confirmed_at": null,
+      "status": "not_reached_in_observed_grid",
+      "threshold": 0.7
+    },
+    "text_static_geometry_time": {
+      "consecutive": 2,
+      "earliest_endpoint": null,
+      "stability_confirmed_at": null,
+      "status": "not_reached_in_observed_grid",
+      "threshold": 0.7
+    },
+    "text_static_geometry_time_topology": {
+      "consecutive": 2,
+      "earliest_endpoint": null,
+      "stability_confirmed_at": null,
+      "status": "not_reached_in_observed_grid",
+      "threshold": 0.7
+    }
+  },
+  "saved_vectors": 7776,
+  "scientific_config_sha256": "b6c7de93b0016a8b127c6cbc010bf62dd70d8eec16afc30e57581d0b33270513",
+  "scope": "Known synthetic profiles; fixed held-out topic/formulation families; no human identity or attractor claim.",
+  "sessions": 108,
+  "simultaneous_grid_contrast_intervals": {
+    "bootstrap_replicates": 2000,
+    "confidence_level_each": 0.9958333333333333,
+    "family_size": 12,
+    "intervals": {
+      "12": {
+        "activation_added": [
+          -0.11111111111111116,
+          0.24542824074074404
+        ],
+        "time_geometry_added": [
+          0.0,
+          0.0
+        ],
+        "topology_added": [
+          0.0,
+          0.0
+        ]
+      },
+      "16": {
+        "activation_added": [
+          -0.16209490740740742,
+          0.384317129629633
+        ],
+        "time_geometry_added": [
+          0.0,
+          0.22222222222222232
+        ],
+        "topology_added": [
+          -0.22222222222222215,
+          0.0
+        ]
+      },
+      "20": {
+        "activation_added": [
+          -0.16666666666666669,
+          0.3565393518518552
+        ],
+        "time_geometry_added": [
+          0.0,
+          0.0
+        ],
+        "topology_added": [
+          -0.25,
+          0.16666666666666669
+        ]
+      },
+      "24": {
+        "activation_added": [
+          -0.19444444444444445,
+          0.3009837962962997
+        ],
+        "time_geometry_added": [
+          0.0,
+          0.0
+        ],
+        "topology_added": [
+          0.0,
+          0.13888888888888895
+        ]
+      }
+    },
+    "scope": "confirmation_secondary_fixed_grid_contrast_family"
+  },
+  "source_commit": "358e76a0b69fa4fa8ff10af2feb09ecb91bd99c1",
+  "status": "COMPLETE",
+  "stop_reasons": {
+    "eos": 1,
+    "max_new_tokens": 2591
+  },
+  "turns": 2592
+}

@@ -1,19 +1,19 @@
 # LEM-II-Light
 
-**Execution update, 8 September 2026:** the full 108-dialogue study, freeze and
-independent confirmation are authorized by the new execution instruction. Follow
-[RUN_STUDY.md](RUN_STUDY.md) for the bounded production path and recovery rules.
-That dated authorization supersedes the earlier smoke-only execution scope below;
-the original scientific configuration and historical smoke evidence are preserved.
+**Completed, 8 September 2026:** all 108 dialogues / 2,592 turns were collected,
+the four endpoint artifacts were frozen, and the single confirmation analysis
+completed without fitting or tuning on confirmation data. See the
+[scientific results](RESULTS_2026-09-08.md) and [production execution record](RUN_STUDY.md).
+None of the three primary corrected intervals establishes positive added value.
 
 Author: Lazaros Varvatis. This directory contains the executable pipeline for a
-**prespecified protocol**, not a publicly preregistered or completed study.
+**prespecified protocol** and its completed Light study; it was not publicly preregistered.
 The original LEM-I manuscripts, figures, correction and experiments are separate.
 
 **Verified 7 September 2026:** the real Qwen3B Modal smoke passed 24+2 turns,
 including actual state extraction, session reset and local feature recomputation.
 See the [public technical verification record](TECHNICAL_SMOKE_2026-09-07.md).
-The scientific study remains unexecuted.
+Those technical observations remain separate from the completed scientific data.
 
 Read [PROTOCOL.md](PROTOCOL.md) for the scientific decisions and
 [ANALYSIS.md](ANALYSIS.md) for the analysis contract. The matching machine-readable
@@ -35,10 +35,12 @@ tuning budget: text alone versus text plus static activations/geometry; that
 static basis versus added time/delay features; the same complete basis versus
 added topology. Turn24 is primary;12/16/20/24 form the separate fixed-window curve.
 
-This task authorizes only local implementation/fixtures and at most $5 gross
-additional Modal technical usage **across all attempts**. The remainder of the
-$30 study budget is not released. All study and confirmation execution gates
-remain false. Nothing here schedules, deploys or automatically continues a run.
+The 8 September instruction authorized all three phases and the complete local
+analysis under the unchanged $27 gross workspace usage limit. It superseded the
+earlier smoke-only $5 scope and the earlier $30 planning ceiling. Repository
+execution gates remain false as safe defaults; the authorized study used only
+the six designated gates in private runtime copies. All three GPU apps are stopped.
+Nothing here schedules or automatically repeats the completed study.
 
 ## Local setup and validation
 
@@ -101,7 +103,11 @@ turn or session. A uniform system prompt is used. Profile/regime/seed/policy
 metadata go only to separate labels/audit files. The text baseline gets exactly
 the rendered pre-answer context, never the current or future answer.
 
-## Bounded Modal smoke
+## Historical bounded Modal smoke (7 September 2026)
+
+The following describes the preserved technical-only launcher and its original
+budget rules. The completed scientific study used the separate production path
+in [RUN_STUDY.md](RUN_STUDY.md); smoke observations were never promoted to study data.
 
 Prepare a **private** `.runtime/private-preflight.json` using the structure in
 [config/preflight.example.json](config/preflight.example.json). The public example
@@ -173,7 +179,7 @@ full-dimensional per-vector L2 normalization; it is explicitly distinct from
 the development-fitted scientific PCA8/scaling path tested on fixtures. It fits
 no scientific transform or classifier on smoke observations.
 
-## Later study execution
+## Study execution path
 
 The prepared plan contains metadata and seeds only:
 
@@ -182,9 +188,10 @@ The prepared plan contains metadata and seeds only:
 .venv-lem-ii/bin/python -m lem_ii.study --help
 ```
 
-After a separate authorization and cost review, `study collect` operates on an
-already provisioned compatible CUDA GPU with explicit run limits; it does not
-provision Modal resources. It requires an explicit externally enforced provider
+The low-level `study collect` command operates on an already provisioned
+compatible CUDA GPU with explicit run limits; it does not provision Modal
+resources. The authorized completed study used `launch_study` to provide those
+resources and durable checkpoints. Collection requires an externally enforced provider
 resource timeout at or below the run deadline plus60 seconds. That provider stop
 must be independently verified before a future run; Python's alarm cannot
 guarantee interruption of a hung CUDA call or release a rented GPU. The currently
@@ -192,17 +199,17 @@ tested Modal smoke has its own enforced function timeout and app-stop controller
 `analyze-development-validation` reads the complete
 validated72-session set, executes the same analysis path and freezes all four
 endpoint artifacts. `confirm` consumes all36 reserved confirmation sessions and
-all four frozen artifacts once, without fitting or tuning. Current gates fail
-before model/data access. Enabling a gate is an authorization record, not itself
+all four frozen artifacts once, without fitting or tuning. Repository-default gates
+fail before model/data access. Enabling a gate is an authorization record, not itself
 a permission grant. The smoke controller can never launch those study modes.
 
 Order and label controls reuse the saved study contexts/states and add no GPU
 dialogues. The two-turn reset control belongs to this technical budget. The
-private planning projection counts108 model loads conservatively,2592 extra
-extraction prefills, full measured24-turn context growth, and a separate CPU
-analysis/build allowance. Private measured usage and account-specific projections
-are not published here. One smoke topic cannot establish an across-topic cost
-distribution.
+original private planning projection conservatively counted108 model loads.
+Actual production instead loaded the model once per phase and retained all2592
+extra extraction prefills and full24-turn histories. Measured phase times updated
+the remaining-cost projections. Private usage and account-specific evidence stay
+outside Git. One smoke topic cannot establish an across-topic cost distribution.
 
 Sources checked before execution: [Qwen model card](https://huggingface.co/Qwen/Qwen2.5-3B-Instruct),
 [Modal prices](https://modal.com/pricing), [Modal budgets](https://modal.com/docs/guide/budgets).
