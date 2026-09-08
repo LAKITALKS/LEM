@@ -25,7 +25,8 @@ from .storage import SessionStore, atomic_json, canonical_hash, file_hash
 
 PACKAGE = Path(__file__).resolve().parent
 SOURCE_FILES = ("__init__.py", "design.py", "simulator.py", "model_adapter.py", "storage.py",
-                "collection.py", "features.py", "evaluation.py", "study.py", "requirements.txt")
+                "collection.py", "features.py", "evaluation.py", "study.py", "requirements.txt",
+                "production.py", "modal_study.py", "launch_study.py")
 STUDY_LEDGER = PACKAGE.parent / ".runtime" / "study-usage-ledger.json"
 PINNED_COLLECTION_SOFTWARE = {"torch": "2.9.1", "transformers": "4.57.6", "tokenizers": "0.22.2",
                               "huggingface-hub": "0.36.2", "safetensors": "0.7.0", "numpy": "2.4.6"}
@@ -171,29 +172,46 @@ def load_completed_study_records(root, config, splits=("development", "validatio
     return rows, provenance
 
 
-def analyze_development_validation(root, config, output):
+def analyze_development_validation(root, config, output, *, resume=False):
     _require(config, "analyze", ("development", "validation"))
     from sklearn.metrics import balanced_accuracy_score
     from .evaluation import (METHODS, analysis_provenance, earliest_recognition, fit_and_tune,
-                             freeze_artifact, label_countercheck, labels_for, paired_cluster_intervals,
+                             freeze_artifact, load_frozen_artifact, label_countercheck, labels_for, paired_cluster_intervals,
                              predict, simultaneous_grid_intervals, split_records, time_countercheck)
     rows, provenance = load_completed_study_records(root, config)
     output = Path(output)
     # A single output directory freezes one analysis, rather than permitting a
     # succession of favorable classifier fits to replace an earlier freeze.
-    output.mkdir(parents=True, exist_ok=False)
-    atomic_json(output / "verified_inputs.json", provenance)
-    atomic_json(output / "analysis_started.json", {"status": "started_once", "input_set_sha256": provenance["input_set_sha256"]})
+    started_binding = {"status": "started_once", "input_set_sha256": provenance["input_set_sha256"],
+                       "scientific_config_sha256": _scientific_hash(config), **analysis_provenance()}
+    if resume:
+        if (json.loads((output / "verified_inputs.json").read_text()) != provenance
+                or json.loads((output / "analysis_started.json").read_text()) != started_binding):
+            raise ValueError("Analysis recovery inputs/code/software changed")
+        if (output / "freeze.json").exists():
+            from .production import verify_freeze
+            verify_freeze(output, config)
+            return json.loads((output / "study_development_validation.json").read_text())
+    else:
+        output.mkdir(parents=True, exist_ok=False)
+        atomic_json(output / "verified_inputs.json", provenance)
+        atomic_json(output / "analysis_started.json", started_binding)
     development, validation = split_records(rows, config)
     report = {"data_kind": "real_model_study", "scope": "development_validation_descriptive",
               "confirmation_generated_or_evaluated": False, "scientific_config_sha256": _scientific_hash(config),
               "input_set_sha256": provenance["input_set_sha256"], "endpoints": {}, **analysis_provenance()}
     grid, primary = {}, None
     for endpoint in config["features"]["endpoints"]:
-        fitted = fit_and_tune(rows, config, endpoint)
+        artifact_path = output / f"study_endpoint_{endpoint}.joblib"
+        manifest_path = output / f"study_endpoint_{endpoint}.manifest.json"
+        if resume and artifact_path.exists() and manifest_path.exists():
+            fitted = load_frozen_artifact(artifact_path, manifest_path, config)
+            frozen = json.loads(manifest_path.read_text())
+        else:
+            fitted = fit_and_tune(rows, config, endpoint)
+            frozen = freeze_artifact(fitted, output)
         grid[endpoint] = predict(fitted, validation)
         development_predictions = predict(fitted, development)
-        frozen = freeze_artifact(fitted, output)
         report["endpoints"][endpoint] = {
             "validation_balanced_accuracy": {m: float(balanced_accuracy_score(labels_for(validation), p)) for m, p in grid[endpoint].items()},
             "development_balanced_accuracy": {m: float(balanced_accuracy_score(labels_for(development), p)) for m, p in development_predictions.items()},
@@ -213,18 +231,23 @@ def analyze_development_validation(root, config, output):
     return report
 
 
-def confirm(root, config, artifacts, output):
+def confirm(root, config, artifacts, output, *, resume=False):
     _require(config, "analyze", ("confirmation",))
     from .evaluation import predict_confirmation_grid_once
     output = Path(output)
-    if output.exists() or output.with_suffix(output.suffix + ".inputs.json").exists():
+    if not resume and (output.exists() or output.with_suffix(output.suffix + ".inputs.json").exists()):
         raise FileExistsError("Confirmation output or input provenance already exists")
     rows, provenance = load_completed_study_records(root, config, ("confirmation",))
     output.parent.mkdir(parents=True, exist_ok=True)
     # This provenance contains no model predictions. The analysis API reserves
     # its permanent shared grid lock before any confirmation prediction.
-    atomic_json(output.with_suffix(output.suffix + ".inputs.json"), provenance)
-    return predict_confirmation_grid_once(Path(artifacts), rows, config, output)
+    provenance_path = output.with_suffix(output.suffix + ".inputs.json")
+    if resume:
+        if not provenance_path.exists() or json.loads(provenance_path.read_text()) != provenance:
+            raise ValueError("Confirmation recovery input provenance changed")
+    else:
+        atomic_json(provenance_path, provenance)
+    return predict_confirmation_grid_once(Path(artifacts), rows, config, output, resume=resume)
 
 
 class StudyRuntimeGuard:
@@ -259,7 +282,8 @@ class StudyRuntimeGuard:
             raise RuntimeError("Failed previous turn cannot be silently retried")
         if self.state["sessions"]:
             previous = self.state["sessions"][-1]
-            if sum(t["session_id"] == previous for t in self.state["turns"]) != 24:
+            if (sum(t["session_id"] == previous for t in self.state["turns"])
+                    + self.limits.get("completed_prefixes", {}).get(previous, 0)) != 24:
                 raise RuntimeError("Previous study session is incomplete")
         self.state["sessions"].append(session_id)
         self._save()
@@ -271,7 +295,8 @@ class StudyRuntimeGuard:
         if not self.state["sessions"] or (self.state["turns"] and self.state["turns"][-1]["actual_output_tokens"] is None):
             raise RuntimeError("Start a session and finish the previous turn before reserving")
         session = self.state["sessions"][-1]
-        if sum(t["session_id"] == session for t in self.state["turns"]) >= 24:
+        if (sum(t["session_id"] == session for t in self.state["turns"])
+                + self.limits.get("completed_prefixes", {}).get(session, 0)) >= 24:
             raise RuntimeError("Per-session 24-turn limit reached")
         if max_new_tokens > 128 or input_tokens + max_new_tokens > 8192:
             raise RuntimeError("Context or output reservation cap exceeded")

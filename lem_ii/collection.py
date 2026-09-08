@@ -23,7 +23,7 @@ def smoke_sessions(config):
             replace(first, session_id="smoke-reset-02", split="smoke", seed=seed, turns=2)]
 
 
-def collect_session(config, spec, adapter, root, run_manifest, *, guard=None, resume=False):
+def collect_session(config, spec, adapter, root, run_manifest, *, guard=None, resume=False, checkpoint_hook=None):
     smoke = spec.split == "smoke"
     if not smoke:
         if not config["execution"]["study_collection_allowed"] or config["execution"]["smoke_only"]:
@@ -68,6 +68,8 @@ def collect_session(config, spec, adapter, root, run_manifest, *, guard=None, re
             history.append({"role": "user", "content": user})
             measurement = adapter.measure_reply(history, guard)
             store.append(measurement, user, simulator.last_audit)
+            if checkpoint_hook:
+                checkpoint_hook(store)
             previous = measurement.record["answer"]
             history.append({"role": "assistant", "content": previous})
             print(f"{spec.session_id} turn {store.manifest['completed_turns']}/{spec.turns}: "

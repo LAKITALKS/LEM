@@ -78,7 +78,9 @@ class SessionStore:
         self._save()
 
     def fail(self, error):
-        self.manifest["status"] = "failed"
+        # A transport/persistence callback can fail after the final valid append.
+        # Preserve that complete session; the failed run still records the error.
+        self.manifest["status"] = "complete" if self.manifest["completed_turns"] == self.spec.turns else "failed"
         self.manifest["errors"].append({"type": type(error).__name__, "message": str(error)[:500]})
         self._save()
 

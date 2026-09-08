@@ -13,6 +13,10 @@ import json
 from pathlib import Path
 from typing import Any
 import uuid
+import fcntl
+import time
+
+from .storage import atomic_json, canonical_hash
 
 import joblib
 import numpy as np
@@ -386,7 +390,16 @@ def _reserve_confirmation_once(artifact_directory: Path, output_path: Path) -> N
 
 
 def predict_confirmation_grid_once(artifact_directory: Path, records: list[dict], config: dict,
-                                   output_path: Path) -> dict:
+                                   output_path: Path, *, resume=False) -> dict:
+    """One frozen trial; explicit recovery keeps its lock, inputs and output path."""
+    _validate_confirmation_input(records, config)
+    with (Path(artifact_directory) / "confirmation_process.lock").open("a+") as process_lock:
+        fcntl.flock(process_lock.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+        return _predict_confirmation_grid_locked(Path(artifact_directory), records, config,
+                                                 Path(output_path), resume=resume)
+
+
+def _predict_confirmation_grid_locked(artifact_directory, records, config, output_path, *, resume):
     """Future-only full-grid confirmation using four previously frozen artifacts.
 
     Directory must contain study_endpoint_{12,16,20,24}.joblib and the matching
@@ -412,23 +425,78 @@ def predict_confirmation_grid_once(artifact_directory: Path, records: list[dict]
         common_fit = fit_ids
         fitted_grid[endpoint] = fitted
         hashes[endpoint] = hashlib.sha256(path.read_bytes()).hexdigest()
-    _reserve_confirmation_once(artifact_directory, output_path)
+    input_digest = canonical_hash([
+        {"dialogue_id": r["dialogue_id"], "profile_id": r["profile_id"], "regime": r["regime"],
+         "topic_family": r["topic_family"], "formulation_family": r["formulation_family"],
+         "contexts": r["contexts"],
+         "states_sha256": hashlib.sha256(np.ascontiguousarray(r["states"]).tobytes()).hexdigest()}
+        for r in records])
+    binding = {"output": str(output_path.resolve()), "input_sha256": input_digest,
+               "artifact_sha256": {str(k): v for k, v in hashes.items()},
+               "analysis_config_hash": analysis_configuration_hash(config), **analysis_provenance()}
+    lock_path = artifact_directory / "confirmation_grid.lock"
+    if lock_path.exists():
+        lock = json.loads(lock_path.read_text())
+        if not resume or lock.get("binding") != binding:
+            raise LeakageError("Confirmation already reserved; recovery requires identical inputs, artifacts and output")
+        if output_path.exists():
+            existing = json.loads(output_path.read_text())
+            digest = existing.pop("payload_sha256", None)
+            if (digest != canonical_hash(existing) or existing.get("binding_sha256") != canonical_hash(binding)
+                    or existing.get("trial_id") != lock["trial_id"]):
+                raise LeakageError("Existing confirmation output has no matching committed digest")
+            existing["payload_sha256"] = digest
+            actual = hashlib.sha256(output_path.read_bytes()).hexdigest()
+            if lock.get("output_sha256", actual) != actual:
+                raise LeakageError("Completed confirmation output changed")
+            lock.update(status="complete", output_sha256=actual)
+            atomic_json(lock_path, lock)
+            return existing
+    else:
+        if resume or output_path.exists():
+            raise LeakageError("Cannot resume without the original permanent confirmation lock")
+        lock = {"binding": binding, "trial_id": str(uuid.uuid4()), "reserved_epoch": time.time(),
+                "status": "reserved_once"}
+        with lock_path.open("x") as handle:
+            json.dump(lock, handle, indent=2)
+            handle.flush()
+            import os
+            os.fsync(handle.fileno())
+    binding_hash = canonical_hash(binding)
     predictions, scores = {}, {}
     labels = labels_for(records)
     for endpoint in endpoints:
         fitted_grid[endpoint]["pipeline"].config = copy.deepcopy(config)
-        predictions[endpoint] = predict(fitted_grid[endpoint], records)
+        checkpoint = artifact_directory / f"confirmation_predictions_{endpoint}.json"
+        if checkpoint.exists():
+            saved = json.loads(checkpoint.read_text())
+            payload = saved["payload"]
+            if (saved["sha256"] != canonical_hash(payload) or payload["binding_sha256"] != binding_hash
+                    or payload["trial_id"] != lock["trial_id"] or payload["endpoint"] != endpoint):
+                raise LeakageError("Confirmation prediction checkpoint changed")
+            predictions[endpoint] = {method: np.asarray(values) for method, values in payload["predictions"].items()}
+        else:
+            predictions[endpoint] = predict(fitted_grid[endpoint], records)
+            payload = {"binding_sha256": binding_hash, "trial_id": lock["trial_id"], "endpoint": endpoint,
+                       "predictions": {m: p.tolist() for m, p in predictions[endpoint].items()}}
+            atomic_json(checkpoint, {"payload": payload, "sha256": canonical_hash(payload)})
+        if (set(predictions[endpoint]) != set(METHODS)
+                or any(len(p) != len(records) or not set(p) <= set(labels) for p in predictions[endpoint].values())):
+            raise LeakageError("Invalid confirmation prediction checkpoint dimensions/classes")
         scores[endpoint] = {method: float(balanced_accuracy_score(labels, values))
                             for method, values in predictions[endpoint].items()}
     options = config["analysis"]
     report = {
         "data_kind": "real_model_study", "scope": "independent_frozen_full_grid_confirmation",
+        "trial_id": lock["trial_id"], "trial_reserved_epoch": lock["reserved_epoch"],
+        "input_record_sha256": input_digest, "completed_epoch": time.time(),
         "artifact_sha256_by_endpoint": hashes, "execution_config_hash": configuration_hash(config),
         "analysis_config_hash": analysis_configuration_hash(config),
         "dialogue_ids": [r["dialogue_id"] for r in records],
         "predictions": {endpoint: {method: values.tolist() for method, values in predicted.items()}
                         for endpoint, predicted in predictions.items()},
         "balanced_accuracy_by_endpoint": scores,
+        "time_countercheck": time_countercheck(fitted_grid[24], records),
         "primary_paired_differences": paired_cluster_intervals(records, predictions[24], config),
         "simultaneous_grid_contrast_intervals": simultaneous_grid_intervals(records, predictions, config),
         "recognition_prespecified_point_estimate_summary": {
@@ -440,8 +508,11 @@ def predict_confirmation_grid_once(artifact_directory: Path, records: list[dict]
     for result in report["primary_paired_differences"].values():
         result["scope"] = "confirmation_conditional_on_fixed_topic_families"
     report["simultaneous_grid_contrast_intervals"]["scope"] = "confirmation_secondary_fixed_grid_contrast_family"
-    with output_path.open("x") as stream:
-        stream.write(json.dumps(report, indent=2) + "\n")
+    report["binding_sha256"] = binding_hash
+    report["payload_sha256"] = canonical_hash(report)
+    atomic_json(output_path, report)
+    lock.update(status="complete", output_sha256=hashlib.sha256(output_path.read_bytes()).hexdigest())
+    atomic_json(lock_path, lock)
     return report
 
 

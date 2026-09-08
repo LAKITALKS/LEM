@@ -25,6 +25,45 @@ from lem_ii.storage import SessionStore, atomic_json
 
 
 class ModelStorageTests(unittest.TestCase):
+    def test_partial_prefix_replay_and_persistence_failure_preserve_complete_data(self):
+        from lem_ii.study import StudyRuntimeGuard
+        class StopAfterFive:
+            count = 0
+            def check_deadline(self): pass
+            def start_session(self, *args): pass
+            def reserve_turn(self, *args):
+                if self.count == 5: raise RuntimeError("fixture interruption")
+                self.count += 1
+            def finish_turn(self, *args): pass
+        first = smoke_sessions(self.config)[0]
+        checkpoints = []
+        run = {"run_id": "partial-persistence-fixture"}
+        with tempfile.TemporaryDirectory() as directory, redirect_stdout(io.StringIO()):
+            with self.assertRaises(RuntimeError):
+                collect_session(self.config, first, self.adapter, directory, run,
+                                guard=StopAfterFive(), checkpoint_hook=lambda s: checkpoints.append(s.manifest["completed_turns"]))
+            manifest = json.loads((Path(directory) / first.session_id / "manifest.json").read_text())
+            self.assertEqual(manifest["completed_turns"], 5)
+            original_hashes = manifest["turn_hashes"]
+            guard = StudyRuntimeGuard({"deadline_epoch": 100, "max_sessions": 1,
+                                       "max_prefill_tokens": 1000000, "max_generation_tokens": 1000,
+                                       "completed_prefixes": {first.session_id: 5}},
+                                      Path(directory) / "guard.json", clock=lambda: 0)
+            def persist(store):
+                checkpoints.append(store.manifest["completed_turns"])
+                if store.manifest["completed_turns"] == 24:
+                    raise OSError("fixture persistence failure after final valid append")
+            with self.assertRaises(OSError):
+                collect_session(self.config, first, self.adapter, directory, run,
+                                guard=guard, resume=True, checkpoint_hook=persist)
+            saved = SessionStore(directory, first, manifest["binding"], resume=True)
+            self.assertEqual(saved.manifest["status"], "complete")
+            self.assertEqual(saved.manifest["turn_hashes"][:5], original_hashes)
+            self.assertEqual(checkpoints, list(range(1, 25)))
+            self.assertEqual(len(guard.state["turns"]), 19)
+            complete = collect_session(self.config, first, self.adapter, directory, run, resume=True)
+            self.assertEqual(complete.manifest["turn_hashes"], saved.manifest["turn_hashes"])
+
     @classmethod
     def setUpClass(cls):
         torch.set_num_threads(1)

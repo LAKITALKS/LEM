@@ -1,5 +1,11 @@
 # LEM-II-Light
 
+**Execution update, 8 September 2026:** the full 108-dialogue study, freeze and
+independent confirmation are authorized by the new execution instruction. Follow
+[RUN_STUDY.md](RUN_STUDY.md) for the bounded production path and recovery rules.
+That dated authorization supersedes the earlier smoke-only execution scope below;
+the original scientific configuration and historical smoke evidence are preserved.
+
 Author: Lazaros Varvatis. This directory contains the executable pipeline for a
 **prespecified protocol**, not a publicly preregistered or completed study.
 The original LEM-I manuscripts, figures, correction and experiments are separate.
