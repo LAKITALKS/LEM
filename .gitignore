@@ -1,4 +1,7 @@
 .venv-correction/
+.venv-lem-ii/
+.runtime/
+lem_ii/raw/
 __pycache__/
 *.pyc
 tmp/
@@ -11,3 +14,8 @@ paper/*.fls
 paper/*.fdb_latexmk
 experiments/results/*/original/assets/
 experiments/results/*/corrected/assets/
+
+# Live provider/account evidence is private; public examples use config/.
+lem_ii/evidence/preflight.json
+lem_ii/evidence/provider-usage*.json
+lem_ii/evidence/technical-attempt-ledger*.json

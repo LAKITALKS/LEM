@@ -1,0 +1,16 @@
+{
+  "data_kind": "synthetic_fixture",
+  "scientific_results": false,
+  "confirmation_generated_or_evaluated": false,
+  "config_hash": "639aa3f7c313ba48ab048012fe6fdb747d92055761e12278fe8053457b8ab1cc",
+  "endpoints_exercised": [
+    "12",
+    "16",
+    "20",
+    "24"
+  ],
+  "diagnostic_label_replicates": 3,
+  "diagnostic_bootstrap_replicates": 100,
+  "report_sha256": "19e72661da87eb269f2789a55de911d2a4ff2fbcccfa3cb66f047502d87b587c",
+  "note": "Synthetic random fixtures; no model outcome or scientific evidence."
+}

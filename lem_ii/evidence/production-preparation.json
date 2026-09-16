@@ -1,0 +1,34 @@
+{
+  "checked_at_utc": "2026-09-08T04:30:23.085916+00:00",
+  "pipeline_tests_passed": 77,
+  "pipeline_tests_skipped": 0,
+  "pipeline_test_log_sha256": "88b6fcdd5905d0264d4d48f0ef272b5fc00cddb349e1b2fd35c2273d60515d07",
+  "lem_i_regression_tests_passed": 5,
+  "lem_i_test_log_sha256": "bc551cfe6050ee927d3f3638b166cada86c0aaa7bf0f165237a2695a7070fcbe",
+  "validation_scope": "Local fixtures and tiny random Qwen extraction; no scientific data generated.",
+  "new_production_checks": [
+    "shared budget and retained future phases",
+    "source attestation without remote git",
+    "skip complete sessions without loading model",
+    "same-prefix partial resume",
+    "final-turn persistence failure preserves complete data",
+    "freeze before confirmation collection",
+    "same-trial confirmation recovery",
+    "reject changed output or input",
+    "preserve complete exports and ledger",
+    "current usage cap and live-app rejection"
+  ],
+  "unchanged_scientific_files_sha256": {
+    "model_adapter.py": "698e5e761b99696b3a390a9133c1bc27202e6e9d053ceccf0935772987c7ff27",
+    "simulator.py": "a7fa74a3b15e1aa6d4e2c72fe327eb378a708e8eb630bc4735e68a4884ad7760",
+    "design.py": "08c259e24a1350709232ed3d5eab81e6f079afe56e7f1b6194b1ae26fae79497",
+    "features.py": "db64ca0bc483d2d22dd600744167381f66c008fad09058772cee6e712558ef60",
+    "config/study.json": "e3f5cda125a0f24d67939827525c2586dd046d27134d4bb26e88f96465bb0635",
+    "requirements.txt": "c1de3f67232b6d2dd867c8d2b855f62e0815e96add3fb0b23fce89abbf3ebb60"
+  },
+  "historical_smoke_stop_reasons": {
+    "max_new_tokens": 24
+  },
+  "scientific_study_started_at_verification": false,
+  "local_checks_not_github_ci": true
+}

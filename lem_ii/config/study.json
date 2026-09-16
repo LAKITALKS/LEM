@@ -1,0 +1,602 @@
+{
+  "schema_version": "lem-ii-light.study.v1",
+  "protocol_version": "1.0.0",
+  "study_id": "lem-ii-light-20260907",
+  "status": "prespecified_protocol_not_publicly_preregistered",
+  "language": "en",
+  "system_prompt": "You are a helpful assistant. Help the user work through the practical task in the conversation. Give clear, specific answers and explain uncertainty when relevant.",
+  "design": {
+    "profiles": 18,
+    "sessions_per_profile": 6,
+    "turns_per_session": 24,
+    "planned_sessions": 108,
+    "planned_model_responses": 2592,
+    "primary_target": "regime",
+    "primary_endpoint": 24,
+    "generalization": "new jointly held-out topic and formulation families within the same 18 synthetic profiles",
+    "regimes": [
+      "retain_priority",
+      "advance_when_addressed",
+      "revise_from_answer"
+    ],
+    "variants_per_regime": 6,
+    "variant_definition": "priority=variant_index%3; strict=variant_index>=3; fixed cyclic facet tie order begins at priority",
+    "splits": {
+      "development": [
+        "community_garden",
+        "museum_exhibit"
+      ],
+      "validation": [
+        "emergency_shelter",
+        "library_digitization"
+      ],
+      "confirmation": [
+        "river_monitoring",
+        "food_festival"
+      ]
+    },
+    "crossed_factors": [
+      "regime",
+      "variant",
+      "topic_family"
+    ],
+    "jointly_varied_factors": [
+      "topic_family",
+      "formulation_family",
+      "split"
+    ],
+    "unseen_profile_generalization": false,
+    "secondary_profile_recognition": false
+  },
+  "simulator": {
+    "max_user_words": 100,
+    "sensitivity": {
+      "lenient": {
+        "minimum_distinct_keywords": 1,
+        "minimum_answer_words": 20,
+        "maximum_hedges": 3,
+        "minimum_digit_groups": 1
+      },
+      "strict": {
+        "minimum_distinct_keywords": 2,
+        "minimum_answer_words": 35,
+        "maximum_hedges": 1,
+        "minimum_digit_groups": 2
+      }
+    },
+    "hedge_terms": [
+      "maybe",
+      "perhaps",
+      "possibly",
+      "uncertain",
+      "unclear"
+    ],
+    "wording_seed_rule": "sha256(seeds.design|wording|topic_family|variant_index) first 8 bytes modulo 2^32; matched across regimes",
+    "response_features": [
+      "word_count",
+      "character_count",
+      "digit_groups",
+      "hedge_count",
+      "distinct_exact_keyword_matches_per_facet"
+    ],
+    "policy_rules": {
+      "retain_priority": "Always select the profile priority facet; adequate previous coverage requests an application, otherwise a concrete explanation.",
+      "advance_when_addressed": "If previous selected facet meets keyword, length and hedge adequacy thresholds, advance one facet in cyclic priority order; otherwise retain that facet.",
+      "revise_from_answer": "If previous answer meets length, digit and hedge concreteness thresholds, select its least-covered facet; otherwise select its most-covered facet; ties follow cyclic priority order. First turn selects priority."
+    },
+    "followup_modes": {
+      "clarify": "Please explain the practical details and give a concrete example.",
+      "apply": "Please apply the details to one specific example and explain the next step."
+    },
+    "topics": [
+      {
+        "id": "community_garden",
+        "split": "development",
+        "formulation_family": "d_direct",
+        "title": "setting up a shared neighborhood vegetable garden",
+        "facets": [
+          {
+            "name": "the planting plan",
+            "task": "Explain what to plant and how to care for it.",
+            "keywords": [
+              "soil",
+              "seeds",
+              "plant",
+              "water",
+              "compost"
+            ]
+          },
+          {
+            "name": "access and shared work",
+            "task": "Explain how people can take part and divide the work.",
+            "keywords": [
+              "volunteer",
+              "schedule",
+              "access",
+              "tools",
+              "tasks"
+            ]
+          },
+          {
+            "name": "the material costs",
+            "task": "Explain what supplies are needed and how to pay for them.",
+            "keywords": [
+              "budget",
+              "cost",
+              "supplies",
+              "funding",
+              "purchase"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "museum_exhibit",
+        "split": "development",
+        "formulation_family": "d_scenario",
+        "title": "designing a museum exhibition about early navigation",
+        "facets": [
+          {
+            "name": "the historical content",
+            "task": "Explain which objects and stories to include.",
+            "keywords": [
+              "map",
+              "compass",
+              "navigation",
+              "history",
+              "artifact"
+            ]
+          },
+          {
+            "name": "the visitor experience",
+            "task": "Explain how visitors will move through and understand the exhibition.",
+            "keywords": [
+              "visitor",
+              "display",
+              "label",
+              "route",
+              "accessibility"
+            ]
+          },
+          {
+            "name": "preserving the objects",
+            "task": "Explain how the exhibited objects will be protected.",
+            "keywords": [
+              "light",
+              "humidity",
+              "case",
+              "security",
+              "conservation"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "emergency_shelter",
+        "split": "validation",
+        "formulation_family": "v_request",
+        "title": "planning the practical operation of a temporary storm shelter",
+        "facets": [
+          {
+            "name": "space and occupancy",
+            "task": "Explain how to organize space and the number of people it can accommodate.",
+            "keywords": [
+              "capacity",
+              "beds",
+              "space",
+              "rooms",
+              "occupancy"
+            ]
+          },
+          {
+            "name": "daily supplies",
+            "task": "Explain how food, water, and basic supplies will be provided.",
+            "keywords": [
+              "food",
+              "water",
+              "supplies",
+              "meals",
+              "storage"
+            ]
+          },
+          {
+            "name": "arrival and coordination",
+            "task": "Explain how arrivals and volunteer coordination will work.",
+            "keywords": [
+              "registration",
+              "volunteers",
+              "transport",
+              "arrival",
+              "contact"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "library_digitization",
+        "split": "validation",
+        "formulation_family": "v_consult",
+        "title": "digitizing a local library's historical newspaper collection",
+        "facets": [
+          {
+            "name": "image capture",
+            "task": "Explain how to produce readable digital images without damaging originals.",
+            "keywords": [
+              "scan",
+              "resolution",
+              "image",
+              "paper",
+              "scanner"
+            ]
+          },
+          {
+            "name": "search and description",
+            "task": "Explain how readers will find individual articles and issues.",
+            "keywords": [
+              "metadata",
+              "search",
+              "ocr",
+              "date",
+              "index"
+            ]
+          },
+          {
+            "name": "long-term storage and access",
+            "task": "Explain how files will be preserved and made available.",
+            "keywords": [
+              "backup",
+              "storage",
+              "format",
+              "access",
+              "copyright"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "river_monitoring",
+        "split": "confirmation",
+        "formulation_family": "c_workshop",
+        "title": "organizing a volunteer river water-quality monitoring project",
+        "facets": [
+          {
+            "name": "sampling locations and timing",
+            "task": "Explain where and when measurements should be collected.",
+            "keywords": [
+              "upstream",
+              "downstream",
+              "site",
+              "season",
+              "sampling"
+            ]
+          },
+          {
+            "name": "measurement quality",
+            "task": "Explain how instruments and measurement consistency will be checked.",
+            "keywords": [
+              "calibration",
+              "sensor",
+              "temperature",
+              "ph",
+              "duplicate"
+            ]
+          },
+          {
+            "name": "records and public reporting",
+            "task": "Explain how observations will be recorded and shared.",
+            "keywords": [
+              "data",
+              "record",
+              "report",
+              "chart",
+              "public"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "food_festival",
+        "split": "confirmation",
+        "formulation_family": "c_brief",
+        "title": "organizing a local food festival in a public square",
+        "facets": [
+          {
+            "name": "food vendors and menus",
+            "task": "Explain how to select vendors and offer a useful variety of food.",
+            "keywords": [
+              "vendor",
+              "menu",
+              "food",
+              "cuisine",
+              "dietary"
+            ]
+          },
+          {
+            "name": "site operation",
+            "task": "Explain how stalls, queues, and waste collection will be organized.",
+            "keywords": [
+              "stall",
+              "queue",
+              "waste",
+              "layout",
+              "power"
+            ]
+          },
+          {
+            "name": "attendance and publicity",
+            "task": "Explain how visitors will hear about the event and plan their visit.",
+            "keywords": [
+              "publicity",
+              "poster",
+              "attendance",
+              "ticket",
+              "promotion"
+            ]
+          }
+        ]
+      }
+    ],
+    "formulations": {
+      "d_direct": [
+        "For {topic}, let's consider {facet}. {task} {request}",
+        "I am working on {topic}. Help with {facet}. {task} {request}",
+        "In our plan for {topic}, look at {facet}. {task} {request}"
+      ],
+      "d_scenario": [
+        "Imagine we are {topic}. How would you handle {facet}? {task} {request}",
+        "Suppose our task is {topic}. Take {facet} as the next question. {task} {request}",
+        "We have been asked to help with {topic}. Consider {facet}. {task} {request}"
+      ],
+      "v_request": [
+        "Could you help develop {facet} for {topic}? {task} {request}",
+        "I would like guidance on {facet} while {topic}. {task} {request}",
+        "Please work through {facet} in the context of {topic}. {task} {request}"
+      ],
+      "v_consult": [
+        "The project concerns {topic}, and I need advice about {facet}. {task} {request}",
+        "A team is {topic}. What should it do about {facet}? {task} {request}",
+        "Looking at the practical work of {topic}, explain {facet}. {task} {request}"
+      ],
+      "c_workshop": [
+        "At a planning workshop for {topic}, we are discussing {facet}. {task} {request}",
+        "Our workshop needs a usable account of {facet} for {topic}. {task} {request}",
+        "For the group working on {topic}, develop an answer about {facet}. {task} {request}"
+      ],
+      "c_brief": [
+        "Here is the assignment: {topic}. Address {facet}. {task} {request}",
+        "Prepare part of a practical brief for {topic}, covering {facet}. {task} {request}",
+        "The brief on {topic} needs a section about {facet}. {task} {request}"
+      ]
+    }
+  },
+  "model": {
+    "id": "Qwen/Qwen2.5-3B-Instruct",
+    "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+    "tokenizer_id": "Qwen/Qwen2.5-3B-Instruct",
+    "tokenizer_revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+    "dtype": "bfloat16",
+    "quantization": null,
+    "trust_remote_code": false,
+    "attention_implementation": "sdpa",
+    "generation": {
+      "do_sample": false,
+      "max_new_tokens": 128,
+      "num_beams": 1,
+      "use_cache": true,
+      "repetition_penalty": 1.0,
+      "eos_token_id": [
+        151645,
+        151643
+      ],
+      "pad_token_id": 151643,
+      "bos_token_id": 151643
+    },
+    "max_context_tokens": 8192,
+    "overflow_policy": "fail_without_truncation"
+  },
+  "extraction": {
+    "layers": [
+      0,
+      18,
+      36
+    ],
+    "primary_layer": 36,
+    "sensitivity_layer": 18,
+    "sensitivity_role": "reserved_descriptive_not_primary_selection",
+    "embedding_layer": 0,
+    "hidden_state_numbering": "Transformers hidden_states: 0 embedding output; k output after transformer block k, final layer includes final model norm",
+    "position": "last_non_padding_generation_prefix_token_before_current_assistant_response",
+    "pooling": "none",
+    "raw_vector_normalization": "none",
+    "text_information": "exact_visible_messages_through_current_user_message_no_current_assistant_answer",
+    "reset_between_sessions": true,
+    "use_cache": false
+  },
+  "features": {
+    "endpoints": [
+      12,
+      16,
+      20,
+      24
+    ],
+    "window": 12,
+    "window_mode": "trailing_constant_length",
+    "delay_lag": 1,
+    "delay_dimension": 3,
+    "delay_points": 10,
+    "pca_components": 8,
+    "pca_whiten": false,
+    "preprocessing_order": [
+      "PCA_fit_on_development_observed_states",
+      "coordinate_standardization_fit_on_development_projected_states"
+    ],
+    "too_short_policy": "not_evaluable_no_zero_fill_no_interpolation",
+    "static": [
+      "current_state",
+      "window_mean",
+      "window_population_standard_deviation",
+      "unordered_state_geometry"
+    ],
+    "static_columns": 28,
+    "added_temporal_delay_columns": 17,
+    "geometry": [
+      "pairwise_distance_mean",
+      "pairwise_distance_std",
+      "pairwise_distance_max",
+      "radius_of_gyration"
+    ],
+    "time": [
+      "step_norm_mean_std_max",
+      "adjacent_step_cosine_mean_std",
+      "lag_1_2_3_displacement_mean_std"
+    ],
+    "delay_geometry": [
+      "pairwise_distance_mean_std_max",
+      "coordinate_std_mean_max",
+      "radius_of_gyration"
+    ],
+    "topology": {
+      "complex": "Vietoris-Rips",
+      "metric": "euclidean",
+      "homology_dimensions": [
+        0,
+        1
+      ],
+      "coefficient_field": 2,
+      "threshold": "unbounded",
+      "representation": "rebuilt_lag1_dimension3_delay_embedding_of_standardized_PCA8_states",
+      "finite_bar_features_per_dimension": [
+        "count",
+        "total_persistence",
+        "maximum_persistence",
+        "persistence_entropy_natural_log"
+      ],
+      "essential_bars": "exclude",
+      "empty_finite_diagram": "valid_zero_summary_not_missing_sequence",
+      "bar_inclusion": "finite_strictly_positive_lifetimes"
+    },
+    "text": {
+      "word_ngram_range": [
+        1,
+        2
+      ],
+      "character_ngram_range": [
+        3,
+        5
+      ],
+      "word_max_features": 12000,
+      "character_max_features": 12000,
+      "sublinear_tf": true,
+      "min_df": 1,
+      "style": [
+        "character_count",
+        "word_count",
+        "splitlines_count",
+        "mean_word_character_length",
+        "unique_lowercase_word_fraction",
+        "question_mark_per_char",
+        "exclamation_mark_per_char",
+        "digit_per_char"
+      ],
+      "style_word_regex": "\\b\\w+\\b",
+      "lowercase": true,
+      "norm": "l2",
+      "word_token_pattern": "(?u)\\b\\w\\w+\\b",
+      "character_analyzer": "char",
+      "strip_accents": null,
+      "use_idf": true,
+      "smooth_idf": true,
+      "binary": false
+    },
+    "pca_solver": "full",
+    "time_zero_length_step_cosine": 0.0
+  },
+  "analysis": {
+    "primary_metric": "balanced_accuracy",
+    "classifier": "L2_logistic_regression",
+    "solver": "lbfgs",
+    "class_weight": "balanced",
+    "max_iter": 2000,
+    "C_grid": [
+      0.1,
+      1.0,
+      10.0
+    ],
+    "selection": "development_fit_validation_BA_selection_smallest_C_tie; freeze_without_validation_refit",
+    "primary_comparisons": 3,
+    "comparison_pairs": [
+      [
+        "text",
+        "text_static"
+      ],
+      [
+        "text_static",
+        "text_static_geometry_time"
+      ],
+      [
+        "text_static_geometry_time",
+        "text_static_geometry_time_topology"
+      ]
+    ],
+    "primary_inference_split": "confirmation",
+    "development_validation_reporting": "descriptive",
+    "bootstrap_replicates": 2000,
+    "bootstrap_unit": "profile_stratified_within_regime_all_sessions_kept_paired",
+    "alpha": 0.05,
+    "primary_interval_coverage": 0.9833333333333333,
+    "primary_multiplicity": "Bonferroni_three_paired_differences",
+    "permutation_replicates": 199,
+    "label_permutation_unit": "profile_block_labels_same_mapping_across_splits_preserve_six_sessions_and_class_balance",
+    "recognition_threshold": 0.7,
+    "recognition_consecutive": 2,
+    "recognition_grid": [
+      12,
+      16,
+      20,
+      24
+    ],
+    "recognition_rule": "earliest_grid_point_starting_two_consecutive_BA_at_least_threshold_else_not_reached; Turn24_alone_cannot_qualify",
+    "curves": "constant_window_models_tuned_on_validation_at_each_prespecified_endpoint; point_BA_descriptive_unbanded; paired_contrast_intervals_simultaneous_12_family; future_confirmation_report_all_points_without_tuning",
+    "curve_interval_coverage": 0.9958333333333333,
+    "curve_multiplicity": "Bonferroni_3_paired_contrasts_times_4_endpoints_separate_secondary_family",
+    "uncertainty_scope": "conditional_on_fixed_six_topic_formulation_pairs; resample_profiles_not_turns; no_population_of_topics_claim",
+    "order_controls": [
+      "seeded_permutation_of_11_predecessors_keep_current_state_fixed",
+      "reversed_plain_pointcloud_persistence_invariance"
+    ],
+    "order_control_rule": "keep_endpoint_state_fixed_and_shuffle_11_predecessors; recompute_delay_embedding; entire_static_basis_including_current_and_unordered_geometry_invariant; temporal_and_delay_features_not_required_to_change_on_degenerate_data",
+    "leakage_checks": [
+      "session_disjoint",
+      "topic_disjoint",
+      "formulation_disjoint",
+      "all_profiles_in_all_splits",
+      "balanced_regime_within_each_topic",
+      "metadata_excluded_from_context_and_feature_inputs"
+    ],
+    "attractor_claims": false
+  },
+  "seeds": {
+    "design": 20260907,
+    "pca": 1701,
+    "classifier": 1702,
+    "bootstrap": 1703,
+    "permutation": 1704,
+    "time_shuffle": 1705,
+    "fixtures": 1706,
+    "smoke": 20260908
+  },
+  "execution": {
+    "study_collection_allowed": false,
+    "confirmation_generation_allowed": false,
+    "confirmation_evaluation_allowed": false,
+    "smoke_only": true,
+    "technical_budget_usd": 5.0,
+    "full_study_budget_usd": 30.0,
+    "unreleased_study_budget_usd": 25.0,
+    "automatic_followup": false,
+    "max_parallel_sessions": 1,
+    "automatic_retries": 0,
+    "allow_scientific_analysis": false,
+    "allow_confirmation_analysis": false
+  }
+}
