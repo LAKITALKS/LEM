@@ -1,13 +1,15 @@
 # The Lazaros–Eudora Method (LEM)
 
 **Author:** Lazaros Varvatis
-**Status:** LEM I toy validation — unpublished fixed-point correction draft; archived edition v2.1.0 preserved
+**Status:** LEM I toy validation and correction draft; LEM-II-Light results documented below; archived edition v2.1.0 preserved
 
 **Release / Zenodo version:** `v2.1.0` — archival, bibliography-corrected edition · DOI [10.5281/zenodo.21268033](https://doi.org/10.5281/zenodo.21268033)
 **Archival source of record:** [`paper/lem_paper_final_v4.tex`](paper/lem_paper_final_v4.tex)
 
 **Corrected working draft:** [PDF](paper/lem_paper_correction_draft.pdf) · [source](paper/lem_paper_correction_draft.tex) · [correction note](paper/CORRECTION_NOTE.md).
 The draft corrects the V1 distance metric and adjacent method descriptions. It is **not a new Zenodo version** and has no new DOI. Archived v3/v4 sources, PDFs, bibliography and original figures remain unchanged.
+
+**Research history — 16 September 2026:** The completed LEM-II-Light study used 108 synthetic dialogues with real Qwen2.5-3B-Instruct activations. It found no statistically established added predictive value from the three prespecified activation/time/topology extensions over their respective baselines. It tested interaction-regime classification, not individual-user recognition or attractor dynamics. The [research note](research/LEM_II_LIGHT_RESEARCH_NOTE.md) records the results, limitations, public evidence and rationale for the planned character study. The pipeline remains in [Draft PR #2](https://github.com/LAKITALKS/LEM/pull/2); this documentation update does not merge it or start a new experiment. The DOI above identifies the archival edition, not these later results.
 
 ---
 
@@ -31,6 +33,8 @@ LEM/
 ├── README.md                         ← this file
 ├── LEM_v1.0_Topological_Framework.md ← conceptual framework document
 ├── assets/                           ← legacy conceptual visuals (LEM v1.0)
+├── research/
+│   └── LEM_II_LIGHT_RESEARCH_NOTE.md ← real-model study results and next-study rationale
 ├── paper/
 │   ├── lem_paper_correction_draft.tex ← corrected, unpublished working source
 │   ├── lem_paper_correction_draft.pdf ← compiled correction draft
