@@ -1,0 +1,14 @@
+{
+  "verified_at_utc": "REPLACE_WITH_CURRENT_UTC_TIMESTAMP",
+  "workspace": "REPLACE_WITH_YOUR_ACTIVE_MODAL_WORKSPACE",
+  "environment": "main",
+  "workspace_gross_usage_limit_usd": 5,
+  "workspace_usage_before_usd": null,
+  "rates": {
+    "L4": 0.000222,
+    "CPU_core": 1.31e-05,
+    "RAM_GiB": 2.22e-06
+  },
+  "example_only": true,
+  "instructions": "Copy to .runtime/private-preflight.json. Replace placeholders and independently verify active profile, account scope, current rates, gross usage limit and current usage immediately before any authorized run. Keep live evidence private."
+}

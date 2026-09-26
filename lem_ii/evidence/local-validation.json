@@ -1,0 +1,33 @@
+{
+  "checked_at_utc": "2026-09-07T21:02:22.044323+00:00",
+  "pipeline_tests_passed": 64,
+  "pipeline_tests_skipped": 0,
+  "lem_i_regression_tests_passed": 5,
+  "local_only_not_github_ci": true,
+  "config_sha256": "639aa3f7c313ba48ab048012fe6fdb747d92055761e12278fe8053457b8ab1cc",
+  "pipeline_log_sha256": "68af461713a26b6249421b899c7b5648f7d9774a713be7e51ad5a8078fad6408",
+  "lem_i_log_sha256": "d4cfb2120a8febc4d737352381710f1781e190c3c198e6d6aef855eb0157171d",
+  "tiny_qwen_extraction": "PASS: pinned tokenizer, random tiny weights, actual forward states,24+2turns,bitwise reset",
+  "independent_reviews": [
+    "protocol/model/storage/collection review by separate agent",
+    "runtime budget/Modal SDK/controller review by separate agent",
+    "study collection binding/limits review by separate agent"
+  ],
+  "findings_fixed": [
+    "checkpoint semantic counts and prefix/stop metadata",
+    "unused full-token logits eliminated without changing states",
+    "static geometry in shared baseline and fixed endpoint time shuffle",
+    "idempotent verified Modal termination and bounded watchdog",
+    "invalid usage numbers and stopped-app preflight",
+    "persisted structured launch errors",
+    "future runtime-file reset prevention",
+    "future committed-source and pinned-software checks",
+    "future provider hard timeout contract required"
+  ],
+  "remaining_before_smoke": [
+    "committed source",
+    "real3B BF16 remote extraction not yet executed"
+  ],
+  "main_study_executed": false,
+  "confirmation_generated_or_evaluated": false
+}

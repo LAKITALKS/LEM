@@ -1,0 +1,143 @@
+{
+  "status": "PASS_TECHNICAL_SMOKE",
+  "activation_bytes": 642304,
+  "activation_shape_per_turn": [
+    3,
+    2048
+  ],
+  "config_sha256": "639aa3f7c313ba48ab048012fe6fdb747d92055761e12278fe8053457b8ab1cc",
+  "confirmation_generated_or_evaluated": false,
+  "full_24_turn_measured_seconds": 144.80220723199992,
+  "full_dialogue_generation_tokens_per_second": 22.49604217123298,
+  "full_dialogue_output_tokens": 3072,
+  "full_dialogue_prefill_tokens_two_passes": 103704,
+  "generation_parameters": {
+    "bos_token_id": 151643,
+    "do_sample": false,
+    "eos_token_id": [
+      151645,
+      151643
+    ],
+    "max_new_tokens": 128,
+    "num_beams": 1,
+    "pad_token_id": 151643,
+    "repetition_penalty": 1.0,
+    "use_cache": true
+  },
+  "input_token_growth": [
+    82,
+    262,
+    444,
+    625,
+    807,
+    987,
+    1168,
+    1348,
+    1530,
+    1711,
+    1891,
+    2071,
+    2250,
+    2432,
+    2614,
+    2793,
+    2973,
+    3153,
+    3332,
+    3514,
+    3696,
+    3875,
+    4057,
+    4237
+  ],
+  "input_tokens_first_last": [
+    82,
+    4237
+  ],
+  "local_feature_recomputation_matches": true,
+  "model_load_seconds": 63.21975755691528,
+  "model_revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+  "peak_gpu_allocated_bytes": 7240579584,
+  "peak_gpu_reserved_bytes": 10034872320,
+  "peak_host_rss_bytes": 10140033024,
+  "reset_check": {
+    "identical_first_answer": true,
+    "identical_first_context": true,
+    "identical_first_states": true
+  },
+  "scientific_results": false,
+  "session_turns": [
+    24,
+    2
+  ],
+  "smoke_policy_execution": {
+    "action_counts": {
+      "advance": 23,
+      "initial_priority": 1
+    },
+    "focus_counts": {
+      "0": 8,
+      "1": 8,
+      "2": 8
+    },
+    "interpretation": "Technical policy execution only, not a regime-prediction study result.",
+    "policy": "advance_when_addressed",
+    "topic": "community_garden",
+    "user_words_min_max": [
+      36,
+      40
+    ]
+  },
+  "worker_seconds": 220.58852314949036,
+  "runtime_adapter": {
+    "attention_implementation": "sdpa",
+    "chat_template_sha256": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+    "hardware": {
+      "cuda": "12.8",
+      "device": "cuda:0",
+      "gpu": "NVIDIA L4",
+      "gpu_total_memory_bytes": 23659151360
+    },
+    "model_revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+    "parameter_count": 3085938688,
+    "platform": "Linux-4.19.0-gvisor-x86_64-with-glibc2.36",
+    "prefix_token_ids": [
+      151644,
+      77091,
+      198
+    ],
+    "python": "3.11.12",
+    "software": {
+      "huggingface-hub": "0.36.2",
+      "numpy": "2.4.6",
+      "safetensors": "0.7.0",
+      "tokenizers": "0.22.2",
+      "torch": "2.9.1",
+      "transformers": "4.57.6"
+    },
+    "tiny_random_fixture": false,
+    "tokenizer_revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+    "weight_dtype": "torch.bfloat16"
+  },
+  "private_execution_reference": {
+    "commit": "cf9e6e00eb3f9589e301de248b852df61a2ca8a1",
+    "visibility": "Private local execution snapshot; not a commit in public publication ancestry.",
+    "raw_source_core_sha256": {
+      "lem_ii/model_adapter.py": "698e5e761b99696b3a390a9133c1bc27202e6e9d053ceccf0935772987c7ff27",
+      "lem_ii/simulator.py": "a7fa74a3b15e1aa6d4e2c72fe327eb378a708e8eb630bc4735e68a4884ad7760",
+      "lem_ii/config/study.json": "e3f5cda125a0f24d67939827525c2586dd046d27134d4bb26e88f96465bb0635",
+      "lem_ii/features.py": "db64ca0bc483d2d22dd600744167381f66c008fad09058772cee6e712558ef60",
+      "lem_ii/collection.py": "2d96e727175227fcc6501c0f6aca20d83d393a7cb6b4d39bf69ca9199b01fc8c",
+      "lem_ii/evaluation.py": "15322b2c5c06b2963706aca363acaeff693eea78157cbdf73a0ba3696ccf8b75",
+      "lem_ii/storage.py": "c94e3d37db65c5f646656a01ca72fe0460333b634775efe2ff54a5f6d0d2bb92",
+      "lem_ii/design.py": "08c259e24a1350709232ed3d5eab81e6f079afe56e7f1b6194b1ae26fae79497"
+    }
+  },
+  "public_record_scope": "Technical measurements only. Private provider/account/billing records are retained locally and omitted.",
+  "local_validation": {
+    "pipeline_tests_passed": 66,
+    "pipeline_tests_skipped": 0,
+    "lem_i_regressions_passed": 5,
+    "scope": "Validation of the private execution/review snapshot; not GitHub CI."
+  }
+}

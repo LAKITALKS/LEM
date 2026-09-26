@@ -1,0 +1,235 @@
+{
+  "artifact_kind": "synthetic_simulator_examples_not_llm_data",
+  "scientific_eligibility": false,
+  "description": "Invented responses exercise production simulator branches; no study model was invoked.",
+  "examples": [
+    {
+      "profile_id": "p01",
+      "regime": "retain_priority",
+      "fixture_case": "invented_concrete_response",
+      "visible_first_user": "I am working on setting up a shared neighborhood vegetable garden. Help with the planting plan. Explain what to plant and how to care for it. Please explain the practical details and give a concrete example.",
+      "invented_assistant": "Use soil and seeds for the first planting area. Allocate 2 beds and water them for 3 minutes. Add compost before planting, then observe the area carefully and write down what happens every morning.",
+      "visible_next_user": "For setting up a shared neighborhood vegetable garden, let's consider the planting plan. Explain what to plant and how to care for it. Please apply the details to one specific example and explain the next step.",
+      "hidden_audit": {
+        "turn": 2,
+        "session_id": "study-p01-community_garden",
+        "profile_id": "p01",
+        "regime": "retain_priority",
+        "variant_index": 0,
+        "seed": 2567733632,
+        "wording_seed": 1424576541,
+        "previous_focus": 0,
+        "selected_focus": 0,
+        "response_features": {
+          "word_count": 34,
+          "character_count": 197,
+          "digit_groups": 2,
+          "hedge_count": 0,
+          "coverage": [
+            4,
+            0,
+            0
+          ]
+        },
+        "adequate": true,
+        "concrete": true,
+        "action": "retain_priority",
+        "request_mode": "apply",
+        "template_index": 0,
+        "user_word_count": 36,
+        "user_character_count": 210,
+        "previous_assistant_empty": false
+      }
+    },
+    {
+      "profile_id": "p01",
+      "regime": "retain_priority",
+      "fixture_case": "invented_uncertain_response",
+      "visible_first_user": "I am working on setting up a shared neighborhood vegetable garden. Help with the planting plan. Explain what to plant and how to care for it. Please explain the practical details and give a concrete example.",
+      "invented_assistant": "Maybe. Perhaps this is unclear.",
+      "visible_next_user": "For setting up a shared neighborhood vegetable garden, let's consider the planting plan. Explain what to plant and how to care for it. Please explain the practical details and give a concrete example.",
+      "hidden_audit": {
+        "turn": 2,
+        "session_id": "study-p01-community_garden",
+        "profile_id": "p01",
+        "regime": "retain_priority",
+        "variant_index": 0,
+        "seed": 2567733632,
+        "wording_seed": 1424576541,
+        "previous_focus": 0,
+        "selected_focus": 0,
+        "response_features": {
+          "word_count": 5,
+          "character_count": 31,
+          "digit_groups": 0,
+          "hedge_count": 3,
+          "coverage": [
+            0,
+            0,
+            0
+          ]
+        },
+        "adequate": false,
+        "concrete": false,
+        "action": "retain_priority",
+        "request_mode": "clarify",
+        "template_index": 0,
+        "user_word_count": 33,
+        "user_character_count": 200,
+        "previous_assistant_empty": false
+      }
+    },
+    {
+      "profile_id": "p07",
+      "regime": "advance_when_addressed",
+      "fixture_case": "invented_concrete_response",
+      "visible_first_user": "I am working on setting up a shared neighborhood vegetable garden. Help with the planting plan. Explain what to plant and how to care for it. Please explain the practical details and give a concrete example.",
+      "invented_assistant": "Use soil and seeds for the first planting area. Allocate 2 beds and water them for 3 minutes. Add compost before planting, then observe the area carefully and write down what happens every morning.",
+      "visible_next_user": "For setting up a shared neighborhood vegetable garden, let's consider access and shared work. Explain how people can take part and divide the work. Please apply the details to one specific example and explain the next step.",
+      "hidden_audit": {
+        "turn": 2,
+        "session_id": "study-p07-community_garden",
+        "profile_id": "p07",
+        "regime": "advance_when_addressed",
+        "variant_index": 0,
+        "seed": 2318482952,
+        "wording_seed": 1424576541,
+        "previous_focus": 0,
+        "selected_focus": 1,
+        "response_features": {
+          "word_count": 34,
+          "character_count": 197,
+          "digit_groups": 2,
+          "hedge_count": 0,
+          "coverage": [
+            4,
+            0,
+            0
+          ]
+        },
+        "adequate": true,
+        "concrete": true,
+        "action": "advance",
+        "request_mode": "apply",
+        "template_index": 0,
+        "user_word_count": 37,
+        "user_character_count": 223,
+        "previous_assistant_empty": false
+      }
+    },
+    {
+      "profile_id": "p07",
+      "regime": "advance_when_addressed",
+      "fixture_case": "invented_uncertain_response",
+      "visible_first_user": "I am working on setting up a shared neighborhood vegetable garden. Help with the planting plan. Explain what to plant and how to care for it. Please explain the practical details and give a concrete example.",
+      "invented_assistant": "Maybe. Perhaps this is unclear.",
+      "visible_next_user": "For setting up a shared neighborhood vegetable garden, let's consider the planting plan. Explain what to plant and how to care for it. Please explain the practical details and give a concrete example.",
+      "hidden_audit": {
+        "turn": 2,
+        "session_id": "study-p07-community_garden",
+        "profile_id": "p07",
+        "regime": "advance_when_addressed",
+        "variant_index": 0,
+        "seed": 2318482952,
+        "wording_seed": 1424576541,
+        "previous_focus": 0,
+        "selected_focus": 0,
+        "response_features": {
+          "word_count": 5,
+          "character_count": 31,
+          "digit_groups": 0,
+          "hedge_count": 3,
+          "coverage": [
+            0,
+            0,
+            0
+          ]
+        },
+        "adequate": false,
+        "concrete": false,
+        "action": "retain_unaddressed",
+        "request_mode": "clarify",
+        "template_index": 0,
+        "user_word_count": 33,
+        "user_character_count": 200,
+        "previous_assistant_empty": false
+      }
+    },
+    {
+      "profile_id": "p13",
+      "regime": "revise_from_answer",
+      "fixture_case": "invented_concrete_response",
+      "visible_first_user": "I am working on setting up a shared neighborhood vegetable garden. Help with the planting plan. Explain what to plant and how to care for it. Please explain the practical details and give a concrete example.",
+      "invented_assistant": "Use soil and seeds for the first planting area. Allocate 2 beds and water them for 3 minutes. Add compost before planting, then observe the area carefully and write down what happens every morning.",
+      "visible_next_user": "For setting up a shared neighborhood vegetable garden, let's consider access and shared work. Explain how people can take part and divide the work. Please apply the details to one specific example and explain the next step.",
+      "hidden_audit": {
+        "turn": 2,
+        "session_id": "study-p13-community_garden",
+        "profile_id": "p13",
+        "regime": "revise_from_answer",
+        "variant_index": 0,
+        "seed": 3918948523,
+        "wording_seed": 1424576541,
+        "previous_focus": 0,
+        "selected_focus": 1,
+        "response_features": {
+          "word_count": 34,
+          "character_count": 197,
+          "digit_groups": 2,
+          "hedge_count": 0,
+          "coverage": [
+            4,
+            0,
+            0
+          ]
+        },
+        "adequate": true,
+        "concrete": true,
+        "action": "least_covered",
+        "request_mode": "apply",
+        "template_index": 0,
+        "user_word_count": 37,
+        "user_character_count": 223,
+        "previous_assistant_empty": false
+      }
+    },
+    {
+      "profile_id": "p13",
+      "regime": "revise_from_answer",
+      "fixture_case": "invented_uncertain_response",
+      "visible_first_user": "I am working on setting up a shared neighborhood vegetable garden. Help with the planting plan. Explain what to plant and how to care for it. Please explain the practical details and give a concrete example.",
+      "invented_assistant": "Maybe. Perhaps this is unclear.",
+      "visible_next_user": "For setting up a shared neighborhood vegetable garden, let's consider the planting plan. Explain what to plant and how to care for it. Please explain the practical details and give a concrete example.",
+      "hidden_audit": {
+        "turn": 2,
+        "session_id": "study-p13-community_garden",
+        "profile_id": "p13",
+        "regime": "revise_from_answer",
+        "variant_index": 0,
+        "seed": 3918948523,
+        "wording_seed": 1424576541,
+        "previous_focus": 0,
+        "selected_focus": 0,
+        "response_features": {
+          "word_count": 5,
+          "character_count": 31,
+          "digit_groups": 0,
+          "hedge_count": 3,
+          "coverage": [
+            0,
+            0,
+            0
+          ]
+        },
+        "adequate": false,
+        "concrete": false,
+        "action": "most_covered",
+        "request_mode": "clarify",
+        "template_index": 0,
+        "user_word_count": 33,
+        "user_character_count": 200,
+        "previous_assistant_empty": false
+      }
+    }
+  ]
+}
