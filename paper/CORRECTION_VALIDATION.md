@@ -1,5 +1,10 @@
 # Correction validation — 7 September 2026
 
+> **Historical validation snapshot.** Its page count, PDF hash, claim that the
+> Toy V2 function had never been annotated, and archive-wide hash statements
+> describe the 7 September state. See [the 26 September validation](CORRECTION_VALIDATION_2026-09-26.md)
+> and [erratum](ARCHIVE_ERRATUM.md) for the rebuilt draft and current scope.
+
 The correction is complete as an unpublished working draft. Numerical execution,
 source integrity and rendering were checked locally; no publication step is implied.
 

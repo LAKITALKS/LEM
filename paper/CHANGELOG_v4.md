@@ -1,5 +1,12 @@
 # LEM I — Quellen-Rekonstruktion v3 → v4
 
+> **Korrekturhinweis vom 26. September 2026:** Dieses historische Changelog
+> enthält unzutreffende Aussagen über Inhaltsparität, ausschließlich
+> bibliographische Änderungen, die Anzahl der v3-Referenzen (11 statt 12)
+> und die im veröffentlichten PDF tatsächlich vorhandenen Autorennamen.
+> [Das Erratum](ARCHIVE_ERRATUM.md) ersetzt diese Aussagen. Das ursprüngliche
+> Protokoll darunter bleibt als historischer Beleg stehen.
+
 **Datum:** 2026-07-08
 **Anlass:** Externer Review-Befund zur `ripser`-Zitation in Abschnitt 4.2.1.
 

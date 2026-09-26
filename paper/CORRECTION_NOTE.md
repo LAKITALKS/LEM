@@ -1,5 +1,15 @@
 # LEM I — Fixed-point distance correction
 
+> **26 September 2026 update:** The text below describes the original 7 September
+> fixed-point correction and its then-current file hashes; it does not claim
+> that *all* source and bibliography files are unchanged today. The later
+> [archival erratum](ARCHIVE_ERRATUM.md) covers Toy V2 interpretation, v3/v4
+> content differences, bibliography and the newly rebuilt working PDF.
+> Both historical v3/v4 **PDFs** remain unchanged.
+> The present Toy V2 function adds only output-directory/display scaffolding;
+> its scientific AST is compared with the baseline in the updated reproduction
+> script. The original note below describes its earlier unchanged code state.
+
 **Status:** Corrected working draft, 7 September 2026. Not a new Zenodo version; no new DOI.
 **Author:** Lazaros Varvatis.
 **Baseline:** `f15073f2cab3fb68857ffb16035d6675957c2e06` (verified `origin/main` at checkout).
@@ -55,6 +65,10 @@ python3 -m venv .venv-correction
 cd paper
 tectonic --keep-logs lem_paper_correction_draft.tex
 ```
+
+For the **26 September** revision in this checkout, use
+`cd paper && latexmk -pdf -interaction=nonstopmode -halt-on-error lem_paper_correction_draft.tex`.
+The Tectonic command above is the historical September 7 build record.
 
 Use a fresh output directory. The original numerical source is extracted from the baseline into a temporary working copy; original and corrected outputs are separated. The [result package](../experiments/results/fixed_point_correction/) records full experiment constants, Python 3.11.7, package versions, NumPy build details, execution commands, output hashes, and `ddof=1`. The lock file fixes all installed V1 packages. A first original run completed its numerical outputs but failed during metadata extraction of a derived plotting list; that exporter was corrected and the complete original run repeated. Its numerical files were verified identical to the first run before inclusion. Only the complete, verified comparison is included.
 

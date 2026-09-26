@@ -10,6 +10,26 @@ The [correction draft](../paper/lem_paper_correction_draft.pdf) is unpublished.
 See the [correction note](../paper/CORRECTION_NOTE.md) for before/after values.
 The v3/v4 sources, PDFs and their original images are preserved in `paper/`.
 
+## Scope of Toy V2
+
+The archived Toy V2 is a **one-seed synthetic sanity check**, not an empirical
+validation of user-specific LLM attractors. At seed 1337, the code generates
+one stable fixed-point sink and one prescribed Van der Pol limit cycle, embeds
+each trajectory into 16 dimensions with **separately drawn random projection
+matrices**, adds noise and computes maximum persistent H1 lifetime. The
+historically reported cyclic/sink ratio of **161.6** describes this one pair;
+it is not a cross-seed estimate, a calibrated signal-to-noise statistic or a
+measured improvement over simpler geometric features.
+
+No matched-scale non-loop control, common-projection comparison, independent
+test set or held-out threshold was evaluated in that archived experiment.
+Persistent homology of the trajectory's point cloud also discards the order
+of turns: rearranging the same points leaves the diagram unchanged. Toy V2
+therefore checks that the implementation can detect an explicitly constructed
+loop; it cannot distinguish a user-specific dynamical attractor from a static
+cloud with the same points. A new study would require independent repeats,
+matched geometric controls and a temporal perturbation/return endpoint.
+
 ## Reproduce the matched V1 comparison
 
 Run from the repository root, with Python 3.11 (the recorded run used 3.11.7):
@@ -26,7 +46,10 @@ alternative. The runner extracts the original source files into a temporary copy
 runs Pilot, Scaled and V1b in separate original/corrected output directories, and
 compares all unaffected reported values exactly. It also checks parameter and
 package equality, the final NumPy RNG state after each experiment, and SHA-256
-hashes of every pre-existing paper file. No V2, LLM call or cloud job is invoked.
+hashes of the immutable archived PDFs, original figures and legacy v3 source.
+Editorially corrected TeX, bibliography and changelog files are intentionally
+allowed to differ; the test checks V2's scientific AST after excluding only
+the named display and asset-directory changes. No V2, LLM call or cloud job is invoked.
 `--phase original`, `--phase corrected` and `--phase compare` support separate
 execution and a comparison-only recheck without simulations.
 
@@ -36,7 +59,7 @@ The checked-in [result package](results/fixed_point_correction/) contains:
   hashes and run logs. Generated PNGs in these folders are local outputs.
 - `comparison.csv`: before/after values per seed or noise level, including deltas.
 - `manifest.json`: source references, parameters/method conventions, reproduction
-  command, patch hash and archive-file hashes; each `execution.json` records
+  command, patch hash and immutable historical-artifact hashes; each `execution.json` records
   Python/package versions, actual worker command and output hashes.
 - `production.patch`: the exact simulation/standalone-runner diff from the baseline.
 - `tests/`: the green run and two mathematical red checks.
@@ -67,7 +90,7 @@ corrected source passes all five tests. No import/interface failure counts as re
 ```bash
 .venv-correction/bin/python experiments/update_correction_artifacts.py --results-dir /tmp/lem-correction-reproduction
 cd paper
-tectonic --keep-logs lem_paper_correction_draft.tex
+latexmk -pdf -interaction=nonstopmode -halt-on-error lem_paper_correction_draft.tex
 ```
 
 The generator verifies input hashes and recreates only `figures_correction/` and
@@ -107,9 +130,13 @@ correlation; it is not the standard deviation of an individual state.
 
 ## Separate full-suite runner
 
-The existing standalone runner is unchanged. From an output directory, after
-installing `experiments/requirements.txt`, run the repository's `experiments/run_all.py`
-(use `--skip-pilot` to omit the pilot). It executes corrected V1 plus the unchanged
-Toy V2 and writes PNGs to `assets/` and JSON/CSV into the current working directory.
-Use a separate output directory to protect manuscript assets. V2's archived SNR
-is 161.6; V2 was not rerun for this metric-only correction.
+The existing standalone runner remains available. The numerical source also
+handles a missing `IPython` display import when run outside a notebook. From
+an output directory, after installing `experiments/requirements.txt`, run the
+repository's `experiments/run_all.py`
+(use `--skip-pilot` to omit the pilot). It executes corrected V1 plus Toy V2
+with the unchanged scientific AST and optional display setup; it writes PNGs
+to `assets/` and JSON/CSV into the current working directory.
+Use a separate output directory to protect manuscript assets. V2's archived
+ratio is 161.6 for that one constructed pair; V2 was not rerun for the original
+V1 metric-only correction.

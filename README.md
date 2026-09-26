@@ -1,131 +1,93 @@
 # The Lazaros–Eudora Method (LEM)
 
-**Author:** Lazaros Varvatis
-**Status:** LEM I toy validation and correction draft; LEM-II-Light results documented below; archived edition v2.1.0 preserved
+**Author:** Lazaros Varvatis · **Status:** research program and synthetic
+pipeline checks; LEM-II-Light pilot completed with a narrow null result.
+The name “Eudora” refers to AI collaboration; it does not name a second
+scientific author. AI tools assisted with drafting, code, and review;
+Lazaros Varvatis is responsible for the claims and released materials.
 
-**Release / Zenodo version:** `v2.1.0` — archival, bibliography-corrected edition · DOI [10.5281/zenodo.21268033](https://doi.org/10.5281/zenodo.21268033)
-**Archival source of record:** [`paper/lem_paper_final_v4.tex`](paper/lem_paper_final_v4.tex)
+> **Read this correction first:** [LEM I archival erratum](paper/ARCHIVE_ERRATUM.md).
+> The existing Zenodo [v2.1.0 archival edition](https://doi.org/10.5281/zenodo.21268033)
+> contains known scientific and bibliographic errors. Its PDF remains an unchanged
+> historical artifact. The [corrected working PDF](paper/lem_paper_correction_draft.pdf)
+> and [source](paper/lem_paper_correction_draft.tex) on GitHub have **no new
+> Zenodo DOI**.
 
-**Corrected working draft:** [PDF](paper/lem_paper_correction_draft.pdf) · [source](paper/lem_paper_correction_draft.tex) · [correction note](paper/CORRECTION_NOTE.md).
-The draft corrects the V1 distance metric and adjacent method descriptions. It is **not a new Zenodo version** and has no new DOI. Archived v3/v4 sources, PDFs, bibliography and original figures remain unchanged.
+## Research question and evidence
 
-**Research history — 16 September 2026:** The completed LEM-II-Light study used 108 synthetic dialogues with real Qwen2.5-3B-Instruct activations. It found no statistically established added predictive value from the three prespecified activation/time/topology extensions over their respective baselines. It tested interaction-regime classification, not individual-user recognition or attractor dynamics. The [research note](research/LEM_II_LIGHT_RESEARCH_NOTE.md) records the results, limitations, public evidence and rationale for the planned character study. The pipeline remains in [Draft PR #2](https://github.com/LAKITALKS/LEM/pull/2); this documentation update does not merge it or start a new experiment. The DOI above identifies the archival edition, not these later results.
+LEM asks whether repeated interaction with a person produces reproducible
+patterns in a language model's internal representations, across fresh sessions,
+topics and controlled perturbations. A frozen model's activations depend on its
+current input and available history. This hypothesis does **not** imply that a
+person changes the model's weights during ordinary inference or that an old
+conversation survives an empty-context reset.
 
----
+| Proposed measurement | Current status |
+|---|---|
+| Repeatable user region, single-vector and cluster signatures | Hypotheses; no real-user confirmation. |
+| User-specific trajectory shapes across independent sessions | Untested as an identity endpoint in the completed Light study. |
+| User-specific attractor with return after perturbation | Untested; a cluster or long-lived loop alone does not establish an attractor. |
+| Cross-model correspondence and controlled reactivation | Future work; representation spaces require explicit alignment and causal intervention. |
+| Cooperation/affinity correlated with a signature | Separate exploratory hypothesis, not a claim about a model's feelings. |
 
-## Abstract
+Two **synthetic pipeline checks** appear in LEM I:
 
-The Lazaros–Eudora Method (LEM) is a conceptual and computational framework for analyzing user–LLM interactions as **dynamic trajectories in latent representation space** rather than as isolated prompt–response pairs.
+| Example | Observation | Boundary |
+|---|---|---|
+| Toy V1: 500 randomly separated synthetic user vectors in 512 dimensions | Nearest-neighbor accuracy 1.000 across ten seeds at σ = 0.15; corrected mean distance to the prescribed fixed point 0.7597. | The user signals were built into the simulator; no LLM users or identity effects are demonstrated. Accuracy at σ = 0.30 was 0.2300, at σ = 0.50 it was 0.0200 versus random 0.0020. |
+| Toy V2: one prescribed sink and one prescribed cycle | Maximum H₁ lifetimes 0.0326 / 5.2649 and historical ratio 161.6 at seed 1337. | One pair only, independent random projections, threshold assessed on the same pair; no held-out error estimate, scale-matched control or proof of an advantage over geometric statistics. |
 
-The core hypothesis is that repeated interaction between a user and a language model induces structured trajectory regimes — convergence, recurrence, or instability — that can be described through user-specific attractors and compact interaction signatures. LEM argues that purely geometric similarity is insufficient for characterizing such regimes and motivates a **topological reformulation based on persistent homology**.
+The later [LEM-II-Light research note](research/LEM_II_LIGHT_RESEARCH_NOTE.md)
+documents a limited study with **108 synthetic dialogues and Qwen2.5-3B-Instruct
+activations**. At the prespecified confirmation turn, the four classifiers had
+41.7%, 47.2%, 47.2% and 52.8% balanced accuracy; no nested increment had an
+adjusted interval strictly above zero. This tested **rule-defined regime
+classification**, not user identity or attractors. All classifier arms included
+text, the same 18 profiles appeared in all phases, and nearly every answer hit a
+128-token cap. The available public aggregates do not enable a complete independent
+reconstruction of the dialogues or activation arrays. The protocol and aggregate
+evidence remain in [Draft PR #2](https://github.com/LAKITALKS/LEM/pull/2).
 
-The current preprint presents two toy-model validations:
+Further character-study runs mentioned in private planning are technical
+calibrations; this repository reports no completed new character-identity result.
 
-1. **Geometric Identifiability** — Perfect nearest-neighbor re-identification across N=500 users in d=512 dimensions, at σ = 0.15. On the original noise grid, accuracy drops between σ = 0.15 and 0.30; no precise threshold at 0.25 was measured.
-2. **Topological Class Separation** — Convergent and cyclic regimes distinguished through persistent H₁ structure with SNR = 161.6.
+## Files and reproduction
 
----
+- [Corrected manuscript and archive](paper/) · [erratum](paper/ARCHIVE_ERRATUM.md)
+  · [V1 numerical correction and provenance](paper/CORRECTION_NOTE.md).
+- [Toy simulation code and instructions](experiments/README.md) ·
+  [checked V1 result package](experiments/results/fixed_point_correction/).
+- [Historical v1 topological framework](LEM_v1.0_Topological_Framework.md),
+  with editorial corrections; the conceptual drawings in [assets/](assets/) are
+  illustrations, not evidence.
+- [LEM-II-Light research note](research/LEM_II_LIGHT_RESEARCH_NOTE.md) and the
+  linked public evidence in Draft PR #2.
 
-## Repository Structure
-
-```
-LEM/
-├── README.md                         ← this file
-├── LEM_v1.0_Topological_Framework.md ← conceptual framework document
-├── assets/                           ← legacy conceptual visuals (LEM v1.0)
-├── research/
-│   └── LEM_II_LIGHT_RESEARCH_NOTE.md ← real-model study results and next-study rationale
-├── paper/
-│   ├── lem_paper_correction_draft.tex ← corrected, unpublished working source
-│   ├── lem_paper_correction_draft.pdf ← compiled correction draft
-│   ├── figures_correction/           ← regenerated V1 figures only
-│   ├── tables_correction/            ← V1 table rows generated from result CSVs
-│   ├── CORRECTION_NOTE.md            ← before/after results and provenance
-│   ├── lem_paper_final_v4.tex        ← LaTeX source of record (reconstructed)
-│   ├── lem_paper_final_v4.pdf        ← compiled PDF (v4)
-│   ├── lem_paper_final_v3.pdf        ← published preprint PDF (Zenodo record)
-│   ├── references.bib                ← bibliography (14 sources)
-│   ├── CHANGELOG_v4.md               ← v3→v4 reconstruction & bibliography notes
-│   ├── toy_v1_scaled_results.png     ← Figure 1
-│   ├── toy_v1b_robustness.png        ← Figure 2
-│   ├── toy_v2_moneyplot.png          ← Figure 3
-│   └── archive/
-│       ├── lem_paper_final_v3_legacy_source.tex ← superseded, non-compiling
-│       └── README.md                 ← archive note
-└── experiments/
-    ├── lem_simulations.py            ← all simulation code
-    ├── run_all.py                    ← standalone runner (no Colab needed)
-    ├── requirements.txt              ← Python dependencies
-    └── README.md                     ← experiment documentation
-```
-
-> **Note:** The top-level `assets/` directory holds legacy conceptual visuals from the earlier LEM v1.0 framework. The current preprint figures and toy-validation results (`toy_v1_scaled_results.png`, `toy_v1b_robustness.png`, `toy_v2_moneyplot.png`) live directly in `paper/`.
-
----
-
-## Reproducing the Results
-
-For the complete matched V1 comparison, run from the repository root:
+From the repository root, with the documented Python environment:
 
 ```bash
 python3 -m venv .venv-correction
 .venv-correction/bin/python -m pip install -r experiments/requirements-v1-correction.lock
-.venv-correction/bin/python experiments/reproduce_fixed_point_correction.py --output-dir /tmp/lem-correction-reproduction
-.venv-correction/bin/python experiments/verify_fixed_point_regression.py --output-dir /tmp/lem-correction-tests
+.venv-correction/bin/python experiments/reproduce_fixed_point_correction.py --output-dir /tmp/lem-v1-comparison
+.venv-correction/bin/python experiments/verify_fixed_point_regression.py --output-dir /tmp/lem-v1-regression
 ```
 
-The runner extracts the original V1 sources from `f15073f2cab3fb68857ffb16035d6675957c2e06` into a temporary source copy, runs all three original and corrected V1 experiments in separate output folders, and checks exact equality of every unaffected reported metric and of the final random-generator states. Use a fresh output directory. The checked-in [results and manifest](experiments/results/fixed_point_correction/) record parameters, environment, commands, sample SD (`ddof=1`), and archive hashes. No V2 rerun is required for this correction.
+The [experiment instructions](experiments/README.md) explain the reproduction
+scope and PDF build. The corrected tables and V1 figures derive from the
+checked-in numerical result package. The archived Toy V2 figure is an
+illustration of its original single-pair result; it has not been recast as a
+new multi-seed experiment.
 
-See [experiment instructions](experiments/README.md) for manuscript regeneration and the separate full-suite runner.
+## Publication, credit, and reuse
 
----
+The existing [Zenodo DOI](https://doi.org/10.5281/zenodo.21268033)
+identifies the **archival** edition only; it does not identify this erratum, the
+corrected working PDF, or LEM-II-Light. Cite the exact GitHub revision when
+referencing the corrections. No historical release or DOI was silently replaced.
 
-## Key Results
-
-| Experiment | Key Finding | Paper Section |
-|---|---|---|
-| Toy V1 (Scaled) | NN Accuracy 1.000 ± 0.000 across 10 seeds | Section 4.1, Table 1 |
-| Toy V1b (Robustness) | Accuracy 1.0000 at σ=0.15, 0.2300 at 0.30, 0.0200 at 0.50 (baseline 0.0020) | Section 4.1, Table 2 |
-| Toy V2 (Topological) | SNR = 161.6 (H₁ cyclic vs. convergent) | Section 4.2, Table 3 |
-
----
-
-## Four Pillars of LEM (v1.0)
-
-| Pillar | Concept | Topological View |
-|---|---|---|
-| **1. Dynamic Trajectory** | User interaction induces a time-series of latent states | Path through a high-dimensional point cloud |
-| **2. System-Induced Topology** | The model's latent landscape has anisotropic regions | Not a smooth manifold — folds, pinch points, singularities |
-| **3. Cognitive Attractor** | Repeated interaction converges to a characteristic region | Stable features in persistent homology (H₀/H₁) |
-| **4. Triggering & Shielding** | Prompts can activate or obscure the attractor | Reinforcing or flattening persistent features |
-
----
-
-## Citation
-
-For the published archival edition, cite the existing Zenodo record below. For the correction draft, additionally identify its branch/commit; this DOI does not identify the correction:
-
-> Lazaros Varvatis (2026). **LAKITALKS/LEM: Lazaros–Eudora Method (LEM) v2.1.0 — Archival Edition (Bibliography-Corrected).** Zenodo.
-> https://doi.org/10.5281/zenodo.21268033
-
----
-
-## Related Work
-
-LEM builds on and distinguishes itself from several research traditions:
-
-- **Dynamical systems in LLMs:** Wang et al. (ACL 2025), Ramsauer et al. (ICLR 2021), Bai et al. (NeurIPS 2019)
-- **Persona and behavioral directions:** Chen et al. / Anthropic (2025)
-- **Mechanistic interpretability:** Bricken et al. (2023), Templeton et al. (2024)
-- **TDA on LLM representations:** Gardinazzi et al. (arXiv 2024; ICML 2025 poster), Carlsson (2009)
-- **Latent state persistence:** Huang et al. (2025)
-
-LEM's novelty lies in combining user-specific trajectory modeling, latent-space analysis, and topological regime differentiation — a synthesis not present in any single existing work.
-
----
-
-## License & Collaboration
-
-This is an active research project. Researchers in TDA, dynamical systems, ML interpretability, and AI safety are welcome to reach out via the Issues page.
-
-> *LEM explores whether user–LLM interactions form stable dynamical patterns — and what that means for identity, privacy, and alignment.*
+No repository-wide software license is specified here. The CC BY 4.0 label on
+the Zenodo publication applies to the deposited archival material, and does
+not by itself grant a software license for the GitHub code. A separate code
+license must be selected and published by the rights holder before unrestricted
+reuse can be assumed. For research questions and collaboration, use
+[GitHub Issues](https://github.com/LAKITALKS/LEM/issues).

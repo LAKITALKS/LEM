@@ -33,7 +33,7 @@ The completed collection contains **108 dialogues, 2,592 rounds and 7,776 saved 
 
 **None of these intervals establishes positive added value.** The zero-width time interval arises from identical predictions at this endpoint; it is not evidence of general equivalence. The broad static-feature interval leaves substantial uncertainty. With 12 dialogues per class, a net improvement of two correct classifications is approximately 5.6 percentage points. The prespecified recognition threshold was not reached.
 
-The 199 label permutations in the published aggregate report are **validation diagnostics**, not confirmation p-values. They must not be treated as a confirmation null distribution. These results establish neither that every method is at chance nor that all possible activation methods lack signal.
+The 199 label permutations in the published aggregate report are **validation diagnostics**, not confirmation p-values. Their bands cannot be read as the null distribution of the 36 confirmation predictions. These results establish neither that every method is at chance nor that all possible activation methods lack signal.
 
 ## What the study contributes, and its limits
 
@@ -44,7 +44,16 @@ Interpretation is limited by the following design choices:
 - The same known synthetic profiles recur in all phases, and only two topic/formulation families were reserved for confirmation. Profile-bundle bootstrap intervals do not measure uncertainty over a general population of topics or people.
 - **2,591 of 2,592 answers reached the 128-token cap.** This can interrupt answers and influence the simulator's next action. The keyword-based simulator is a narrow behavioral construction, not a validated human model.
 - The primary analysis used a particular readout, layer and reduced representation. Every prediction arm included the text basis. Thus, the outcome concerns these incremental feature comparisons, not a standalone test of all information readable from activations.
-- No controlled perturbation-and-return experiment or individual-profile recognition endpoint was included. Human identity, post-reset memory and user-specific attractors remain untested.
+- No controlled perturbation-and-return experiment or individual-profile recognition endpoint was included. Human identity and user-specific attractors remain untested. With unchanged weights and empty history, cumulative post-reset model memory is excluded by the setup.
+
+With **unchanged weights and an empty conversation history after a reset**, this
+study has no mechanism to accumulate a user-specific memory *inside the model*
+across independent sessions. The same synthetic profile's future inputs could
+still elicit a reproducible signature in new activations. Recognizing that
+signature across fresh sessions and topics would be a separate, presently
+untested question.
+The saved trajectory states demonstrate what was encoded in each supplied
+context, not a persistent change in model weights.
 
 The finding is retained without rerunning confirmation to seek a favorable outcome. It neither confirms nor directly refutes the broader attractor hypothesis.
 
@@ -53,7 +62,7 @@ The finding is retained without rerunning confirmation to seek a favorable outco
 The planned character study brings the operational questions closer to the original motivation:
 
 1. **A — Recognition:** distinguish known synthetic characters across new sessions and topics, comparing structured text, static activation summaries and trajectories, including the direct topology ablation.
-2. **B — Persistence:** measure whether character-related differences remain when subsequent user inputs are shared and neutral. Earlier history remains in context, so this tests context-carried persistence.
+2. **B — Persistence:** measure whether character-related differences remain when subsequent user inputs are shared and neutral. Earlier history remains in context, so this tests context-carried persistence, not lasting model memory after reset.
 3. **C — Perturbation response:** compare perturbed and control continuations of the same history. Test recovery toward the appropriate control while checking common drift, fading history and loss of differences between characters.
 
 Longer dialogue alone does not establish an attractor. Role quality, answer completeness, measurement sensitivity and actual costs require separate calibration; sufficient statistical precision must not be inferred from software tests. This next study is planned and paused, not a result reported here. The broader signature and cross-model research questions remain open.

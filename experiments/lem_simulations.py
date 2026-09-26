@@ -7,7 +7,7 @@ Simulation Code Repository
 Author:  Lazaros Varvatis
 Paper:   "The Lazaros-Eudora Method (LEM): A Topological Framework
           for User-LLM Interaction Dynamics"
-Repo:    https://github.com/[your-username]/LEM
+Repo:    https://github.com/LAKITALKS/LEM
 
 --------------------------------------------------------------------------------
 CONTENTS
@@ -36,7 +36,15 @@ USAGE (Google Colab)
 """
 
 import os
-os.makedirs("assets", exist_ok=True)
+
+
+def _show_image(path):
+    """Display plots in a notebook; plain Python needs no IPython."""
+    try:
+        from IPython.display import Image, display
+    except ImportError:
+        return
+    display(Image(path))
 
 
 def fixed_point_distance(mean_states, user_signatures, domain_vector, alpha, beta):
@@ -69,6 +77,7 @@ def fixed_point_distance(mean_states, user_signatures, domain_vector, alpha, bet
 # ==============================================================================
 
 def run_experiment_1():
+    os.makedirs("assets", exist_ok=True)
     import json
     import numpy as np
     import matplotlib.pyplot as plt
@@ -216,12 +225,12 @@ def run_experiment_1():
 # ==============================================================================
 
 def run_experiment_1_scaled():
+    os.makedirs("assets", exist_ok=True)
     import json
     import time
     import numpy as np
     import matplotlib.pyplot as plt
     import pandas as pd
-    from IPython.display import Image, display
 
     DIM      = 512
     N_USERS  = 500
@@ -373,7 +382,7 @@ def run_experiment_1_scaled():
                                "N_TESTS": N_TESTS, "SEEDS": SEEDS},
                    "results": all_results}, f, indent=2)
 
-    display(Image("assets/toy_v1_scaled_results.png"))
+    _show_image("assets/toy_v1_scaled_results.png")
     return df, summary
 
 
@@ -394,11 +403,11 @@ def run_experiment_1_scaled():
 # ==============================================================================
 
 def run_experiment_1b():
+    os.makedirs("assets", exist_ok=True)
     import json
     import numpy as np
     import matplotlib.pyplot as plt
     import pandas as pd
-    from IPython.display import Image, display
 
     DIM          = 512
     N_USERS      = 500
@@ -532,7 +541,7 @@ def run_experiment_1b():
     with open("toy_v1b_robustness.json", "w") as f:
         json.dump(results, f, indent=2)
 
-    display(Image("assets/toy_v1b_robustness.png"))
+    _show_image("assets/toy_v1b_robustness.png")
     return df
 
 
@@ -540,9 +549,10 @@ def run_experiment_1b():
 # EXPERIMENT 2 — TOPOLOGICAL CLASS SEPARATION (TDA / Persistent Homology)
 # ==============================================================================
 # Purpose:
-#   Core topological validation of LEM. Distinguishes convergent vs cyclic
-#   interaction regimes using persistent H1 homology (Vietoris-Rips).
-#   This is the central result of the paper (Table 3, Figure 2).
+#   Pipeline demonstration on one constructed convergent and one cyclic
+#   trajectory (seed 1337). This cannot validate user-specific LLM dynamics
+#   or establish an advantage over elementary geometric measures.
+#   The archival paper shows this example in Table 3 and Figure 3.
 #
 # Key results (seed=1337):
 #   - Max H1 convergent:  0.0326  (noise-level, no persistent loop)
@@ -554,6 +564,7 @@ def run_experiment_1b():
 # ==============================================================================
 
 def run_experiment_2():
+    os.makedirs("assets", exist_ok=True)
     import json
     import warnings
     import numpy as np
@@ -561,7 +572,6 @@ def run_experiment_2():
     from scipy.integrate import odeint
     from ripser import ripser
     from sklearn.decomposition import PCA
-    from IPython.display import Image, display
 
     warnings.filterwarnings("ignore")
 
@@ -677,7 +687,7 @@ def run_experiment_2():
     for k, v in metrics.items():
         print(f"  {k}: {v}")
 
-    display(Image("assets/toy_v2_moneyplot.png"))
+    _show_image("assets/toy_v2_moneyplot.png")
     return metrics
 
 

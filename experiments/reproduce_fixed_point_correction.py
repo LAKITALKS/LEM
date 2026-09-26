@@ -6,6 +6,7 @@ Run from the repository root. No V2, model API, or cloud workload is invoked.
 import argparse
 import ast
 import contextlib
+import copy
 import hashlib
 import importlib.metadata
 import io
@@ -21,6 +22,35 @@ ROOT = Path(__file__).resolve().parents[1]
 BASELINE = "f15073f2cab3fb68857ffb16035d6675957c2e06"
 SOURCE_FILES = ["experiments/lem_simulations.py", "experiments/run_all.py"]
 FUNCTIONS = ["run_experiment_1", "run_experiment_1_scaled", "run_experiment_1b"]
+IMMUTABLE_PAPER_FILES = [
+    "paper/archive/lem_paper_final_v3_legacy_source.tex",
+    "paper/lem_paper_final_v3.pdf",
+    "paper/lem_paper_final_v4.pdf",
+    "paper/toy_v1_scaled_results.png",
+    "paper/toy_v1b_robustness.png",
+    "paper/toy_v2_moneyplot.png",
+]
+
+
+def v2_without_display_scaffolding(function, original):
+    """Allow only the explicitly named UI and output-dir edits in Toy V2.
+
+    The remaining entire function AST, including random draws, integration,
+    projection, persistence and result calculation, must match the baseline.
+    """
+    expected = (
+        ["from IPython.display import Image, display",
+         'display(Image("assets/toy_v2_moneyplot.png"))']
+        if original else
+        ['os.makedirs("assets", exist_ok=True)',
+         '_show_image("assets/toy_v2_moneyplot.png")']
+    )
+    allowed = {ast.dump(ast.parse(item).body[0]) for item in expected}
+    normalized = copy.deepcopy(function)
+    removed = [node for node in normalized.body if ast.dump(node) in allowed]
+    assert {ast.dump(node) for node in removed} == allowed, "V2 display scaffolding differs"
+    normalized.body = [node for node in normalized.body if ast.dump(node) not in allowed]
+    return ast.dump(normalized)
 
 
 def sha256(path):
@@ -130,8 +160,8 @@ def compare(output, baseline):
         assert old_nested == new_nested, f"Simulation/estimator/classifier helper changed: {name}"
         method_checks[name] = "Nested simulation, estimator, normalization and classifier functions AST-identical"
         if name == "run_experiment_2":
-            assert ast.dump(before) == ast.dump(after), "V2 changed"
-            method_checks[name] = "Entire function AST-identical; not rerun"
+            assert v2_without_display_scaffolding(before, True) == v2_without_display_scaffolding(after, False), "V2 scientific AST changed"
+            method_checks[name] = "Full V2 scientific AST identical after explicitly removing display and assets-dir scaffolding; not rerun"
 
     rows = []
     old_pilot = json.loads((output / "original/toy_v1_metrics.json").read_text())
@@ -159,11 +189,12 @@ def compare(output, baseline):
 
     patch = git("diff", baseline, "--", *SOURCE_FILES)
     (output / "production.patch").write_bytes(patch)
-    archive_files = [p for p in git("ls-tree", "-r", "--name-only", baseline, "paper").decode().splitlines()]
     archive_hashes = {}
-    for p in archive_files:
+    baseline_files = set(git("ls-tree", "-r", "--name-only", baseline, "paper").decode().splitlines())
+    assert set(IMMUTABLE_PAPER_FILES) <= baseline_files, "Missing historical archive assets"
+    for p in IMMUTABLE_PAPER_FILES:
         digest = hashlib.sha256(git("show", f"{baseline}:{p}")).hexdigest()
-        assert sha256(ROOT / p) == digest, f"Archived file changed: {p}"
+        assert sha256(ROOT / p) == digest, f"Immutable historical artifact changed: {p}"
         archive_hashes[p] = digest
     write_json(output / "manifest.json", {
         "baseline_commit": baseline,
@@ -185,8 +216,9 @@ def compare(output, baseline):
             "distance": "Euclidean norm of each tail mean minus fixed point, averaged over users and domains; alpha=0.4, beta=0.3.",
             "rounding": "Pilot/V1b outputs 4 decimals; Scaled per-seed outputs 6 decimals before summary, as in baseline.",
         },
-        "v2": "Not rerun: run_experiment_2 and run_all.py unchanged; archived V2 figure/table retained.",
-        "archived_paper_sha256_unchanged": archive_hashes,
+        "v2": "Not rerun: V2 scientific AST invariant; only display and asset-directory scaffolding differs. run_all.py and archived V2 figure unchanged.",
+        "immutable_historical_artifact_sha256": archive_hashes,
+        "edited_paper_sources": "The 2026-09-26 erratum, bibliography, and archival-source annotations intentionally differ from baseline; do not treat them as immutable PDF artifacts.",
     })
     print("PASS: exact equality of unaffected metrics, configurations and RNG states; archive hashes preserved.")
 

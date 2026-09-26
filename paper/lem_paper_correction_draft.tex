@@ -1,9 +1,11 @@
-% LEM I fixed-point correction working draft; not a new Zenodo release.
-% Based on f15073f2cab3fb68857ffb16035d6675957c2e06; archived v3/v4 untouched.
+% LEM I research corrections, 26 September 2026; not a new Zenodo release.
+% Historical v3/v4 PDFs remain unchanged; see ARCHIVE_ERRATUM.md.
 \documentclass[11pt]{article}
 
 \usepackage[utf8]{inputenc}
+\usepackage{cmap}
 \usepackage[T1]{fontenc}
+\usepackage{lmodern}
 \usepackage{amsmath, amssymb, amsthm}
 \usepackage{graphicx}
 \usepackage{booktabs}
@@ -13,6 +15,8 @@
 \usepackage{hyperref}
 
 \hypersetup{
+  pdftitle   = {The Lazaros-Eudora Method (LEM) - corrected working draft},
+  pdfauthor  = {Lazaros Varvatis},
   colorlinks = true,
   linkcolor  = black,
   citecolor  = black,
@@ -22,15 +26,16 @@
 \title{The Lazaros--Eudora Method (LEM):\\
 A Topological Framework for User--LLM Interaction Dynamics}
 
-\author{Lazaros Varvatis}
-\date{Corrected working draft --- 7 September 2026}
+\author{Lazaros Varvatis\\\small Independent researcher}
+\date{Corrected working draft --- 26 September 2026}
 
 \begin{document}
 \maketitle
 \begin{center}
 \small\textbf{Unpublished correction to the LEM I archival edition.}\\
-This working draft corrects the V1 distance metric and its interpretation.\\
-It has not been published as a new Zenodo version; no new DOI is assigned.
+This draft corrects the V1 distance metric, V2 interpretation, source attribution,\\
+and bibliographic record. It has no new Zenodo version or DOI; see\\
+\texttt{ARCHIVE\_ERRATUM.md} for an explicit comparison with the archived PDF.
 \end{center}
 
 % =========================================================
@@ -43,20 +48,20 @@ framework for analyzing user--LLM interactions as dynamic trajectories in latent
 representation space rather than as isolated prompt--response pairs. The central
 hypothesis of LEM is that repeated interaction between a user and a language
 model induces structured trajectory regimes that can be described through
-user-specific attractors and compact interaction signatures. We argue that purely
-geometric similarity is insufficient for characterizing such regimes and motivate
-a topological reformulation based on persistent homology. To render the framework
-testable without reliance on proprietary frontier-model internals, we present two
-toy-model validations in controlled synthetic settings. The first demonstrates
+user-specific attractors and compact interaction signatures. We propose both
+geometric and topological summaries as candidate measurements; whether topology
+adds value beyond appropriately matched geometric controls is an open question.
+We present two synthetic pipeline checks. The first demonstrates
 geometric identifiability of user-conditioned trajectories in a controlled latent
 dynamical system, achieving perfect nearest-neighbor re-identification in the
 reported synthetic setting across $N=500$ users and ten independent random seeds,
 compared to a random baseline of $0.002$. The second shows that convergent and
 cyclic interaction regimes can be distinguished through persistent $H_1$ structure
-after noisy projection into a higher-dimensional latent space, yielding a
-signal-to-noise ratio of $161.6$. We position LEM as a testable research program
-for studying user--LLM interaction dynamics, while explicitly delimiting its
-current scope and empirical constraints.
+in one constructed trajectory pair after noisy projection, yielding a descriptive
+ratio of $161.6$ at seed 1337. Neither example establishes user signatures in
+language-model activations, population-level performance, or a unique advantage
+for topology. LEM remains a research program whose empirical claims require
+independent real-model tests.
 \end{abstract}
 
 % =========================================================
@@ -88,8 +93,8 @@ frontier-model internals. Instead, it contributes:
   \item a compact conceptual formalization of LEM;
   \item a distinction between geometric and topological notions of interaction
         signatures;
-  \item two toy-model validations showing how user-conditioned attractors and
-        trajectory classes can be operationalized in controlled synthetic
+  \item two toy-model pipeline demonstrations showing how constructed user
+        vectors and trajectory classes can be measured in controlled synthetic
         settings.
 \end{enumerate}
 
@@ -113,6 +118,10 @@ We define an interaction trajectory as a time-ordered sequence of states
 where $\mathcal{X}$ is a latent or constructed representation space associated with
 a multi-turn user--LLM interaction. In practice, $\mathcal{X}$ may refer to internal
 activations, reduced coordinates, or synthetic latent states in a toy model.
+For inference with frozen weights, the activation at a turn depends on the
+supplied context. Returning to the same weights with empty history does not
+retain an earlier dialogue without explicit memory or training. Context-carried
+signatures must be distinguished from changes stored in model parameters.
 
 This shift from isolated states to trajectories is the first core move of LEM. The
 object of study is not merely the embedding of a prompt or response, but the path
@@ -132,9 +141,9 @@ dynamics. In the present paper, we distinguish two operational levels:
         especially the presence or absence of robust $H_1$ features.
 \end{enumerate}
 
-This distinction is essential. Geometric signatures capture identifiability in a
-vector-space sense. Topological signatures capture regime structure that may not
-be reducible to distance alone.
+This distinction is a proposed measurement strategy. A topological summary
+captures loops in a point cloud, but the present examples do not show that it
+outperforms geometric summaries of the same trajectories.
 
 \subsection{Attractor-like interaction regimes}
 
@@ -152,8 +161,9 @@ regimes. In the minimal setting considered here, these include:
 
 \subsection{Core hypotheses}
 
-We focus on four hypotheses, of which only the first three are partially
-operationalized in the current paper.
+We state four hypotheses. The synthetic examples instantiate aspects of the
+first three by construction; none is empirically established for real user--LLM
+interaction by these examples.
 
 \paragraph{H1: Geometric identifiability.}
 User-conditioned interaction dynamics can generate trajectories that are
@@ -195,34 +205,33 @@ two levels of structure:
 
 This motivates the use of topological data analysis (TDA), especially persistent
 homology. In the current work, the key topological observable is persistent $H_1$
-structure, interpreted as evidence of recurrent cyclic organization in trajectory
-point clouds.
+structure, which can detect a sampled loop in a constructed point cloud. A
+loop alone does not establish a dynamical attractor: recurrence and return
+after perturbation require temporal and interventional evidence.
 
 We explicitly do \emph{not} claim that topological features directly reveal
-psychological essence or consciousness. The intended claim is narrower: in a
-controlled setting, topology can distinguish classes of interaction dynamics that
-are poorly summarized by static geometry alone.
+psychological essence or consciousness. A claim of added value over geometry
+requires a matched nonloop control and an independent comparison with geometric
+summary statistics; neither is included in the original Toy V2 example.
 
 % =========================================================
-% 4. TOY-MODEL NUMERICAL VALIDATION
+% 4. TOY-MODEL PIPELINE CHECKS
 % =========================================================
 
-\section{Toy-Model Numerical Validation}
+\section{Toy-Model Pipeline Checks}
 
-The present paper does not attempt to validate LEM directly on proprietary
-frontier-model internals. Instead, it follows a more modest and methodologically
-transparent strategy: we test whether the core conceptual claims of the framework
-can be operationalized in controlled synthetic systems. The goal of these toy
-experiments is not realism, but falsifiability. If the central vocabulary of
-LEM---user-conditioned trajectories, attractor-like behavior, and topological
-regime separation---cannot be instantiated even in simple latent dynamical systems,
-the framework would lack methodological credibility.
+The present paper does not validate LEM on real model internals. These deliberately
+constructed examples check that the numerical pipeline behaves as expected under
+known dynamics. An implementation defect could make such a check fail. Success,
+however, does not provide a test of whether user-specific signatures or attractors
+exist in language models. That question requires independent data and a falsifiable
+real-model design.
 
-We therefore use two toy experiments with distinct roles. The first tests
-\emph{geometric identifiability}: whether user-conditioned latent dynamics generate
-re-identifiable trajectories above chance. The second tests \emph{topological class
-separation}: whether convergent and cyclic regimes remain distinguishable after
-projection into a noisy higher-dimensional latent space.
+We therefore present two toy checks with distinct roles. The first constructs
+well-separated user-indexed synthetic vectors and checks their geometric
+identifiability. The second constructs one sink and one cycle and checks whether
+their $H_1$ lifetimes differ in this example. Neither check compares a topology
+method with a matched geometric baseline on held-out instances.
 
 % ---------------------------------------------------------
 \subsection{Toy Experiment 1: Geometric Identifiability}
@@ -383,10 +392,9 @@ operating threshold for LEM.
 % ---------------------------------------------------------
 \subsection{Toy Experiment 2: Topological Class Separation}
 
-The second toy experiment is the central numerical validation for the topological
-reformulation of LEM. Here, the aim is not to separate users geometrically, but to
-distinguish qualitatively different \emph{dynamical regimes} through topological
-invariants.
+The second toy experiment is an illustrative check of the persistent-homology
+pipeline on two prescribed dynamical systems. Its setup supplies the sink and
+cycle in advance; it does not test whether user interactions produce either.
 
 \subsubsection{Setup}
 
@@ -407,8 +415,10 @@ We construct two synthetic trajectory classes:
 \end{enumerate}
 
 Both systems are integrated over $T$=40 time units with $\Delta t$=0.1 (401 steps),
-then embedded into $\mathbb{R}^{16}$ via a random linear projection
+then embedded into $\mathbb{R}^{16}$ via random linear projections
 $A \in \mathbb{R}^{2 \times 16}$ with additive Gaussian noise ($\sigma$=0.05).
+The executed code samples a separate projection for each trajectory; their
+geometry and scale are therefore not controlled to match.
 Persistent homology in degree $H_1$ is computed via the Vietoris--Rips filtration
 using \texttt{ripser} \cite{bauer2021ripser,tralie2018ripserpy}.
 
@@ -420,8 +430,10 @@ The key quantity is the \emph{maximum persistence}
   p_{\max} = \max_{(b,d)\, \in\, \mathrm{PD}(H_1)} (d - b),
 \]
 where $b$ and $d$ denote the birth and death of a homological feature. A large
-$p_{\max}$ indicates a robust loop; values near zero indicate no persistent cyclic
-structure. We define the signal-to-noise ratio as
+$p_{\max}$ summarizes the longest detected one-dimensional feature in each
+sampled point cloud. The historical experiment calls the following quotient its
+``SNR''; it is a descriptive ratio of two maxima, not an independently calibrated
+signal-to-noise statistic:
 \[
   \mathrm{SNR} = \frac{p^{\text{cyclic}}_{\max}}{p^{\text{convergent}}_{\max} + \epsilon},
   \qquad \epsilon = 10^{-9}.
@@ -431,8 +443,8 @@ structure. We define the signal-to-noise ratio as
 
 \begin{table}[htbp]
   \centering
-  \caption{Toy Experiment 2 --- topological class separation ($d$=16, $T$=40,
-           seed $=$ 1337).}
+  \caption{Toy Experiment 2 --- one constructed sink/cycle pair ($d$=16,
+           $T$=40, seed $=$ 1337); descriptive results only.}
   \label{tab:toy2}
   \begin{tabular}{lrr}
     \toprule
@@ -440,19 +452,19 @@ structure. We define the signal-to-noise ratio as
     \midrule
     Max $H_1$ persistence     & 0.0326 & 5.2649 \\
     Mean $H_1$ persistence    & 0.0092 & 0.1972 \\
-    SNR (cyclic / convergent) & \multicolumn{2}{c}{161.6} \\
+    Ratio (historically ``SNR'') & \multicolumn{2}{c}{161.6} \\
     \bottomrule
   \end{tabular}
 \end{table}
 
 The cyclic regime produces a maximum $H_1$ persistence of $5.265$, compared to
-$0.033$ for the convergent regime---a ratio of $161.6\times$. A simple threshold
-classifier at $p_{\max} > 0.1$ separates the two regimes with zero error, requiring
-no learned parameters.
-
-These results demonstrate that persistent homology reliably distinguishes convergent
-from cyclic LEM dynamics even after noisy high-dimensional embedding, without access
-to the original system parameters.
+$0.033$ for the convergent regime---a ratio of $161.6\times$ for this pair.
+A threshold $p_{\max} > 0.1$ labels these two observed examples correctly; it was
+not selected and evaluated on separate samples, so no error rate is estimated.
+There is one seed, no matched-scale noncyclic control, no held-out pairs and no
+comparison against simpler geometric descriptors. The large ratio therefore
+neither establishes that persistent homology reliably separates unseen regimes
+nor demonstrates that topology adds value for LEM's user-level hypotheses.
 
 \begin{figure}[htbp]
   \centering
@@ -462,8 +474,8 @@ to the original system parameters.
            trajectories embedded in $\mathbb{R}^{16}$. \textbf{Bottom:} degree-1
            persistence diagrams. The convergent diagram shows only diagonal noise
            ($p_{\max}$=0.033); the cyclic diagram contains a prominent off-diagonal
-           generator ($p_{\max}$=5.265) corresponding to the limit-cycle topology.
-           SNR $=$ 161.6.}
+           generator ($p_{\max}$=5.265) for the constructed limit cycle.
+           The historical ratio called ``SNR'' is 161.6 for this single pair.}
   \label{fig:toy2}
 \end{figure}
 
@@ -476,10 +488,10 @@ Taken together, the two toy experiments support a restricted interpretation of L
 \begin{itemize}[leftmargin=1.8em]
   \item User-conditioned latent trajectories can be geometrically distinguishable
         above chance in a controlled synthetic separability regime.
-  \item Convergent and cyclic trajectory classes can be topologically separated
-        through persistent homology (SNR $=$ 161.6).
-  \item The vocabulary of attractors, signatures, and topological regime structure
-        is operationalizable and falsifiable.
+  \item On the one prescribed sink/cycle pair, $H_1$ maximum lifetimes differ;
+        their descriptive ratio is 161.6.
+  \item The synthetic constructions provide concrete code paths and motivate
+        preregisterable measurements for future empirical tests.
 \end{itemize}
 
 \paragraph{Not established in the present paper.}
@@ -491,6 +503,8 @@ Taken together, the two toy experiments support a restricted interpretation of L
   \item That high-dimensional synthetic separability implies real-world user
         identifiability.
   \item That cross-version stability has already been demonstrated empirically.
+  \item That Toy V2 generalizes to new seeds or separates matched-scale controls,
+        or that persistent homology outperforms geometric baselines.
   \item That LEM currently enables deployment-grade personalization, safety, or
         forensic attribution.
 \end{itemize}
@@ -549,9 +563,9 @@ in being trajectory-centric rather than feature- or circuit-centric.
 A third neighboring tradition concerns topological data analysis in machine learning
 and language models. The foundational framework for applying persistent homology to
 data analysis was established by Carlsson \cite{carlsson2009topology}. More recently,
-Gardinazzi et al. apply persistent homology directly to LLM activation spaces across
-layers, demonstrating that topological features capture structural properties of
-learned representations that linear probes miss \cite{gardinazzi2024persistent}. Tan
+Gardinazzi et al. apply zigzag persistence across successive layers of LLM
+activation spaces \cite{gardinazzi2024persistent}. Their work does not establish
+a general advantage over linear probes for recognizing users. Tan
 et al. extend this direction to reasoning traces \cite{tan2025shape}. In a
 complementary line of work, Chia et al. probe latent subspaces of LLMs to identify
 adversarial states and demonstrate that structured regions in activation space can be
@@ -576,15 +590,16 @@ sequence models can converge to fixed points, formalizing the notion of equilibr
 computation in neural networks \cite{bai2019deq}. Most directly relevant to LEM, Wang
 et al. provide empirical evidence that iterative text generation in LLMs converges to
 attractor cycles, including two-period limit cycles under successive paraphrasing
-\cite{wang2025attractorcycles}. This establishes that attractor dynamics in language
-models are not merely a theoretical construct but an empirically observable
-phenomenon.
+\cite{wang2025attractorcycles}. These are observations for successive paraphrasing.
+Ko and Geiping report model-specific attractor-like behavior in multi-turn
+model--model conversations \cite{ko2026attractor}; they do not establish a
+user-specific attractor in a human--model dialogue.
 
 LEM differs from this line of work in three respects. First, it studies
 user-conditioned trajectories rather than generic model dynamics. Second, it operates
 in latent representation space rather than in text space. Third, it employs
-topological analysis to distinguish regime types, whereas existing dynamical-systems
-work on LLMs has not used persistent homology for this purpose.
+topological analysis as a candidate way to summarize regime types. These are
+research aims, not experimentally established distinctions of this paper.
 
 \subsection{Positioning of the present contribution}
 
@@ -605,10 +620,10 @@ introduces a single trajectory-based framework in which:
         \cite{carlsson2009topology,gardinazzi2024persistent}.
 \end{enumerate}
 
-No existing work in the surveyed literature combines all three elements. LEM is
-therefore best understood as a synthesis with a specific new emphasis: the study of
-user--LLM interaction through the combined lenses of trajectory dynamics, attractor
-structure, and topological signatures.
+LEM is therefore best understood as a proposed synthesis with a specific emphasis:
+the study of user--LLM interaction through trajectory dynamics, candidate attractor
+structure, and topological signatures. This review does not prove priority or
+uniqueness.
 
 % =========================================================
 % 6. DISCUSSION AND LIMITATIONS
@@ -621,18 +636,19 @@ when interpreted not as a completed explanatory theory, but as a compact researc
 program that introduces a trajectory-based object of analysis and proposes geometric
 and topological tools for studying it.
 
-The toy models support two limited claims:
+The toy constructions provide two limited pipeline checks:
 
 \begin{enumerate}[leftmargin=1.8em]
   \item user-conditioned trajectories can be geometrically identifiable above chance
         in a controlled synthetic separability regime;
-  \item convergent and cyclic trajectory classes can be topologically separated
-        through persistent homology.
+  \item the one prescribed sink and one prescribed cycle produce different
+        maximum $H_1$ lifetimes in the recorded example.
 \end{enumerate}
 
-These findings do not establish that real frontier-model interaction traces behave in
-the same way. They instead show that the theoretical vocabulary of LEM is
-operationalizable and falsifiable in controlled synthetic settings.
+These observations do not establish that real language-model interaction traces
+behave in the same way. A future attractor test must specify the perturbation,
+recovery horizon, alternative null dynamics, and independent experimental unit
+before collecting confirmation data.
 
 It bears emphasis that the perfect re-identification observed in Toy Experiment 1 is
 a consequence of the high-dimensional synthetic construction, not evidence for
@@ -644,13 +660,18 @@ value of Toy Experiment 1 lies not in the magnitude of the accuracy, but in conf
 that the attractor-based update rule produces stable, structured trajectories in the
 controlled regime.
 
-This work has several further limitations. First, all numerical validation is based on
+This work has several further limitations. First, all numerical illustrations use
 synthetic toy dynamics rather than internal activation traces from real language
-models. Second, the notion of an interaction signature is operational and
+models; Toy V2 has one seed and two independently sampled projections and was not
+compared with matched geometric controls. Second, the notion of an interaction signature is operational and
 representational, not psychological or neuroscientific. Third, the current paper does
 not establish cross-version or cross-model stability. Fourth, no claim is made here
 that topological signatures are already useful for deployed personalization, safety,
-or forensic attribution.
+or forensic attribution. The later LEM-II-Light study on synthetic dialogues and
+real model activations did not establish a prespecified incremental benefit for
+its activation, time, or topology blocks. Its regime-classification design did
+not test user-specific attractor dynamics (see
+\href{https://github.com/LAKITALKS/LEM/blob/main/research/LEM_II_LIGHT_RESEARCH_NOTE.md}{LEM-II-Light research note}).
 
 The paper deliberately avoids stronger claims about cognition, consciousness, or human
 identity. Its scope is restricted to a formal and computational framework for
@@ -665,10 +686,11 @@ analyzing interaction dynamics.
 There are four immediate next steps:
 
 \begin{enumerate}[leftmargin=1.8em]
-  \item extend the toy-model logic to real multi-turn activation traces from
-        open-weight language models;
-  \item compare geometric and topological signatures more systematically, including
-        bottleneck and Wasserstein diagram distances;
+  \item collect independent quality-checked multi-turn traces from an open-weight
+        model, with repeated profiles, held-out topics, and explicit text controls;
+  \item compare independent toy sink/cycle seeds with matched-scale noncycle
+        controls and held-out threshold selection; then compare geometric and
+        topological summaries, including diagram distances;
   \item operationalize cross-version stability through diagram-based distances or
         related invariants;
   \item connect LEM more explicitly to current interpretability workflows, including
@@ -680,8 +702,9 @@ implications, and robust trajectory-level defenses, should be treated as future
 hypotheses rather than present conclusions.
 
 The framework documentation and code are available at
-\url{https://github.com/LAKITALKS/LEM}. The bibliography-corrected archival
-edition v2.1.0 is citable at
+\url{https://github.com/LAKITALKS/LEM}. The archival edition v2.1.0,
+originally labeled ``bibliography-corrected'' despite errors in the archived
+PDF (see \texttt{ARCHIVE\_ERRATUM.md}), is citable at
 \href{https://doi.org/10.5281/zenodo.21268033}{doi:10.5281/zenodo.21268033}.
 That DOI identifies the archive, not this unpublished correction draft.
 
@@ -695,10 +718,17 @@ LEM provides a compact and testable framework for analyzing user--LLM interactio
 dynamics as trajectories rather than isolated states. Its central contribution is to
 combine attractor-based intuition with a topological reformulation that makes
 convergent and cyclic regimes measurable in principle. The current paper presents a
-first version of this program: conceptual formalization plus toy-model numerical
-validation. Whether these ideas scale to real language-model internals remains an
+first version of this program: a conceptual formulation and synthetic pipeline
+checks. Whether these ideas hold for user-specific dynamics in model internals remains an
 open empirical question. However, even at the present stage, LEM provides a clearer
 basis for asking that question in a controlled and scientifically tractable way.
+
+\section*{Research and tool disclosure}
+
+``Eudora'' in the project name denotes AI collaboration, not a second human
+author. AI tools assisted with drafting, code, and review; the named author is
+responsible for the claims and released materials. Neither of the toy checks
+in this manuscript includes human participants.
 
 % =========================================================
 % REFERENCES

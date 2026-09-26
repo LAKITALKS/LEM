@@ -13,8 +13,12 @@ Nothing here should be treated as authoritative.
 
 ## Source of record
 
-For the archival edition of LEM I, the authoritative LaTeX source is
-[`../lem_paper_final_v4.tex`](../lem_paper_final_v4.tex).
+For the archival edition of LEM I, the reconstructed historical LaTeX source is
+[`../lem_paper_final_v4.tex`](../lem_paper_final_v4.tex). The archived v4 PDF
+was not built from the final corrected bibliography; the source also includes
+new prose absent from the published v3 PDF. Consult the
+[erratum](../ARCHIVE_ERRATUM.md) and [corrected working draft](../lem_paper_correction_draft.pdf)
+before relying on the historical content.
 
 The reconstruction and the bibliography metadata cleanup are documented in
 [`../CHANGELOG_v4.md`](../CHANGELOG_v4.md).
