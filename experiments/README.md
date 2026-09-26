@@ -6,7 +6,9 @@ The archived code omitted the denominator. Only the distance metric changes;
 trajectories, random draws, signature estimation, NN classification and cosine
 comparisons retain their original definitions.
 
-The [correction draft](../paper/lem_paper_correction_draft.pdf) is unpublished.
+The corrected paper is published as [Zenodo v2.2.0](https://doi.org/10.5281/zenodo.22973258).
+The [GitHub correction draft](../paper/lem_paper_correction_draft.pdf) preserves
+the pre-publication state; use the Zenodo version for the current paper.
 See the [correction note](../paper/CORRECTION_NOTE.md) for before/after values.
 The v3/v4 sources, PDFs and their original images are preserved in `paper/`.
 

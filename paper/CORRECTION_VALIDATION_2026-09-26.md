@@ -1,7 +1,8 @@
 # Corrected working draft: validation on 26 September 2026
 
 **Author:** Lazaros Varvatis · **Scope:** Repository documentation, source and PDF
-corrections. This is not a Zenodo publication or a newly executed LEM study.
+corrections. This validation snapshot predates the separate
+[Zenodo v2.2.0 publication](https://doi.org/10.5281/zenodo.22973258). It is not a newly executed LEM study.
 
 - `latexmk -pdf -interaction=nonstopmode -halt-on-error lem_paper_correction_draft.tex`
   completed. The final PDF has **15 pages**; the final LaTeX log has no errors,
@@ -34,8 +35,9 @@ corrections. This is not a Zenodo publication or a newly executed LEM study.
 
 New GitHub working PDF SHA-256:
 `e8217766fc311fef77f544ad193e72f89aa3ee7349130e8d537bb5c7ef9efa5b`.
-The archived v4 PDF is still bibliographically incorrect; publishing a new
-Zenodo version would require a separate, explicit deposit. The corrected GitHub
-draft is a documented replacement for *reading* the science, not a silent edit
-of the archive. No statistical confirmation of user-specific signatures or
-attractor dynamics follows from these checks.
+The archived v4 PDF is still bibliographically incorrect. The separate v2.2.0
+Zenodo publication now provides the corrected paper with updated publication
+notices; its file and SHA-256 are documented in [ARCHIVE_ERRATUM.md](ARCHIVE_ERRATUM.md).
+The GitHub draft and the hash above describe the pre-publication artifact.
+No statistical confirmation of user-specific signatures or attractor dynamics
+follows from these checks or the publication.

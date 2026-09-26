@@ -9,9 +9,10 @@ Lazaros Varvatis is responsible for the claims and released materials.
 > **Read this correction first:** [LEM I archival erratum](paper/ARCHIVE_ERRATUM.md).
 > The existing Zenodo [v2.1.0 archival edition](https://doi.org/10.5281/zenodo.21268033)
 > contains known scientific and bibliographic errors. Its PDF remains an unchanged
-> historical artifact. The [corrected working PDF](paper/lem_paper_correction_draft.pdf)
-> and [source](paper/lem_paper_correction_draft.tex) on GitHub have **no new
-> Zenodo DOI**.
+> historical artifact. Read and cite the [corrected edition v2.2.0](https://doi.org/10.5281/zenodo.22973258)
+> ([current PDF](https://zenodo.org/records/22973258/files/LEM-I-v2.2.0-corrected.pdf?download=1)).
+> Its [source commit](https://github.com/LAKITALKS/LEM/commit/854849765c8ee01356e3ea520de5fe9ed2169eb2)
+> and deposited correction note document the publication build.
 
 ## Research question and evidence
 
@@ -80,13 +81,24 @@ new multi-seed experiment.
 
 ## Publication, credit, and reuse
 
-The existing [Zenodo DOI](https://doi.org/10.5281/zenodo.21268033)
-identifies the **archival** edition only; it does not identify this erratum, the
-corrected working PDF, or LEM-II-Light. Cite the exact GitHub revision when
-referencing the corrections. No historical release or DOI was silently replaced.
+The corrected paper is published as [v2.2.0](https://doi.org/10.5281/zenodo.22973258)
+with version DOI **10.5281/zenodo.22973258**. The prior DOI
+[10.5281/zenodo.21268033](https://doi.org/10.5281/zenodo.21268033) still identifies
+the historical **v2.1.0** edition. The [Concept DOI](https://doi.org/10.5281/zenodo.16541978)
+represents the version family; cite the version DOI for the exact corrected paper.
+Neither DOI identifies LEM-II-Light. No historical PDF was replaced.
+
+The publication PDF is `LEM-I-v2.2.0-corrected.pdf`, SHA-256
+`65f6334315784570d76f6c6c2ee5068ba6a6067b11a4f789d2a0a992de0d7c61`.
+The GitHub working-draft PDF remains a provenance artifact; the Zenodo PDF
+updates its publication notices and title metadata only. The deposited
+[correction note](https://zenodo.org/records/22973258/files/LEM-I-v2.2.0-CORRECTION-NOTE.txt?download=1)
+includes the exact source-status diff and build instructions. No new experiment
+or confirmation result was added. No GitHub release was created; automatic
+GitHub–Zenodo synchronization remains disabled.
 
 No repository-wide software license is specified here. The CC BY 4.0 label on
-the Zenodo publication applies to the deposited archival material, and does
+the Zenodo records applies to the deposited archival and corrected papers. It does
 not by itself grant a software license for the GitHub code. A separate code
 license must be selected and published by the rights holder before unrestricted
 reuse can be assumed. For research questions and collaboration, use

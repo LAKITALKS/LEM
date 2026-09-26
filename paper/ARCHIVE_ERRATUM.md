@@ -4,11 +4,21 @@
 
 The existing Zenodo version [v2.1.0](https://doi.org/10.5281/zenodo.21268033)
 and its GitHub PDF are **historical artifacts**. They have not been replaced or
-silently edited. The currently corrected manuscript is the
-[working PDF](lem_paper_correction_draft.pdf) and its
-[LaTeX source](lem_paper_correction_draft.tex), published here on GitHub without
-a new Zenodo deposit or DOI. Cite the DOI only when referring to the archival
-version; identify the GitHub commit when citing the revised draft.
+silently edited. The corrected paper is now published as [v2.2.0](https://doi.org/10.5281/zenodo.22973258)
+in the same Zenodo version family, with the new version DOI
+**10.5281/zenodo.22973258** and [Concept DOI](https://doi.org/10.5281/zenodo.16541978).
+Use the [current publication PDF](https://zenodo.org/records/22973258/files/LEM-I-v2.2.0-corrected.pdf?download=1)
+for reading and the v2.2.0 DOI for citation. The old DOI continues to identify v2.1.0.
+
+Publication file: `LEM-I-v2.2.0-corrected.pdf`; SHA-256:
+`65f6334315784570d76f6c6c2ee5068ba6a6067b11a4f789d2a0a992de0d7c61`.
+It was built from [source commit 8548497](https://github.com/LAKITALKS/LEM/commit/854849765c8ee01356e3ea520de5fe9ed2169eb2),
+changing only publication notices and PDF title metadata. The deposited
+[correction note](https://zenodo.org/records/22973258/files/LEM-I-v2.2.0-CORRECTION-NOTE.txt?download=1)
+records the exact source-status diff. The [GitHub working PDF](lem_paper_correction_draft.pdf)
+and [source](lem_paper_correction_draft.tex) preserve the pre-publication state;
+their old draft notices do not describe the published v2.2.0 PDF.
+Lazaros Varvatis remains the sole scientific author; CC BY 4.0 is retained.
 
 | Archived statement or record | What the evidence supports |
 |---|---|

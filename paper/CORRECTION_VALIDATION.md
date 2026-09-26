@@ -5,7 +5,9 @@
 > describe the 7 September state. See [the 26 September validation](CORRECTION_VALIDATION_2026-09-26.md)
 > and [erratum](ARCHIVE_ERRATUM.md) for the rebuilt draft and current scope.
 
-The correction is complete as an unpublished working draft. Numerical execution,
+At this historical validation date the correction was an unpublished working draft.
+The later [published v2.2.0](https://doi.org/10.5281/zenodo.22973258) is documented in the
+[erratum](ARCHIVE_ERRATUM.md). Numerical execution,
 source integrity and rendering were checked locally; no publication step is implied.
 
 | Check | Result |

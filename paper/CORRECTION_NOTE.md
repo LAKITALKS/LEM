@@ -10,7 +10,11 @@
 > its scientific AST is compared with the baseline in the updated reproduction
 > script. The original note below describes its earlier unchanged code state.
 
-**Status:** Corrected working draft, 7 September 2026. Not a new Zenodo version; no new DOI.
+**Publication status (26 September 2026):** The corrected edition is now
+published as [v2.2.0](https://doi.org/10.5281/zenodo.22973258); the old
+[DOI](https://doi.org/10.5281/zenodo.21268033) remains v2.1.0. The numerical
+provenance below describes the 7 September working-draft stage. See the
+[erratum](ARCHIVE_ERRATUM.md) for the publication file, hash and source-status diff.
 **Author:** Lazaros Varvatis.
 **Baseline:** `f15073f2cab3fb68857ffb16035d6675957c2e06` (verified `origin/main` at checkout).
 **Branch:** `codex/lem-i-fixed-point-correction`. The corrected numerical source is identified by [`production.patch`](../experiments/results/fixed_point_correction/production.patch) against this baseline and SHA-256 values in the [manifest](../experiments/results/fixed_point_correction/manifest.json) and execution records; the enclosing Git commit identifies the complete draft.
@@ -80,4 +84,4 @@ Every pre-existing file under `paper/`, including both published PDFs, v4/legacy
 
 The build and visual-check results are recorded in [`CORRECTION_VALIDATION.md`](CORRECTION_VALIDATION.md).
 
-No LEM-II pipeline, paid model calls, Modal jobs, main merge, tag, release, Zenodo publication, DOI creation or third-party messages are part of this correction.
+The original 7 September numerical correction did not include a LEM-II pipeline, paid model calls, Modal jobs, main merge, tag, release or publication. The subsequent v2.2.0 Zenodo publication is documented above; it adds no experiment or confirmation result.
