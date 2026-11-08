@@ -1,0 +1,8 @@
+...................                                                      [100%]
+19 passed in 9.95s
+Original output SHA-256 hashes: unchanged; before/after manifest in summary.json.
+Original simulation, V1 code/results, v3/v4 materials and paper/archive: git diff against main empty.
+Existing mathematical red/green verifier: expected 5 old-target failures, 3 archived-production failures, corrected 5 tests pass.
+Tectonic 0.16.9: PDF built; no overfull boxes; changed title/method/table/figure/conclusion pages visually inspected.
+pdftotext: identifiability (6 occurrences), Vietoris (3 occurrences); v2.3.0 working-draft notice present.
+No LLM/cloud experiment, merge, tag, release or Zenodo action.

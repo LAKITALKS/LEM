@@ -245,10 +245,15 @@ def plot(metrics, path):
 
 
 def main():
+    global OUTPUT
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--output-dir', type=Path, default=OUTPUT)
     parser.add_argument('--benchmark-only', action='store_true')
     parser.add_argument('--workers', type=int, default=1)
     args = parser.parse_args()
+    OUTPUT = args.output_dir.resolve()
+    if OUTPUT == ORIGINAL_DIR.resolve():
+        raise ValueError('Supplemental output must not overwrite the original result directory')
     OUTPUT.mkdir(parents=True, exist_ok=True)
     if (OUTPUT / 'summary.json').exists():
         raise FileExistsError('Supplemental summary already exists; do not overwrite a reported run')
