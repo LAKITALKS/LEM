@@ -150,3 +150,108 @@ protocol commit, benchmark and actual runtime), toy_v2_robustness.png (noise swe
 and environment.txt (Python, platform and package versions). Record all 3200
 class observations; keep calibration and evaluation labels. Commit results as
 obtained, then update the working paper, PDF, README files and v2.3.0 changelog.
+
+## Amendment 1 (8 Nov 2026, after external review; original B2 already computed)
+
+Author and sole contributor: Lazaros Varvatis. The requester supplied this
+amendment following external review attributed to Eudora and stated that it was
+fixed before Lazaros or Claude saw results. This is **not** a preregistration of
+the original run: B2 had already completed, its outputs were committed in
+`ee90b9f`, and the executing assistant had inspected and reported its outcome in
+the chat before this amendment arrived. The amendment is committed before any
+supplemental fitting or computation. Preserve all original result files byte for
+byte; report the original version alongside the amended main analysis. No
+claim is made here about when other analysts read the chat.
+
+### E1: joint geometric predictor
+
+G is logistic regression on standardized g1, g2, g3, with L2 regularization,
+C=1.0 fixed. G+H1 uses the same model with H1 as its fourth feature. Fit both
+StandardScaler and logistic regression only on calibration seeds, separately for
+each comparison, projection and noise level. Use StandardScaler's population
+variance convention, solver lbfgs, intercept enabled, class_weight=None,
+max_iter=10000, tol=1e-10, random_state=2301. The second class (the control) is
+positive, as in the original protocol. Evaluate fixed predicted probabilities
+on evaluation seeds without refitting, reorientation or hyperparameter tuning.
+Report AUC(H1), AUC(G), AUC(G+H1), and paired
+Delta AUC = AUC(G+H1)-AUC(G), each with 95% bootstrap intervals. H1 retains its
+calibration-selected sign and threshold; for GAUSS these are the original DISK
+values. For G and G+H1, also report accuracy at the fixed probability cutoff 0.5;
+this cutoff is descriptive and does not enter categorization.
+
+### E2: controls and preservation of the original version
+
+In the amended analysis, rename DISK to **GAUSS**. Its construction stays exactly
+as specified above: an affine-matched Gaussian OU cloud, not a uniform disk.
+Keep DISK as the historical name in the unchanged original outputs.
+
+Add **UNIFORM**: N=|W| independent uniform points in an ellipse, then exactly
+affine-match sample mean and sample covariance on W to CYCLE. Draw independent
+angles uniformly on [0,2*pi) and radii sqrt(U), U uniform on [0,1), forming uniform
+points in the unit disk. Color with the symmetric square root of CYCLE's
+covariance to obtain an ellipse; then center, whiten by its own ddof=1 sample
+covariance, color by CYCLE's covariance and shift to its mean. Use a separate
+RandomState(seed+1000000). Report matching residuals. As for GAUSS, affine matching
+couples the final finite sample, so independence/uniformity describes the draws
+before the sample-dependent exact matching step.
+
+Use exactly the original seeds, windows, projection matrices and observation
+noise for all existing classes. In the common-projection mode, use the same
+matrix for UNIFORM, with new independent observation noise. In the independent
+mode, draw a new projection and noise for UNIFORM. To preserve the original RNG
+stream, append UNIFORM **after** SINK,CYCLE,GAUSS,LINE in both modes. Do not alter
+any original per-seed value. LINE remains a plausibility probe.
+
+### E3: shuffled cycle
+
+CYCLE_SHUF is the exact same **noisy embedded** CYCLE point cloud in random order,
+using a permutation from RandomState(seed+2000000). Do not regenerate projection
+or noise for it. Check both persistence diagrams H0/H1 after lexicographic sorting
+of (birth,death), and g1–g3, for equality to CYCLE with absolute tolerance 1e-9,
+relative tolerance zero (equal infinite H0 endpoints are allowed). Report the
+maximum differences and failures; do not change tolerance after inspection.
+The second-half g1 is order-dependent and is excluded from this invariance test.
+The paper must state: point-cloud H1 measures loop geometry, not temporal return.
+
+### E4: evaluation and bootstrap
+
+Report CYCLE against GAUSS, UNIFORM, and LINE separately, retaining Va for
+continuity. Each noise level and projection mode is evaluated separately; never
+pool across noise levels. Use the original calibration/evaluation seed splits.
+Bootstrap whole evaluation seed IDs, retaining all classes and predictions of a
+seed together, 1000 draws with RandomState(2300). Use the same seed-index draws
+across controls and feature arms within a condition. Compute percentile 95%
+intervals for AUCs and paired Delta AUC from those joint resamples; never refit
+models, scalers, H1 signs or thresholds in a resample.
+
+### E5: amended categories
+
+Decide separately for GAUSS and UNIFORM at sigma=0.05, common projection,
+on evaluation seeds, using point estimates without rounding:
+
+- **EINDEUTIGER VORTEIL**: AUC(H1)>=0.95 and AUC(G)<=0.65.
+- **ZUSATZNUTZEN**: AUC(H1)>=0.95, AUC(G)>0.65, Delta AUC>=0.05,
+  and the lower 95% bootstrap limit of Delta AUC is strictly positive.
+- **GLEICHSTAND**: AUC(H1)>=0.95, but neither of the two conditions above holds.
+- **NICHT ROBUST**: AUC(H1)<0.95. This means H1 alone does not recognize the
+  constructed loop reliably; it does not mean "not significant".
+
+Overall category is the weaker of GAUSS and UNIFORM, ordered from strongest to
+weakest: EINDEUTIGER VORTEIL > ZUSATZNUTZEN > GLEICHSTAND > NICHT ROBUST.
+A tie is a valid reportable result. LINE does not enter the category.
+The original R1/R2 and all original tables remain reportable as the original
+committed analysis, not relabeled as amended outcomes.
+
+### Supplemental artifacts and reporting
+
+Implement supplemental computation in a separate runner, preserving the original
+runner's scientific logic. Write new outputs only under
+`experiments/results/toy_v2_robustness/amendment_1/` (per-seed statistics,
+summary with fitted model coefficients/scalers, AUCs, intervals, Delta AUCs,
+thresholds, both versions' categories, diagnostic checks, runtime, environment,
+and a separate noise-sweep plot). Record this amendment's commit hash and SHA-256
+hashes of all original outputs before and after execution. Any mismatch is a
+failure. Supplemental files do not overwrite original outputs. The amended
+analysis becomes the paper's main result; state the amendment date, external-review
+reason, and original results' prior existence, and additionally report the
+original committed R2 category. Keep interpretation limited to this toy.
