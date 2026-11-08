@@ -49,8 +49,7 @@ text, the same 18 profiles appeared in all phases, and nearly every answer hit a
 reconstruction of the dialogues or activation arrays. The protocol and aggregate
 evidence remain in [Draft PR #2](https://github.com/LAKITALKS/LEM/pull/2).
 
-Further character-study runs mentioned in private planning are technical
-calibrations; this repository reports no completed new character-identity result.
+A further private study (a role-swap design with Ministral-3-14B) was completed in November 2026; its result is under review and not yet published here. Other runs in private planning are technical calibrations or instrument checks.
 
 ## Files and reproduction
 
@@ -97,9 +96,5 @@ includes the exact source-status diff and build instructions. No new experiment
 or confirmation result was added. No GitHub release was created; automatic
 GitHub–Zenodo synchronization remains disabled.
 
-No repository-wide software license is specified here. The CC BY 4.0 label on
-the Zenodo records applies to the deposited archival and corrected papers. It does
-not by itself grant a software license for the GitHub code. A separate code
-license must be selected and published by the rights holder before unrestricted
-reuse can be assumed. For research questions and collaboration, use
+Code: MIT (see LICENSE). Texts, figures and the paper: CC BY 4.0. For research questions and collaboration, use
 [GitHub Issues](https://github.com/LAKITALKS/LEM/issues).
