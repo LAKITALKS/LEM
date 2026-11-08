@@ -283,7 +283,7 @@ def main():
     computation_seconds = time.perf_counter() - computation_start
     rows.sort(key=lambda r: (MODES.index(r['projection']), r['noise'], r['seed'], CLASSES.index(r['class'])))
     with (output / 'per_seed.csv').open('w', newline='') as stream:
-        writer = csv.DictWriter(stream, fieldnames=list(rows[0]))
+        writer = csv.DictWriter(stream, fieldnames=list(rows[0]), lineterminator='\n')
         writer.writeheader(); writer.writerows(rows)
     metrics = summarize(rows)
     diagnostics = {key: {'min': min(r[key] for r in rows), 'max': max(r[key] for r in rows)}
