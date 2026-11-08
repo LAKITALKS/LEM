@@ -36,7 +36,7 @@ Two **synthetic pipeline checks** appear in LEM I:
 | Example | Observation | Boundary |
 |---|---|---|
 | Toy V1: 500 randomly separated synthetic user vectors in 512 dimensions | Nearest-neighbor accuracy 1.000 across ten seeds at σ = 0.15; corrected mean distance to the prescribed fixed point 0.7597. | The user signals were built into the simulator; no LLM users or identity effects are demonstrated. Accuracy at σ = 0.30 was 0.2300, at σ = 0.50 it was 0.0200 versus random 0.0020. |
-| Toy V2: one prescribed sink and one prescribed cycle | Maximum H₁ lifetimes 0.0326 / 5.2649 and historical ratio 161.6 at seed 1337. | One pair only, independent random projections, threshold assessed on the same pair; no held-out error estimate, scale-matched control or proof of an advantage over geometric statistics. |
+| Toy V2: pre-specified multi-seed check with matched controls; Amendment 1 | At σ = 0.05 with common projection and evaluation seeds 100–199: against GAUSS, AUC(H₁) = 0.9942, AUC(G) = 0.8276, AUC(G+H₁) = 0.9933; paired ΔAUC = 0.1657 [0.1087, 0.2347]. Amended overall category: **ZUSATZNUTZEN** (GAUSS: ZUSATZNUTZEN; UNIFORM: EINDEUTIGER VORTEIL). | Only these synthetic generators and fixed predictors. Amendment 1 followed the already computed original analysis (R2: TEILWEISE), whose outputs remain unchanged. LINE is a plausibility probe; shuffled CYCLE has identical H₁ diagrams. Point-cloud H₁ measures loop geometry, not temporal return, LLM behavior or user identity. |
 
 The later [LEM-II-Light research note](research/LEM_II_LIGHT_RESEARCH_NOTE.md)
 documents a limited study with **108 synthetic dialogues and Qwen2.5-3B-Instruct
@@ -75,8 +75,15 @@ python3 -m venv .venv-correction
 The [experiment instructions](experiments/README.md) explain the reproduction
 scope and PDF build. The corrected tables and V1 figures derive from the
 checked-in numerical result package. The archived Toy V2 figure is an
-illustration of its original single-pair result; it has not been recast as a
-new multi-seed experiment.
+illustration of its original single-pair result. The separate
+[Toy V2 protocol and Amendment 1](experiments/toy_v2_robustness/PROTOCOL.md),
+[original outputs](experiments/results/toy_v2_robustness/) and
+[amended main tables](experiments/results/toy_v2_robustness/amendment_1/main_tables.md)
+document the new multi-seed check.
+
+The [v2.3.0 working draft](paper/lem_paper_correction_draft.pdf) is **not yet
+published**. It reports the amended main analysis and the original committed
+analysis separately; the current published version remains v2.2.0.
 
 ## Publication, credit, and reuse
 
@@ -92,8 +99,8 @@ The publication PDF is `LEM-I-v2.2.0-corrected.pdf`, SHA-256
 The GitHub working-draft PDF remains a provenance artifact; the Zenodo PDF
 updates its publication notices and title metadata only. The deposited
 [correction note](https://zenodo.org/records/22973258/files/LEM-I-v2.2.0-CORRECTION-NOTE.txt?download=1)
-includes the exact source-status diff and build instructions. No new experiment
-or confirmation result was added. No GitHub release was created; automatic
+includes the exact source-status diff and build instructions. That published correction added no new experiment
+or confirmation result. No GitHub release was created; automatic
 GitHub–Zenodo synchronization remains disabled.
 
 Code: MIT (see LICENSE). Texts, figures and the paper: CC BY 4.0. For research questions and collaboration, use

@@ -1,11 +1,24 @@
-% LEM I research corrections, 26 September 2026; not a new Zenodo release.
+% Working draft for v2.3.0 — not yet published. The current published version is v2.2.0, DOI 10.5281/zenodo.22973258.
 % Historical v3/v4 PDFs remain unchanged; see ARCHIVE_ERRATUM.md.
 \documentclass[11pt]{article}
 
-\usepackage[utf8]{inputenc}
-\usepackage{cmap}
-\usepackage[T1]{fontenc}
-\usepackage{lmodern}
+% Tectonic uses XeTeX: explicit OpenType fonts without common ligatures keep
+% words such as identifiability searchable as ordinary Unicode letters.
+\usepackage{iftex}
+\ifXeTeX
+  \usepackage{fontspec}
+  \setmainfont{lmroman10-regular.otf}[
+    BoldFont=lmroman10-bold.otf,
+    ItalicFont=lmroman10-italic.otf,
+    BoldItalicFont=lmroman10-bolditalic.otf,
+    Ligatures={TeX,NoCommon}]
+  \setmonofont{lmmono10-regular.otf}[Ligatures=NoCommon]
+\else
+  \usepackage[utf8]{inputenc}
+  \usepackage{cmap}
+  \usepackage[T1]{fontenc}
+  \usepackage{lmodern}
+\fi
 \usepackage{amsmath, amssymb, amsthm}
 \usepackage{graphicx}
 \usepackage{booktabs}
@@ -15,7 +28,7 @@
 \usepackage{hyperref}
 
 \hypersetup{
-  pdftitle   = {The Lazaros-Eudora Method (LEM) - corrected working draft},
+  pdftitle   = {The Lazaros-Eudora Method (LEM) - v2.3.0 working draft},
   pdfauthor  = {Lazaros Varvatis},
   colorlinks = true,
   linkcolor  = black,
@@ -27,15 +40,15 @@
 A Topological Framework for User--LLM Interaction Dynamics}
 
 \author{Lazaros Varvatis\\\small Independent researcher}
-\date{Corrected working draft --- 26 September 2026}
+\date{v2.3.0 working draft --- 8 November 2026}
 
 \begin{document}
 \maketitle
 \begin{center}
-\small\textbf{Unpublished correction to the LEM I archival edition.}\\
-This draft corrects the V1 distance metric, V2 interpretation, source attribution,\\
-and bibliographic record. It has no new Zenodo version or DOI; see\\
-\texttt{ARCHIVE\_ERRATUM.md} for an explicit comparison with the archived PDF.
+\small\textbf{Working draft for v2.3.0 --- not yet published.}\\
+The current published version is v2.2.0, DOI 10.5281/zenodo.22973258.\\
+This draft adds the Toy V2 robustness check and Amendment 1 of 8 November 2026.\\
+The published v2.2.0 and archived v3/v4 materials remain unchanged.
 \end{center}
 
 % =========================================================
@@ -49,18 +62,23 @@ representation space rather than as isolated prompt--response pairs. The central
 hypothesis of LEM is that repeated interaction between a user and a language
 model induces structured trajectory regimes that can be described through
 user-specific attractors and compact interaction signatures. We propose both
-geometric and topological summaries as candidate measurements; whether topology
-adds value beyond appropriately matched geometric controls is an open question.
+geometric and topological summaries as candidate measurements. For the specified
+Toy V2 generators and geometric predictors, the amended held-out comparison is
+assigned the pre-specified category \textit{ZUSATZNUTZEN}; this result applies only
+to this toy, not to LLMs or users.
 We present two synthetic pipeline checks. The first demonstrates
 geometric identifiability of user-conditioned trajectories in a controlled latent
 dynamical system, achieving perfect nearest-neighbor re-identification in the
 reported synthetic setting across $N=500$ users and ten independent random seeds,
-compared to a random baseline of $0.002$. The second shows that convergent and
-cyclic interaction regimes can be distinguished through persistent $H_1$ structure
-in one constructed trajectory pair after noisy projection, yielding a descriptive
-ratio of $161.6$ at seed 1337. Neither example establishes user signatures in
-language-model activations, population-level performance, or a unique advantage
-for topology. LEM remains a research program whose empirical claims require
+compared to a random baseline of $0.002$. The second extends an archived sink/cycle pair to a pre-specified multi-seed
+check with matched controls. In Amendment 1, on held-out seeds at noise $0.05$
+with common projection, $H_1$ AUC is $0.9942$ against the matched Gaussian OU
+control; a fixed joint geometric predictor has AUC $0.8276$, and adding $H_1$
+gives $0.9933$. The paired increment is $0.1657$ (95\% interval
+$[0.1087,0.2347]$). The amended overall category is \textit{ZUSATZNUTZEN};
+the original committed analysis was \textit{TEILWEISE}. Neither example
+establishes user signatures in language-model activations or performance in
+real-user populations. LEM remains a research program whose empirical claims require
 independent real-model tests.
 \end{abstract}
 
@@ -95,7 +113,8 @@ frontier-model internals. Instead, it contributes:
         signatures;
   \item two toy-model pipeline demonstrations showing how constructed user
         vectors and trajectory classes can be measured in controlled synthetic
-        settings.
+        settings, including a pre-specified multi-seed Toy V2 check with matched
+        controls and a dated amendment evaluating a fixed joint geometric predictor.
 \end{enumerate}
 
 The intended contribution is therefore methodological: to provide a testable
@@ -229,9 +248,10 @@ real-model design.
 
 We therefore present two toy checks with distinct roles. The first constructs
 well-separated user-indexed synthetic vectors and checks their geometric
-identifiability. The second constructs one sink and one cycle and checks whether
-their $H_1$ lifetimes differ in this example. Neither check compares a topology
-method with a matched geometric baseline on held-out instances.
+identifiability. The second starts with the archived sink/cycle example and
+adds a pre-specified multi-seed comparison with matched controls and held-out
+instances. Its amended joint geometric comparison is described below; the
+original V1 numerical files and original Toy V2 generator remain unchanged.
 
 % ---------------------------------------------------------
 \subsection{Toy Experiment 1: Geometric Identifiability}
@@ -461,8 +481,8 @@ The cyclic regime produces a maximum $H_1$ persistence of $5.265$, compared to
 $0.033$ for the convergent regime---a ratio of $161.6\times$ for this pair.
 A threshold $p_{\max} > 0.1$ labels these two observed examples correctly; it was
 not selected and evaluated on separate samples, so no error rate is estimated.
-There is one seed, no matched-scale noncyclic control, no held-out pairs and no
-comparison against simpler geometric descriptors. The large ratio therefore
+In that archived example there is one seed, no matched-scale noncyclic control,
+no held-out pairs and no comparison against simpler geometric descriptors. The large ratio therefore
 neither establishes that persistent homology reliably separates unseen regimes
 nor demonstrates that topology adds value for LEM's user-level hypotheses.
 
@@ -480,6 +500,8 @@ nor demonstrates that topology adds value for LEM's user-level hypotheses.
 \end{figure}
 
 % ---------------------------------------------------------
+\input{toy_v2_robustness_section.tex}
+
 \subsection{What the toy experiments do and do not establish}
 
 Taken together, the two toy experiments support a restricted interpretation of LEM.
@@ -490,6 +512,8 @@ Taken together, the two toy experiments support a restricted interpretation of L
         above chance in a controlled synthetic separability regime.
   \item On the one prescribed sink/cycle pair, $H_1$ maximum lifetimes differ;
         their descriptive ratio is 161.6.
+  \item The amended multi-seed Toy V2 check has category \textit{ZUSATZNUTZEN}
+        under the specified generators, fixed predictors and evaluation rule.
   \item The synthetic constructions provide concrete code paths and motivate
         preregisterable measurements for future empirical tests.
 \end{itemize}
@@ -503,8 +527,9 @@ Taken together, the two toy experiments support a restricted interpretation of L
   \item That high-dimensional synthetic separability implies real-world user
         identifiability.
   \item That cross-version stability has already been demonstrated empirically.
-  \item That Toy V2 generalizes to new seeds or separates matched-scale controls,
-        or that persistent homology outperforms geometric baselines.
+  \item That Toy V2 generalizes beyond the specified synthetic generators,
+        projections, noise levels and fixed predictors, or establishes universal
+        superiority of persistent homology over geometric methods.
   \item That LEM currently enables deployment-grade personalization, safety, or
         forensic attribution.
 \end{itemize}
@@ -662,8 +687,10 @@ controlled regime.
 
 This work has several further limitations. First, all numerical illustrations use
 synthetic toy dynamics rather than internal activation traces from real language
-models; Toy V2 has one seed and two independently sampled projections and was not
-compared with matched geometric controls. Second, the notion of an interaction signature is operational and
+models; the new Toy V2 comparison is restricted to its pre-specified generators,
+matched controls and fixed predictors. Its original result and later amendment
+are reported separately, since the original outputs already existed when the
+amendment arrived. Second, the notion of an interaction signature is operational and
 representational, not psychological or neuroscientific. Third, the current paper does
 not establish cross-version or cross-model stability. Fourth, no claim is made here
 that topological signatures are already useful for deployed personalization, safety,
@@ -688,9 +715,9 @@ There are four immediate next steps:
 \begin{enumerate}[leftmargin=1.8em]
   \item collect independent quality-checked multi-turn traces from an open-weight
         model, with repeated profiles, held-out topics, and explicit text controls;
-  \item compare independent toy sink/cycle seeds with matched-scale noncycle
-        controls and held-out threshold selection; then compare geometric and
-        topological summaries, including diagram distances;
+  \item extend the synthetic comparison beyond the specified controls and fixed
+        geometric predictor families, including diagram distances and temporal
+        perturbation/return endpoints;
   \item operationalize cross-version stability through diagram-based distances or
         related invariants;
   \item connect LEM more explicitly to current interpretability workflows, including
@@ -706,7 +733,8 @@ The framework documentation and code are available at
 originally labeled ``bibliography-corrected'' despite errors in the archived
 PDF (see \texttt{ARCHIVE\_ERRATUM.md}), is citable at
 \href{https://doi.org/10.5281/zenodo.21268033}{doi:10.5281/zenodo.21268033}.
-That DOI identifies the archive, not this unpublished correction draft.
+That DOI identifies the archive, not this unpublished v2.3.0 working draft. The current published
+version is v2.2.0, DOI \href{https://doi.org/10.5281/zenodo.22973258}{10.5281/zenodo.22973258}.
 
 % =========================================================
 % 8. CONCLUSION
@@ -719,7 +747,11 @@ dynamics as trajectories rather than isolated states. Its central contribution i
 combine attractor-based intuition with a topological reformulation that makes
 convergent and cyclic regimes measurable in principle. The current paper presents a
 first version of this program: a conceptual formulation and synthetic pipeline
-checks. Whether these ideas hold for user-specific dynamics in model internals remains an
+checks. The amended Toy V2 analysis is assigned \textit{ZUSATZNUTZEN}, with
+\textit{ZUSATZNUTZEN} for GAUSS and \textit{EINDEUTIGER VORTEIL} for UNIFORM;
+the original committed rule gave \textit{TEILWEISE}. These categories refer only
+to this toy and these fixed comparisons. Point-cloud $H_1$ measures loop geometry,
+not temporal return. Whether these ideas hold for user-specific dynamics in model internals remains an
 open empirical question. However, even at the present stage, LEM provides a clearer
 basis for asking that question in a controlled and scientifically tractable way.
 
