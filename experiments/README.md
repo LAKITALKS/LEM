@@ -15,8 +15,8 @@ The v3/v4 sources, PDFs and their original images are preserved in `paper/`.
 ## Scope of Toy V2
 
 The [pre-specified multi-seed Toy V2 check and Amendment 1](toy_v2_robustness/PROTOCOL.md) retain the original sink/cycle generator and add exactly moment-matched GAUSS (originally DISK), UNIFORM and LINE controls, with calibration and evaluation seeds kept separate.
-At noise 0.05 with common projection, the amended overall category is **incremental value (ZUSATZNUTZEN)**: GAUSS gives incremental value (H1 AUC 0.9942; G 0.8276; G+H1 0.9933; paired ΔAUC 0.1657, 95% interval [0.1087, 0.2347]), and UNIFORM gives clear advantage (EINDEUTIGER VORTEIL).
-The [original results](results/toy_v2_robustness/) remain unchanged with R1 **H1 separates sink and cycle** and R2 **partial (TEILWEISE)**; the dated amendment was committed after those outputs already existed, before supplemental computation, and its [tables and results](results/toy_v2_robustness/amendment_1/main_tables.md) are reported as the new main analysis.
+At noise 0.05 with common projection, the amended overall category is **incremental value**: GAUSS gives incremental value (H1 AUC 0.9942; G 0.8276; G+H1 0.9933; paired ΔAUC 0.1657, 95% interval [0.1087, 0.2347]), and UNIFORM gives clear advantage.
+The [original results](results/toy_v2_robustness/) remain unchanged with R1 **H1 separates sink and cycle** and R2 **partial**; the dated amendment was committed after those outputs already existed, before supplemental computation, and its [tables and results](results/toy_v2_robustness/amendment_1/main_tables.md) are reported as the new main analysis.
 LINE remains a plausibility probe, and all 800 CYCLE/CYCLE_SHUF checks retain identical H0/H1 diagrams and g1–g3 within 1e-9: point-cloud H1 measures loop geometry, not temporal return.
 These are synthetic pipeline checks of these generators and fixed predictors; they establish no LLM, user-identity or dynamical-attractor result.
 

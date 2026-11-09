@@ -18,7 +18,7 @@ The current published version remains v2.2.0, DOI 10.5281/zenodo.22973258.
   H1, g1–g3 and supplementary second-half g1, frozen Youden signs/thresholds,
   paired-seed bootstrap intervals and five-seed runtime estimates.
 - Preserved the original result package `ee90b9f` byte-for-byte (3200 class rows):
-  R1 **H1 separates sink and cycle**, original R2 **partial (TEILWEISE)**.
+  R1 **H1 separates sink and cycle**, original R2 **partial**.
 - Committed Amendment 1 (`cf66e01`) after external review on 8 November 2026,
   after the original results had been computed, inspected and reported in chat,
   before supplemental computation. The review requested a joint geometric
@@ -33,8 +33,8 @@ The current published version remains v2.2.0, DOI 10.5281/zenodo.22973258.
   per-seed data, coefficients/scalers, evaluation predictions, shuffle diagnostics,
   bootstrap summaries, both versions' categories, original SHA-256 hashes,
   environment, runtime and a new noise plot. Original output hashes are unchanged.
-- Amended main category: **incremental value (ZUSATZNUTZEN)** overall; **incremental value** for GAUSS,
-  **clear advantage (EINDEUTIGER VORTEIL)** for UNIFORM. Against GAUSS, H1 AUC is 0.9942,
+- Amended main category: **incremental value** overall; **incremental value** for GAUSS,
+  **clear advantage** for UNIFORM. Against GAUSS, H1 AUC is 0.9942,
   G is 0.8276, G+H1 is 0.9933, Delta AUC is 0.1657 [0.1087, 0.2347].
   LINE remains a plausibility probe and does not enter categorization.
 - All 800 shuffle checks pass 1e-9; H0/H1 diagram differences are zero.
@@ -58,7 +58,7 @@ The current published version remains v2.2.0, DOI 10.5281/zenodo.22973258.
 ## Editorial follow-up — 9 November 2026
 
 - Replaced category labels in the paper and both README files with English names,
-  retaining each original protocol identifier in parentheses at its first occurrence;
+  initially retaining protocol identifiers at first occurrence (superseded below);
   translated R1 to "H1 separates sink and cycle".
 - Introduced both synthetic checks before the abstract's V2 result and limited
   that result to two sentences with the requested three-decimal values and the
@@ -67,3 +67,14 @@ The current published version remains v2.2.0, DOI 10.5281/zenodo.22973258.
   and made the same chronology explicit in Section 4.3.
 - Rebuilt the working-draft PDF with Tectonic and verified its text layer and
   changed pages. Numerical outputs, fitted models and decision rules are unchanged.
+
+### Label mapping follow-up — 9 November 2026
+
+- Removed all original-language category aliases from the paper (including its
+  included section), both README files and this changelog. These texts now use
+  only English category names and the English R1 label.
+- Added the seven-row "Label mapping (9 Nov 2026)" table to PROTOCOL.md. The
+  original labels remain in the frozen outputs; every result file and its hash
+  is unchanged.
+- Verified zero original-language label matches with grep, rebuilt the PDF with
+  Tectonic, and checked its text layer and affected pages.

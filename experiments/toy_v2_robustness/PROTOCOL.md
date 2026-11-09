@@ -257,3 +257,20 @@ failure. Supplemental files do not overwrite original outputs. The amended
 analysis becomes the paper's main result; state the amendment date, external-review
 reason, and original results' prior existence, and additionally report the
 original committed R2 category. Keep interpretation limited to this toy.
+
+## Label mapping (9 Nov 2026)
+
+This is an editorial display mapping for the paper and README files. It does not
+change either frozen analysis, its decision rules, or the stored result labels.
+All frozen result files (including summary.json and per_seed.csv) and their
+SHA-256 hashes remain unchanged.
+
+| English name | Label in the frozen result files |
+| --- | --- |
+| clear advantage | `EINDEUTIGER VORTEIL` |
+| incremental value | `ZUSATZNUTZEN` |
+| tie | `GLEICHSTAND` |
+| not robust | `NICHT ROBUST` |
+| partial | `TEILWEISE` |
+| no clear advantage | `KEIN EINDEUTIGER VORTEIL` |
+| H1 separates sink and cycle | `H1 trennt Senke und Zyklus` |
