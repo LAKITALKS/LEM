@@ -18,7 +18,7 @@ The current published version remains v2.2.0, DOI 10.5281/zenodo.22973258.
   H1, g1–g3 and supplementary second-half g1, frozen Youden signs/thresholds,
   paired-seed bootstrap intervals and five-seed runtime estimates.
 - Preserved the original result package `ee90b9f` byte-for-byte (3200 class rows):
-  R1 **H1 trennt Senke und Zyklus**, original R2 **TEILWEISE**.
+  R1 **H1 separates sink and cycle**, original R2 **partial (TEILWEISE)**.
 - Committed Amendment 1 (`cf66e01`) after external review on 8 November 2026,
   after the original results had been computed, inspected and reported in chat,
   before supplemental computation. The review requested a joint geometric
@@ -33,8 +33,8 @@ The current published version remains v2.2.0, DOI 10.5281/zenodo.22973258.
   per-seed data, coefficients/scalers, evaluation predictions, shuffle diagnostics,
   bootstrap summaries, both versions' categories, original SHA-256 hashes,
   environment, runtime and a new noise plot. Original output hashes are unchanged.
-- Amended main category: **ZUSATZNUTZEN** overall; **ZUSATZNUTZEN** for GAUSS,
-  **EINDEUTIGER VORTEIL** for UNIFORM. Against GAUSS, H1 AUC is 0.9942,
+- Amended main category: **incremental value (ZUSATZNUTZEN)** overall; **incremental value** for GAUSS,
+  **clear advantage (EINDEUTIGER VORTEIL)** for UNIFORM. Against GAUSS, H1 AUC is 0.9942,
   G is 0.8276, G+H1 is 0.9933, Delta AUC is 0.1657 [0.1087, 0.2347].
   LINE remains a plausibility probe and does not enter categorization.
 - All 800 shuffle checks pass 1e-9; H0/H1 diagram differences are zero.
@@ -54,3 +54,16 @@ The current published version remains v2.2.0, DOI 10.5281/zenodo.22973258.
 - Kept the original simulation, all V1 files, final v3/v4 materials, `paper/archive/`,
   published v2.2.0 and Zenodo records unchanged. No merge, tag, release or Zenodo
   publication is part of this branch.
+
+## Editorial follow-up — 9 November 2026
+
+- Replaced category labels in the paper and both README files with English names,
+  retaining each original protocol identifier in parentheses at its first occurrence;
+  translated R1 to "H1 separates sink and cycle".
+- Introduced both synthetic checks before the abstract's V2 result and limited
+  that result to two sentences with the requested three-decimal values and the
+  original rule's partial outcome. Detailed V2 numbers remain in Section 4.3.
+- Added the dated reviewer-blindness clarification immediately below Amendment 1
+  and made the same chronology explicit in Section 4.3.
+- Rebuilt the working-draft PDF with Tectonic and verified its text layer and
+  changed pages. Numerical outputs, fitted models and decision rules are unchanged.

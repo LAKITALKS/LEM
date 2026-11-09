@@ -40,7 +40,7 @@
 A Topological Framework for User--LLM Interaction Dynamics}
 
 \author{Lazaros Varvatis\\\small Independent researcher}
-\date{v2.3.0 working draft --- 8 November 2026}
+\date{v2.3.0 working draft --- 9 November 2026}
 
 \begin{document}
 \maketitle
@@ -56,30 +56,25 @@ The published v2.2.0 and archived v3/v4 materials remain unchanged.
 % =========================================================
 
 \begin{abstract}
-We introduce the Lazaros--Eudora Method (LEM), a conceptual and computational
-framework for analyzing user--LLM interactions as dynamic trajectories in latent
-representation space rather than as isolated prompt--response pairs. The central
-hypothesis of LEM is that repeated interaction between a user and a language
-model induces structured trajectory regimes that can be described through
-user-specific attractors and compact interaction signatures. We propose both
-geometric and topological summaries as candidate measurements. For the specified
-Toy V2 generators and geometric predictors, the amended held-out comparison is
-assigned the pre-specified category \textit{ZUSATZNUTZEN}; this result applies only
-to this toy, not to LLMs or users.
-We present two synthetic pipeline checks. The first demonstrates
-geometric identifiability of user-conditioned trajectories in a controlled latent
-dynamical system, achieving perfect nearest-neighbor re-identification in the
-reported synthetic setting across $N=500$ users and ten independent random seeds,
-compared to a random baseline of $0.002$. The second extends an archived sink/cycle pair to a pre-specified multi-seed
-check with matched controls. In Amendment 1, on held-out seeds at noise $0.05$
-with common projection, $H_1$ AUC is $0.9942$ against the matched Gaussian OU
-control; a fixed joint geometric predictor has AUC $0.8276$, and adding $H_1$
-gives $0.9933$. The paired increment is $0.1657$ (95\% interval
-$[0.1087,0.2347]$). The amended overall category is \textit{ZUSATZNUTZEN};
-the original committed analysis was \textit{TEILWEISE}. Neither example
-establishes user signatures in language-model activations or performance in
-real-user populations. LEM remains a research program whose empirical claims require
-independent real-model tests.
+We present two synthetic pipeline checks for the Lazaros--Eudora Method (LEM),
+a conceptual framework that treats user--LLM interactions as trajectories in
+latent representation space. The first demonstrates geometric identifiability
+of user-conditioned trajectories in a controlled synthetic dynamical system,
+with perfect nearest-neighbor re-identification across $N=500$ users and ten
+independent seeds, compared to a random baseline of $0.002$. The second extends
+an archived sink/cycle example to a pre-specified multi-seed check with matched
+controls and a fixed joint geometric predictor.
+
+For this toy and these fixed predictors, Amendment 1 assigns the overall category
+\textit{incremental value (ZUSATZNUTZEN)}: in the primary comparison against GAUSS,
+AUC$(H_1)=0.994$ versus $0.828$ for the joint geometric predictor, with a paired
+increment of $0.166$ (95\% interval $[0.109,0.235]$) when adding $H_1$.
+The original rule assigned \textit{partial (TEILWEISE)}.
+
+Neither check establishes user signatures in language-model activations or
+performance in real-user populations. Geometric and topological summaries remain
+candidate measurements for empirical work; LEM remains a research program
+requiring independent real-model tests.
 \end{abstract}
 
 % =========================================================
@@ -512,7 +507,7 @@ Taken together, the two toy experiments support a restricted interpretation of L
         above chance in a controlled synthetic separability regime.
   \item On the one prescribed sink/cycle pair, $H_1$ maximum lifetimes differ;
         their descriptive ratio is 161.6.
-  \item The amended multi-seed Toy V2 check has category \textit{ZUSATZNUTZEN}
+  \item The amended multi-seed Toy V2 check has category \textit{incremental value}
         under the specified generators, fixed predictors and evaluation rule.
   \item The synthetic constructions provide concrete code paths and motivate
         preregisterable measurements for future empirical tests.
@@ -747,9 +742,9 @@ dynamics as trajectories rather than isolated states. Its central contribution i
 combine attractor-based intuition with a topological reformulation that makes
 convergent and cyclic regimes measurable in principle. The current paper presents a
 first version of this program: a conceptual formulation and synthetic pipeline
-checks. The amended Toy V2 analysis is assigned \textit{ZUSATZNUTZEN}, with
-\textit{ZUSATZNUTZEN} for GAUSS and \textit{EINDEUTIGER VORTEIL} for UNIFORM;
-the original committed rule gave \textit{TEILWEISE}. These categories refer only
+checks. The amended Toy V2 analysis is assigned \textit{incremental value}, with
+\textit{incremental value} for GAUSS and \textit{clear advantage} for UNIFORM;
+the original committed rule gave \textit{partial}. These categories refer only
 to this toy and these fixed comparisons. Point-cloud $H_1$ measures loop geometry,
 not temporal return. Whether these ideas hold for user-specific dynamics in model internals remains an
 open empirical question. However, even at the present stage, LEM provides a clearer

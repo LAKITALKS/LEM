@@ -153,6 +153,8 @@ obtained, then update the working paper, PDF, README files and v2.3.0 changelog.
 
 ## Amendment 1 (8 Nov 2026, after external review; original B2 already computed)
 
+**9 Nov 2026.** Clarification: the amendment was drafted by reviewers who had not seen the results; the original results had already been computed and reported in the execution chat before it arrived (see paper, Section 4.3).
+
 Author and sole contributor: Lazaros Varvatis. The requester supplied this
 amendment following external review attributed to Eudora and stated that it was
 fixed before Lazaros or Claude saw results. This is **not** a preregistration of

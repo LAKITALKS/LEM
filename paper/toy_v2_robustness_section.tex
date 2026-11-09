@@ -8,8 +8,8 @@
 The original design was committed as
 \href{https://github.com/LAKITALKS/LEM/commit/c7d44d1dcbfc1bef889601dda69dcc95b8500cb3}{\texttt{c7d44d1}}
 before any computation. Its outputs were committed as \texttt{ee90b9f}.
-Amendment 1, dated 8 November 2026, was then supplied following external review
-and committed as
+Amendment 1, dated 8 November 2026, was drafted by reviewers who had not seen
+the results, then supplied following external review and committed as
 \href{https://github.com/LAKITALKS/LEM/commit/cf66e01fb868d829948cea0bc8c7b550181f208c}{\texttt{cf66e01}}
 before supplemental computation. Its purpose was to compare $H_1$ with a joint
 geometric predictor, add a uniform control, and explicitly test invariance to
@@ -93,19 +93,19 @@ cutoff $0.5$, with 95\% bootstrap intervals, on the same amended primary evaluat
 
 \paragraph{Amended decision rules and result.}
 Categories are determined separately for GAUSS and UNIFORM on the primary
-evaluation. \textit{EINDEUTIGER VORTEIL} requires AUC$(H_1)\geq0.95$ and
-AUC$(G)\leq0.65$. \textit{ZUSATZNUTZEN} requires AUC$(H_1)\geq0.95$,
+evaluation. \textit{clear advantage (EINDEUTIGER VORTEIL)} requires AUC$(H_1)\geq0.95$ and
+AUC$(G)\leq0.65$. \textit{incremental value} requires AUC$(H_1)\geq0.95$,
 AUC$(G)>0.65$, $\Delta$AUC$\geq0.05$, and a strictly positive lower
-95\% bootstrap limit for $\Delta$AUC. \textit{GLEICHSTAND} applies when
+95\% bootstrap limit for $\Delta$AUC. \textit{tie (GLEICHSTAND)} applies when
 AUC$(H_1)\geq0.95$ and neither preceding condition holds.
-\textit{NICHT ROBUST} applies when AUC$(H_1)<0.95$: $H_1$ alone does not
+\textit{not robust (NICHT ROBUST)} applies when AUC$(H_1)<0.95$: $H_1$ alone does not
 recognize the constructed loop reliably, not ``not significant.'' The overall
 category is the weaker of the two, ordered as these four labels above.
 LINE is a plausibility probe and does not enter categorization.
 
-The amended primary result is \textbf{ZUSATZNUTZEN} for GAUSS and
-\textbf{EINDEUTIGER VORTEIL} for UNIFORM; the overall category is
-\textbf{ZUSATZNUTZEN}. Against GAUSS, $H_1$ AUC is $0.9942$
+The amended primary result is \textbf{incremental value} for GAUSS and
+\textbf{clear advantage} for UNIFORM; the overall category is
+\textbf{incremental value}. Against GAUSS, $H_1$ AUC is $0.9942$
 $[0.9842,1.0000]$, $G$ AUC is $0.8276$ $[0.7547,0.8859]$, and $G+H_1$
 AUC is $0.9933$ $[0.9793,1.0000]$; the paired increment is $0.1657$
 $[0.1087,0.2347]$. Against UNIFORM the corresponding AUCs are $1.0000$,
@@ -135,15 +135,15 @@ different evaluation seed sets. No levels are pooled.}
 
 \paragraph{Original committed analysis, retained without replacement.}
 The original evaluation compared individual statistics only. R1 is
-\textbf{H1 trennt Senke und Zyklus}, since AUC$(H_1,\mathrm{Va})=1.0000$.
+\textbf{H1 separates sink and cycle}, since AUC$(H_1,\mathrm{Va})=1.0000$.
 Its R2, based solely on Vb (CYCLE versus DISK, now called GAUSS), is
-\textbf{TEILWEISE}: $H_1$ AUC is $0.9942$, $g_1$ is $0.5000$,
+\textbf{partial}: $H_1$ AUC is $0.9942$, $g_1$ is $0.5000$,
 $g_2$ is $0.5003$, and $g_3$ is $0.8321$.
 The original rules classify all $g$ AUCs $\leq0.65$ as
-\textit{EINDEUTIGER VORTEIL}, a best $g$ AUC strictly between $0.65$ and
-$0.95$ as \textit{TEILWEISE}, any $g$ AUC $\geq0.95$ as
-\textit{KEIN EINDEUTIGER VORTEIL}, conditional on $H_1$ AUC $\geq0.95$;
-otherwise they assign \textit{NICHT ROBUST}.
+\textit{clear advantage}, a best $g$ AUC strictly between $0.65$ and
+$0.95$ as \textit{partial}, any $g$ AUC $\geq0.95$ as
+\textit{no clear advantage (KEIN EINDEUTIGER VORTEIL)}, conditional on $H_1$ AUC $\geq0.95$;
+otherwise they assign \textit{not robust}.
 Vc (CYCLE versus LINE) remains outside R2; its $g_2$ AUC is $1.0000$.
 The different original and amended category labels reflect different specified
 comparators and decision rules; one has not been substituted for the other.
