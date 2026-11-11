@@ -11,3 +11,4 @@ paper/*.fls
 paper/*.fdb_latexmk
 experiments/results/*/original/assets/
 experiments/results/*/corrected/assets/
+.venv-toy-v2/

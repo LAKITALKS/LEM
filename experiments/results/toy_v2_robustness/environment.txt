@@ -1,0 +1,11 @@
+Python: 3.11.7 (v3.11.7:fa7a6f2303, Dec  4 2023, 15:22:56) [Clang 13.0.0 (clang-1300.0.29.30)]
+Platform: macOS-14.6.1-arm64-arm-64bit
+CPU only; one numerical thread per worker
+numpy==2.4.6
+scipy==1.17.1
+scikit-learn==1.9.1
+ripser==0.6.15
+matplotlib==3.11.2
+threadpoolctl==3.8.0
+pytest==9.2.0
+pypdf==7.0.0

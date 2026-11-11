@@ -7,30 +7,63 @@ trajectories, random draws, signature estimation, NN classification and cosine
 comparisons retain their original definitions.
 
 The corrected paper is published as [Zenodo v2.2.0](https://doi.org/10.5281/zenodo.22973258).
-The [GitHub correction draft](../paper/lem_paper_correction_draft.pdf) preserves
-the pre-publication state; use the Zenodo version for the current paper.
+The [GitHub working draft](../paper/lem_paper_correction_draft.pdf) is now the
+unpublished v2.3.0 draft; use the Zenodo version for the current published paper.
 See the [correction note](../paper/CORRECTION_NOTE.md) for before/after values.
 The v3/v4 sources, PDFs and their original images are preserved in `paper/`.
 
 ## Scope of Toy V2
 
-The archived Toy V2 is a **one-seed synthetic sanity check**, not an empirical
-validation of user-specific LLM attractors. At seed 1337, the code generates
-one stable fixed-point sink and one prescribed Van der Pol limit cycle, embeds
-each trajectory into 16 dimensions with **separately drawn random projection
-matrices**, adds noise and computes maximum persistent H1 lifetime. The
-historically reported cyclic/sink ratio of **161.6** describes this one pair;
-it is not a cross-seed estimate, a calibrated signal-to-noise statistic or a
-measured improvement over simpler geometric features.
+The [pre-specified multi-seed Toy V2 check and Amendment 1](toy_v2_robustness/PROTOCOL.md) retain the original sink/cycle generator and add exactly moment-matched GAUSS (originally DISK), UNIFORM and LINE controls, with calibration and evaluation seeds kept separate.
+At noise 0.05 with common projection, the amended overall category is **incremental value**: GAUSS gives incremental value (H1 AUC 0.9942; G 0.8276; G+H1 0.9933; paired ΔAUC 0.1657, 95% interval [0.1087, 0.2347]), and UNIFORM gives clear advantage.
+The [original results](results/toy_v2_robustness/) remain unchanged with R1 **H1 separates sink and cycle** and R2 **partial**; the dated amendment was committed after those outputs already existed, before supplemental computation, and its [tables and results](results/toy_v2_robustness/amendment_1/main_tables.md) are reported as the new main analysis.
+LINE remains a plausibility probe, and all 800 CYCLE/CYCLE_SHUF checks retain identical H0/H1 diagrams and g1–g3 within 1e-9: point-cloud H1 measures loop geometry, not temporal return.
+These are synthetic pipeline checks of these generators and fixed predictors; they establish no LLM, user-identity or dynamical-attractor result.
 
-No matched-scale non-loop control, common-projection comparison, independent
-test set or held-out threshold was evaluated in that archived experiment.
-Persistent homology of the trajectory's point cloud also discards the order
-of turns: rearranging the same points leaves the diagram unchanged. Toy V2
-therefore checks that the implementation can detect an explicitly constructed
-loop; it cannot distinguish a user-specific dynamical attractor from a static
-cloud with the same points. A new study would require independent repeats,
-matched geometric controls and a temporal perturbation/return endpoint.
+## Reproduce Toy V2 and Amendment 1
+
+Use a new local environment and the recorded package versions:
+
+```bash
+python3 -m venv .venv-toy-v2
+.venv-toy-v2/bin/python -m pip install -r experiments/toy_v2_robustness/requirements.lock
+.venv-toy-v2/bin/python -m pytest -q
+# Reproduce original calculations to a fresh directory:
+.venv-toy-v2/bin/python experiments/toy_v2_robustness/run_toy_v2_robustness.py --output-dir tmp/toy-v2-original-reproduction
+# Read unchanged committed original per-seed values; compute new controls,
+# shuffle checks and frozen joint predictors into another fresh directory:
+.venv-toy-v2/bin/python experiments/toy_v2_robustness/run_amendment_1.py --output-dir tmp/toy-v2-amendment-reproduction
+```
+
+Each runner times five seeds in both projection modes first. CPU execution uses
+one numerical thread per worker; process parallelism is selected if the serial
+estimate exceeds 60 minutes. The recorded full times, including each benchmark
+and reporting, were about 211 seconds originally and 279 seconds for Amendment 1.
+The supplemental runner rejects an existing summary and the original output
+directory. It verifies original output hashes before and after execution.
+
+The original package contains `per_seed.csv`, `summary.json`, the original noise
+plot, `environment.txt` and `benchmark.json`. The supplemental `amendment_1/`
+package additionally contains evaluation predictions, all 800 shuffle checks,
+model coefficients/scalers, paired Delta-AUC intervals, both versions' categories
+and the original hashes. Every noise/projection/comparison has its own frozen
+calibration; levels are never pooled. The primary 0.05 point uses evaluation
+seeds 100–199; other noise levels use 20–39, so curves also reflect different seed
+sets. An interval [1,1] is a finite-bootstrap outcome, not certainty elsewhere.
+
+To regenerate manuscript tables from the two saved summaries and rebuild only
+the working-draft PDF:
+
+```bash
+.venv-toy-v2/bin/python experiments/toy_v2_robustness/make_report_tables.py
+cd paper
+tectonic --keep-logs lem_paper_correction_draft.tex
+pdftotext lem_paper_correction_draft.pdf -
+```
+
+The current published version remains v2.2.0, DOI 10.5281/zenodo.22973258.
+The v2.3.0 working draft is not published; no historical PDF or Zenodo record is
+replaced. The remaining sections document the unchanged V1 correction.
 
 ## Reproduce the matched V1 comparison
 
